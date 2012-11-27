@@ -246,7 +246,7 @@ namespace LumiereRenderer
 	/// @param b Point.
 	/// @param w Weight.
 	/// @return lerp returns a when w is zero and b when w is one.
-	Vector3 lerp(const Vector3& a, const Vector3& b, float w)
+	Point3 lerp(const Point3& a, const Point3& b, float w)
 	{
 		return a + (b - a) * w;
 	}
@@ -584,10 +584,19 @@ namespace LumiereRenderer
 	{
 	}
 
-	/// Constructor for a Ray.
+	/// Constructor for a ray.
 	/// @param origin The starting point for the ray.
 	/// @param direction The direction of the ray.
 	Ray::Ray(Point3 origin, Vector3 direction) : origin(origin), direction(direction)
 	{
+	}
+
+	/// Construct a ray that starts at point A and goes in the direction of B.
+	/// @param a Origin of the ray.
+	/// @param b The point that defines the direction
+	Ray::Ray(Point3 a, Point3 b)
+	{
+		origin = a;
+		direction = b-a;
 	}
 }

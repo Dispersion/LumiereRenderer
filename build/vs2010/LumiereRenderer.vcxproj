@@ -14,7 +14,7 @@
     <ClCompile Include="..\..\src\math\geometry.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\math\geometry.h" />
+    <ClInclude Include="..\..\include\geometry.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}</ProjectGuid>
@@ -60,6 +60,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -142,7 +142,8 @@ namespace LumiereRenderer
 	{
 	public:
 		Ray();		
-		Ray(Point3 origin, Vector3 direction);		
+		Ray(Point3 origin, Vector3 direction);	
+		Ray(Point3 a, Point3 b);
 
 		Point3 origin;
 		Vector3 direction;
