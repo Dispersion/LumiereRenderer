@@ -16,15 +16,67 @@
       <UniqueIdentifier>{082ff90e-07c3-4397-ad61-bd3f2f421e68}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{dd548dc0-05d1-4f00-a165-218159df04c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera\Header Files">
+      <UniqueIdentifier>{96ce391a-6a3f-4c57-9322-0a73f90654f5}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Camera\Source Files">
+      <UniqueIdentifier>{865f206c-f382-4124-83c5-cb2ccf74e5af}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{38e140e7-2d67-45a3-9a55-1cdb19fa49d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Header Files">
+      <UniqueIdentifier>{d11ab82c-6a46-4183-b13d-bce70ed4e86e}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Core\Source Files">
+      <UniqueIdentifier>{0cb0b1e8-bb5d-4f1b-87f5-c434aece453b}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\math\geometry.cpp">
       <Filter>Math\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\camera\pinhole.cpp">
+      <Filter>Camera\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\camera.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\imagesensor.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\camera\ccd.cpp">
+      <Filter>Camera\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\canvas.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\geometry.h">
       <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\pinhole.h">
+      <Filter>Camera\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\camera.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\canvas.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\imagesensor.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ccd.h">
+      <Filter>Camera\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,10 +11,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\camera\ccd.cpp" />
+    <ClCompile Include="..\..\src\camera\pinhole.cpp" />
+    <ClCompile Include="..\..\src\core\camera.cpp" />
+    <ClCompile Include="..\..\src\core\canvas.cpp" />
+    <ClCompile Include="..\..\src\core\imagesensor.cpp" />
     <ClCompile Include="..\..\src\math\geometry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\camera.h" />
+    <ClInclude Include="..\..\include\canvas.h" />
+    <ClInclude Include="..\..\include\ccd.h" />
     <ClInclude Include="..\..\include\geometry.h" />
+    <ClInclude Include="..\..\include\imagesensor.h" />
+    <ClInclude Include="..\..\include\pinhole.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}</ProjectGuid>
@@ -49,6 +59,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetName>$(ProjectName)_d</TargetName>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\lib\</OutDir>
@@ -66,6 +77,11 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>copy /y "$(IntermediateOutputPath)$(TargetName).pdb" "$(OutDir)$(TargetName).pdb" </Command>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -33,12 +33,12 @@
 namespace LumiereRenderer
 {
 
-////////////////////////////////////////////////////////////////////////////////////
-///
-///	@class Point3
-/// @brief A point in 3D coordinates.
-///	
-////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////
+	///
+	///	@class Point3
+	/// @brief A point in 3D coordinates.
+	///	
+	////////////////////////////////////////////////////////////////////////////////////
 
 	/// Default constructor.
 	/// @return [0, 0, 0].
@@ -587,8 +587,9 @@ namespace LumiereRenderer
 	/// Constructor for a ray.
 	/// @param origin The starting point for the ray.
 	/// @param direction The direction of the ray.
-	Ray::Ray(Point3 origin, Vector3 direction) : origin(origin), direction(direction)
+	Ray::Ray(Point3 origin, Vector3 direction) : origin(origin)
 	{
+		this->direction = normalize(direction);
 	}
 
 	/// Construct a ray that starts at point A and goes in the direction of B.
@@ -597,6 +598,6 @@ namespace LumiereRenderer
 	Ray::Ray(Point3 a, Point3 b)
 	{
 		origin = a;
-		direction = b-a;
+		direction = normalize(b-a);
 	}
 }
