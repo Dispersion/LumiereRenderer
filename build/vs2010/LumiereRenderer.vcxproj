@@ -5,26 +5,94 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\camera\ccd.cpp" />
     <ClCompile Include="..\..\src\camera\pinhole.cpp" />
+    <ClCompile Include="..\..\src\core\attribute.cpp" />
     <ClCompile Include="..\..\src\core\camera.cpp" />
-    <ClCompile Include="..\..\src\core\canvas.cpp" />
+    <ClCompile Include="..\..\src\core\datahandle.cpp" />
     <ClCompile Include="..\..\src\core\imagesensor.cpp" />
+    <ClCompile Include="..\..\src\core\integrator.cpp" />
+    <ClCompile Include="..\..\src\core\lumiererenderer.cpp" />
+    <ClCompile Include="..\..\src\core\node.cpp" />
+    <ClCompile Include="..\..\src\core\rendercontext.cpp" />
+    <ClCompile Include="..\..\src\core\scene.cpp" />
+    <ClCompile Include="..\..\src\core\scenetracer.cpp" />
+    <ClCompile Include="..\..\src\core\shader.cpp" />
+    <ClCompile Include="..\..\src\core\shadernode.cpp" />
+    <ClCompile Include="..\..\src\core\shape.cpp" />
+    <ClCompile Include="..\..\src\core\spectrum.cpp" />
+    <ClCompile Include="..\..\src\imagesensors\ccd.cpp" />
+    <ClCompile Include="..\..\src\integrators\pathtracer.cpp" />
     <ClCompile Include="..\..\src\math\geometry.cpp" />
+    <ClCompile Include="..\..\src\math\linearalgebra.cpp" />
+    <ClCompile Include="..\..\src\math\matrix.cpp" />
+    <ClCompile Include="..\..\src\math\point3.cpp" />
+    <ClCompile Include="..\..\src\math\radiometry.cpp" />
+    <ClCompile Include="..\..\src\math\random.cpp" />
+    <ClCompile Include="..\..\src\math\ray.cpp" />
+    <ClCompile Include="..\..\src\math\sampler.cpp" />
+    <ClCompile Include="..\..\src\math\vector3.cpp" />
+    <ClCompile Include="..\..\src\math\vector4.cpp" />
+    <ClCompile Include="..\..\src\nodes\checker.cpp" />
+    <ClCompile Include="..\..\src\scenes\list.cpp" />
+    <ClCompile Include="..\..\src\shaders\blackbody.cpp" />
+    <ClCompile Include="..\..\src\shaders\diffuse.cpp" />
+    <ClCompile Include="..\..\src\shaders\mirror.cpp" />
+    <ClCompile Include="..\..\src\shapes\triangle.cpp" />
+    <ClCompile Include="curve.cpp" />
+    <ClCompile Include="renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\camera.h" />
-    <ClInclude Include="..\..\include\canvas.h" />
-    <ClInclude Include="..\..\include\ccd.h" />
-    <ClInclude Include="..\..\include\geometry.h" />
-    <ClInclude Include="..\..\include\imagesensor.h" />
-    <ClInclude Include="..\..\include\pinhole.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\attribute.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\attributevalue.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\blackbody.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\camera.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\ccd.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\checker.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\constants.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\datahandle.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\diffuse.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\geometry.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\imagesensor.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\integrator.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\linearalgebra.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\list.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\lumiererenderer.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\matrix.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\mirror.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\node.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\pathtracer.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\pinhole.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\point3.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\radiometry.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\random.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\ray.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\rendercontext.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\sampler.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\scene.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\scenetracer.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\shader.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\shadernode.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\shape.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\spectrum.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\triangle.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\vector3.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\vector4.h" />
+    <ClInclude Include="curve.h" />
+    <ClInclude Include="renderer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}</ProjectGuid>
@@ -37,12 +105,27 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -50,19 +133,36 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\lib\</OutDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\lib\</OutDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetName>$(ProjectName)_d</TargetName>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)_x64_d</TargetName>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\lib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\lib\</OutDir>
+    <TargetName>$(ProjectName)_x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -83,7 +183,45 @@
       </Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <CustomBuildStep>
+      <Command>copy /y "$(IntermediateOutputPath)$(TargetName).pdb" "$(OutDir)$(TargetName).pdb" </Command>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
@@ -92,6 +230,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

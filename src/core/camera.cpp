@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2012, LumiereRenderer
+// Copyright (c) 2014, LumiereRenderer
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -27,10 +27,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "camera.h"
+#include <lumiererenderer\camera.h>
+#include <lumiererenderer\linearalgebra.h>
 
 namespace LumiereRenderer
-{		
+{	
 	Camera::Camera()
 	{
 		mImageSensor = 0;
@@ -38,6 +39,11 @@ namespace LumiereRenderer
 
 	Camera::~Camera()
 	{
+		if (mImageSensor)
+		{
+			delete mImageSensor;
+		}
+
 	}
 	
 	void Camera::SetImageSensor(ImageSensor* sensor)
@@ -48,5 +54,55 @@ namespace LumiereRenderer
 	ImageSensor* Camera::GetImageSensor()
 	{
 		return mImageSensor;
+	}
+
+	void Camera::SetPosition( Point3 position )
+	{		
+		mTransform[0][3] = position[0];
+		mTransform[1][3] = position[1];
+		mTransform[2][3] = position[2];
+	}
+
+	Point3 Camera::GetPosition()
+	{
+		return Point3(mTransform[0][3], mTransform[1][3], mTransform[2][3]);
+	}
+
+	void Camera::SetViewDirection( Vector3 viewDirection )
+	{
+		viewDirection = Normalize(viewDirection);
+		Vector3 right = Normalize( Cross( GetUpDirection(), viewDirection ) );
+
+		mTransform[0][2] = viewDirection[0];
+		mTransform[1][2] = viewDirection[1];
+		mTransform[2][2] = viewDirection[2];
+		
+		mTransform[0][0] = right[0];
+		mTransform[1][0] = right[1];
+		mTransform[2][0] = right[2];
+	}
+
+	Vector3 Camera::GetViewDirection()
+	{
+		return Vector3(mTransform[0][2], mTransform[1][2], mTransform[2][2]);
+	}
+
+	void Camera::SetUpDirection( Vector3 upDirection )
+	{
+		upDirection = Normalize(upDirection);
+		Vector3 right = Cross(GetViewDirection(), upDirection);
+
+		mTransform[0][1] = upDirection[0];
+		mTransform[1][1] = upDirection[1];
+		mTransform[2][1] = upDirection[2];
+		
+		mTransform[0][0] = right[0];
+		mTransform[1][0] = right[1];
+		mTransform[2][0] = right[2];
+	}
+
+	Vector3 Camera::GetUpDirection()
+	{
+		return Vector3(mTransform[0][1], mTransform[1][1], mTransform[2][1]);
 	}
 }

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2012, LumiereRenderer
+// Copyright (c) 2014, LumiereRenderer
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -27,27 +27,18 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "imagesensor.h"
+#include <lumiererenderer\imagesensor.h>
 
 namespace LumiereRenderer
 {
 	ImageSensor::ImageSensor(float width, float height, int resolutionWidth, int resolutionHeight) : mWidth(width), mHeight(height), mResolutionWidth(resolutionWidth), mResolutionHeight(resolutionHeight)
 	{
-		mCanvas = 0;
+		mPixelWidth = width / resolutionWidth;
+		mPixelHeight = height / resolutionHeight;
 	}
 
 	ImageSensor::~ImageSensor()
 	{
-	}
-
-	void ImageSensor::SetCanvas(Canvas* canvas)
-	{
-		mCanvas = canvas;
-	}
-
-	Canvas* ImageSensor::GetCanvas()
-	{
-		return mCanvas;
 	}
 
 	void ImageSensor::SetResolutionWidth(int resolutionWidth)

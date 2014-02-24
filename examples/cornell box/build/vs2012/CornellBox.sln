@@ -1,7 +1,12 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LumiereRenderer", "LumiereRenderer.vcxproj", "{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CornellBox", "CornellBox.vcxproj", "{4B7E9DCF-3DE5-4904-B460-DC89AD834DDB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D82CB4C4-B25B-401B-9D53-47F5B9820A7D} = {D82CB4C4-B25B-401B-9D53-47F5B9820A7D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LumiereRenderer", "..\..\..\..\build\vs2012\LumiereRenderer.vcxproj", "{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +16,12 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B7E9DCF-3DE5-4904-B460-DC89AD834DDB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4B7E9DCF-3DE5-4904-B460-DC89AD834DDB}.Debug|Win32.Build.0 = Debug|Win32
+		{4B7E9DCF-3DE5-4904-B460-DC89AD834DDB}.Debug|x64.ActiveCfg = Debug|Win32
+		{4B7E9DCF-3DE5-4904-B460-DC89AD834DDB}.Release|Win32.ActiveCfg = Release|Win32
+		{4B7E9DCF-3DE5-4904-B460-DC89AD834DDB}.Release|Win32.Build.0 = Release|Win32
+		{4B7E9DCF-3DE5-4904-B460-DC89AD834DDB}.Release|x64.ActiveCfg = Release|Win32
 		{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}.Debug|Win32.ActiveCfg = Debug|Win32
 		{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}.Debug|Win32.Build.0 = Debug|Win32
 		{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}.Debug|x64.ActiveCfg = Debug|x64
