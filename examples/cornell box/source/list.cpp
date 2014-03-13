@@ -89,7 +89,7 @@ namespace LumiereRenderer
             {
                 hitShape = *shape;
             }
-        }
+        }		
 
         if (hitShape)
         {

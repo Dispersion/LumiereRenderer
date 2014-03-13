@@ -67,7 +67,7 @@ namespace LumiereRenderer
         AddAttribute( mRGBA );
 
         mSamples = new unsigned int[ resolutionWidth * resolutionHeight ];
-        mImage = new RGBA[resolutionWidth * resolutionHeight];
+        mImage = new Pixel[resolutionWidth * resolutionHeight];
         Clear();        
     }
 
@@ -75,17 +75,15 @@ namespace LumiereRenderer
     {
     }
 
-    ImageSensorSample CCD::Sample(unsigned int i, unsigned int j)
+    ImageSensor::Sample CCD::sample(unsigned int i, unsigned int j)
     {
-        ImageSensorSample sample = ImageSensorSample();
-        sample.x = i;
-        sample.y = j;
-        sample.position = Point3((((mResolutionWidth-i) - mResolutionWidth * 0.5f)+Random())  * mPixelWidth, (((mResolutionHeight-j) - mResolutionHeight * 0.5f)-Random()) * mPixelHeight, 0);
-        sample.wavelength = 390+360*Random();
-        return sample;
+        ImageSensor::Sample _sample = ImageSensor::Sample();
+        _sample.position = Point3((((mResolutionWidth-i) - mResolutionWidth * 0.5f)+Random())  * mPixelWidth, (((mResolutionHeight-j) - mResolutionHeight * 0.5f)-Random()) * mPixelHeight, 0);
+        _sample.wavelength = 390+360*Random();
+        return _sample;
     }
 
-    void CCD::SetExposure(const ImageSensorSample& sample, float exposure, float alpha, /*float wavelength,*/ RenderContext* rc)
+    void CCD::SetExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext* rc)
     {
         float red = rc->GetInput( mRed ).AsFloat();
         float green = rc->GetInput( mGreen ).AsFloat();
@@ -94,10 +92,10 @@ namespace LumiereRenderer
         Vector3 c = std::max(0.0f, exposure) * Vector3( red, green, blue ) * 255;
 
         //Vector3 c = exposure * Vector3( mRed->GetIntensity(wavelength), mGreen->GetIntensity(wavelength), mBlue->GetIntensity(wavelength) )*255;
-        int index = sample.y * mResolutionWidth + sample.x;
+        int index = j * mResolutionWidth + i;
 
-        unsigned int samples = mSamples[sample.y * mResolutionWidth + sample.x];
-        RGBA L = mImage[index];
+        unsigned int samples = mSamples[j * mResolutionWidth + i];
+        Pixel L = mImage[index];
 
         
         if ( ( samples-1 ) != 0)
@@ -107,67 +105,26 @@ namespace LumiereRenderer
             L.blue *= (static_cast<float>(samples)-1.f);
             L.alpha *= (static_cast<float>(samples)-1.f);
         }
-
-        
 
         mImage[index].red = (L.red + c.x) / samples;
         mImage[index].green = (L.green + c.y) / samples;
         mImage[index].blue = (L.blue + c.z) / samples;
         mImage[index].alpha = (L.alpha + alpha*255) / samples;		
 
-        mSamples[sample.y * mResolutionWidth + sample.x]++;
+        mSamples[j * mResolutionWidth + i]++;
     }
 
+	void CCD::Evaluate( Attribute* attr, RenderContext* rc )
+	{
 
-    void CCD::Evaluate( Attribute* /*attr*/, RenderContext* rc )
-    {                
-        float red = rc->GetInput( mRed ).AsFloat();
-        float green = rc->GetInput( mGreen ).AsFloat();
-        float blue = rc->GetInput( mBlue ).AsFloat();
-        int sampleX = rc->GetInput( mSampleX ).AsInt();
-        int sampleY = rc->GetInput( mSampleY ).AsInt();
-       
-        rc->GetOutput(mPosition).Set( Point3((((mResolutionWidth-sampleX) - mResolutionWidth * 0.5f)+Random())  * mPixelWidth, (((mResolutionHeight-sampleY) - mResolutionHeight * 0.5f)-Random()) * mPixelHeight, 0));
-        
-        rc->Push();
-        rc->GetOutput( RenderContext::RAY_WAVELENGTH ).Set( 390+360*Random() );        
-        float exposure = rc->GetInput( mExposure ).AsFloat();
-        rc->Pop();
-
-        Vector3 c = exposure * Vector3( red, green, blue ) * 255;
-        int index = sampleY * mResolutionWidth + sampleX;
-
-        unsigned int samples = mSamples[sampleY * mResolutionWidth + sampleX];
-        RGBA L = mImage[index];
-
-        if ( ( samples-1 ) != 0)
-        {
-            L.red *= (static_cast<float>(samples)-1.f);
-            L.green *= (static_cast<float>(samples)-1.f);
-            L.blue *= (static_cast<float>(samples)-1.f);
-            L.alpha *= (static_cast<float>(samples)-1.f);
-        }
+	}
 
 
 
-        mImage[index].red = (L.red + c.x) / samples;
-        mImage[index].green = (L.green + c.y) / samples;
-        mImage[index].blue = (L.blue + c.z) / samples;
-       // mImage[index].alpha = (L.alpha + alpha*255) / samples;		
-
-        mSamples[sampleY * mResolutionWidth + sampleX]++;
-
-       // int index = sampleY * mResolutionWidth + sampleX;            
-        //return mImage[index];
-
-        rc->GetOutput( mRGBA ).Set( Vector4(mImage[index].red, mImage[index].green, mImage[index].blue, mImage[index].alpha) );
-    }
-
-    RGBA CCD::GetColor(unsigned int i, unsigned int j)
-    {
-        int index = j * mResolutionWidth + i;
-        return mImage[index];
-    }
+	CCD::Pixel* CCD::Data()
+	{
+		return &mImage[0];
+	}
     
     void CCD::Clear()
     {

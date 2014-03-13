@@ -34,11 +34,6 @@
 
 namespace LumiereRenderer
 {
-    Attribute* RenderContext::POSITION = new AttributeValue<Point3>("Position", 0);
-    Attribute* RenderContext::NORMAL = new AttributeValue<Vector3>("Normal", 0);
-    Attribute* RenderContext::BINORMAL = new AttributeValue<Vector3>("Binormal", 0);
-    Attribute* RenderContext::TANGENT = new AttributeValue<Vector3>("Tangent", 0);
-    Attribute* RenderContext::TEXCOORD = new AttributeValue<Vector3>("Texcoord", 0);
     Attribute* RenderContext::RAY_ORIGIN = new AttributeValue<Point3>("RayOrigin", 0);
     Attribute* RenderContext::RAY_DIRECTION = new AttributeValue<Vector3>("RayDirection", 0);
     Attribute* RenderContext::RAY_WAVELENGTH = new AttributeValue<float>("RayWavelength", 0);
@@ -50,8 +45,6 @@ namespace LumiereRenderer
     Attribute* RenderContext::SHADER = new AttributeValue<Shader*>("Shader", 0);
     Attribute* RenderContext::SHAPE = new AttributeValue<Shape*>("Shape", 0);
     Attribute* RenderContext::PDF = new AttributeValue<float>("Pdf", 0);
-    Attribute* RenderContext::WORLD_TO_SHADER = new AttributeValue<Matrix>("WorldToShader", Matrix());
-    Attribute* RenderContext::SHADER_TO_WORLD = new AttributeValue<Matrix>("ShaderToWorld", Matrix());
 
     RenderContext::RenderContext(Scene* scene, Camera* camera, Integrator* integrator) : mScene(scene), mCamera(camera), mIntegrator(integrator)
     {

@@ -125,27 +125,27 @@ namespace LumiereRenderer
 
     void Triangle::Evaluate( Attribute* attr, RenderContext* rc )
     { 
-        if( attr == RenderContext::POSITION )
+        if( attr == Shape::POSITION )
         {
             Point3 rayOrigin = rc->GetInput(RenderContext::RAY_ORIGIN).AsPoint3();
             Vector3 rayDirection = rc->GetInput(RenderContext::RAY_DIRECTION).AsVector3();
             float rayLength = rc->GetInput(RenderContext::RAY_LENGTH).AsFloat();
-            DataHandle position = rc->GetOutput(RenderContext::POSITION);
+            DataHandle position = rc->GetOutput(Shape::POSITION);
             position.Set( rayDirection * rayLength + rayOrigin );
         }
-        else if( attr == RenderContext::NORMAL )
+        else if( attr == Shape::NORMAL )
         {
             Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).AsVector3();
-            DataHandle normal = rc->GetOutput(RenderContext::NORMAL);
+            DataHandle normal = rc->GetOutput(Shape::NORMAL);
             normal.Set( Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal) );
         }
-        else if( attr == RenderContext::TEXCOORD )
+        else if( attr == Shape::TEXCOORD )
         {
             Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).AsVector3();
-            DataHandle texcoord = rc->GetOutput(RenderContext::TEXCOORD);
+            DataHandle texcoord = rc->GetOutput(Shape::TEXCOORD);
             texcoord.Set( rayBarycentric.z * v0.texcoord + rayBarycentric.x * v1.texcoord + rayBarycentric.y * v2.texcoord );
         }
-        else if ( attr == RenderContext::SHADER_TO_WORLD )
+        else if ( attr == Shape::SHADER_TO_WORLD )
         {
             Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).AsVector3();
             Vector3 n = Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal);
@@ -154,10 +154,10 @@ namespace LumiereRenderer
             t = Cross(b,n);
             
             Matrix m( t.x, b.x, n.x, 0, t.y, b.y, n.y, 0, t.z, b.z, n.z, 0, 0, 0, 0, 1 );
-            DataHandle shaderToWorld = rc->GetOutput(RenderContext::SHADER_TO_WORLD);
+            DataHandle shaderToWorld = rc->GetOutput(Shape::SHADER_TO_WORLD);
             shaderToWorld.Set(m);
         }
-        else if ( attr == RenderContext::WORLD_TO_SHADER )
+        else if ( attr == Shape::WORLD_TO_SHADER )
         {
             Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).AsVector3();
             Vector3 n = Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal);
@@ -166,7 +166,7 @@ namespace LumiereRenderer
             t = Cross(b,n);
 
             Matrix m( t.x, t.y, t.z, 0, b.x, b.y, b.z, 0, n.x, n.y, n.z, 0, 0, 0, 0, 1 );
-            DataHandle shaderToWorld = rc->GetOutput(RenderContext::WORLD_TO_SHADER);
+            DataHandle shaderToWorld = rc->GetOutput(Shape::WORLD_TO_SHADER);
             shaderToWorld.Set(m);
         }
     }
@@ -187,9 +187,9 @@ namespace LumiereRenderer
 
         float area = Length(Cross(p0,p1) + Cross(p1,p2) + Cross(p2,p0)) * 0.5f;
         
-        DataHandle position = rc->GetOutput( RenderContext::POSITION );
-        DataHandle normal = rc->GetOutput( RenderContext::NORMAL );
-        DataHandle texcoord = rc->GetOutput( RenderContext::TEXCOORD );
+        DataHandle position = rc->GetOutput( Shape::POSITION );
+        DataHandle normal = rc->GetOutput( Shape::NORMAL );
+        DataHandle texcoord = rc->GetOutput( Shape::TEXCOORD );
         DataHandle shader = rc->GetOutput( RenderContext::SHADER );
         DataHandle shape = rc->GetOutput( RenderContext::SHAPE );
         DataHandle pdf = rc->GetOutput( RenderContext::PDF );

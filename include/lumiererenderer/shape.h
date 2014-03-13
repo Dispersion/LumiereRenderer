@@ -35,22 +35,77 @@
 
 namespace LumiereRenderer
 {
-    class BoundingVolume;
+	// Forward declerations
+    class BoundingVolume; 
     class Shader;
     class Hitpoint;
+
+	/** @class Shape
+      * @brief Objects in the scene that will reflect light
+	  * 
+	  * 
+	  * 
+      * 
+      */
 
     class Shape : public Node
     {
     public:
+		 /** 
+	      */
         Shape();
-        virtual ~Shape();
-        virtual bool Trace( Ray& ray ) = 0;
-        Shader* GetShader();
-        void SetShader( Shader* shader );
-        virtual void Evaluate( Attribute* attr, RenderContext* rc ) = 0;
-        virtual void Sample( RenderContext* rc ) = 0;
 
-    protected:
+
+        virtual ~Shape();
+
+		/** Intersect a ray with the shape. This funtion only determines if the ray intersects
+		  * with the shape and not where it intersects. 
+          * @param[in] ray  The ray used to test for intersection.
+          * @return It will return true if the ray intersects with the shape, otherwise it will return false.
+	      */
+		virtual bool Trace( Ray& ray ) = 0;
+  	    
+		/** Each shape have a pointer to the shader used to shade the shape. This means that, however, we store
+		  * the shapes in the scene, we can find out which shader we should use to shade the shape.
+          * @return The shader used to shade this shape.
+	      */
+		Shader* GetShader();
+        	
+		/** Each shape have a pointer to the shader used to shade the shape. This means that, however, we store
+		  * the shapes in the scene, we can find out which shader we should use to shade the shape.
+          * @param[in] shader  The shader used to shade this shape.          
+	      */
+		void SetShader( Shader* shader );
+
+		/** The node system will call the Evaluate function, when a connected node wants to find the value
+		  * of one of this shapes attributes. Any shape must implement this function to evaluate the 
+		  * default shape attributes:
+		  *
+		  *      RenderContext::POSITION            The intersection point between the ray and the shape.
+		  *      RenderContext::NORMAL              The normal on the shape at the intersection point.
+		  *      RenderContext::TANGENT             The tangent on the shape at the intersection point.
+		  *      RenderContext::BINORMAL            The binormal is orthogonal to the tangent and normal.
+		  *      RenderContext::TEXCOORD            The texture coordinates at the intersection point.
+		  *      RenderContext::SHADER_TO_WORLD     The matrix that transform a ray from normal space to world space.
+		  *      RenderContext::WORLD_TO_SHADER     The matrix that transform a ray from world space to normal space.
+		  *
+          * @param[in] attr  The attribute we want to find the value of.
+		  * @param[in] rc    The RenderContext is used to get values from incomming attributes.
+	      */
+        virtual void Evaluate( Attribute* attr, RenderContext* rc ) = 0;
+        
+		
+		virtual void Sample( RenderContext* rc ) = 0;
+	
+        static Attribute* POSITION;
+        static Attribute* NORMAL;
+        static Attribute* BINORMAL;
+        static Attribute* TANGENT;
+        static Attribute* TEXCOORD;
+		static Attribute* WORLD_TO_SHADER;
+        static Attribute* SHADER_TO_WORLD;
+
+	protected:
         Shader* mShader;
     };
 }

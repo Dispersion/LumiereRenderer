@@ -29,9 +29,18 @@
 
 #include <lumiererenderer\shape.h>
 #include <lumiererenderer\shader.h>
+#include <lumiererenderer\attributevalue.h>
 
 namespace LumiereRenderer
 {
+	Attribute* Shape::POSITION = new AttributeValue<Point3>("Position", 0);
+    Attribute* Shape::NORMAL = new AttributeValue<Vector3>("Normal", 0);
+    Attribute* Shape::BINORMAL = new AttributeValue<Vector3>("Binormal", 0);
+    Attribute* Shape::TANGENT = new AttributeValue<Vector3>("Tangent", 0);
+    Attribute* Shape::TEXCOORD = new AttributeValue<Vector3>("Texcoord", 0);
+	Attribute* Shape::WORLD_TO_SHADER = new AttributeValue<Matrix>("WorldToShader", Matrix());
+    Attribute* Shape::SHADER_TO_WORLD = new AttributeValue<Matrix>("ShaderToWorld", Matrix());
+
 	Shape::Shape(void)
 	{
 		mShader = 0;

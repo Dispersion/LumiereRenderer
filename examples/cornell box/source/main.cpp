@@ -13,7 +13,7 @@
 
 using namespace LumiereRenderer;
 
-RGBA* image;
+//RGBA* image;
 int canvasWidth = 512;
 int canvasHeight = 512;
 
@@ -23,10 +23,10 @@ void Render(RenderContext* rc, Camera* camera)
     {
         for (int i = 0; i < canvasWidth; i++)
         {                                        
-            image[j*canvasWidth+i] = camera->Trace(i, j, rc);
+            /*image[j*canvasWidth+i] = */camera->Trace(i, j, rc);
         }		
 
-        UpdatePixels(image);
+		UpdatePixels(camera->GetImageSensor()->Data());
         RefreshCanvas();
 
     }
@@ -34,58 +34,58 @@ void Render(RenderContext* rc, Camera* camera)
 
 const Point3 position[] =
 {
-    Point3(-0.24, 1.98, 0.16),  
-    Point3( 0.23, 1.98, 0.16),
-    Point3( 0.23, 1.98,-0.22),
-    Point3(-0.24, 1.98,-0.22),
-    Point3(-1.01, 0.0,  0.99),
-    Point3( 1.00, 0.0,  0.99),
-    Point3( 1.00, 0.0, -1.04),
-    Point3(-0.99, 0.0, -1.04),
-    Point3( 1.00, 0.00,-1.04),
-    Point3( 1.00, 0.00, 0.99),
-    Point3( 1.00, 1.99, 0.99),
-    Point3( 1.00, 1.99,-1.04),
-    Point3(-0.99, 0.00,-1.04), 
-    Point3( 1.00, 0.00,-1.04),
-    Point3( 1.00, 1.99,-1.04),
-    Point3(-1.02, 1.99,-1.04),
-    Point3(-1.01, 0.00, 0.99),
-    Point3(-0.99, 0.00,-1.04),
-    Point3(-1.02, 1.99,-1.04),
-    Point3(-1.02, 1.99, 0.99),
-    Point3(-1.02, 1.99, 0.99), 
-    Point3(-1.02, 1.99,-1.04),
-    Point3( 1.00, 1.99,-1.04),
-    Point3( 1.00, 1.99, 0.99),
+    Point3(-0.24f, 1.98f, 0.16f),  
+    Point3( 0.23f, 1.98f, 0.16f),
+    Point3( 0.23f, 1.98f,-0.22f),
+    Point3(-0.24f, 1.98f,-0.22f),
+    Point3(-1.01f, 0.0f,  0.99f),
+    Point3( 1.00f, 0.0f,  0.99f),
+    Point3( 1.00f, 0.0f, -1.04f),
+    Point3(-0.99f, 0.0f, -1.04f),
+    Point3( 1.00f, 0.00f,-1.04f),
+    Point3( 1.00f, 0.00f, 0.99f),
+    Point3( 1.00f, 1.99f, 0.99f),
+    Point3( 1.00f, 1.99f,-1.04f),
+    Point3(-0.99f, 0.00f,-1.04f), 
+    Point3( 1.00f, 0.00f,-1.04f),
+    Point3( 1.00f, 1.99f,-1.04f),
+    Point3(-1.02f, 1.99f,-1.04f),
+    Point3(-1.01f, 0.00f, 0.99f),
+    Point3(-0.99f, 0.00f,-1.04f),
+    Point3(-1.02f, 1.99f,-1.04f),
+    Point3(-1.02f, 1.99f, 0.99f),
+    Point3(-1.02f, 1.99f, 0.99f), 
+    Point3(-1.02f, 1.99f,-1.04f),
+    Point3( 1.00f, 1.99f,-1.04f),
+    Point3( 1.00f, 1.99f, 0.99f)
 };
 
 const Vector3 normal[] =
 {
-    Vector3( 0.0, -1.0, 0.0),
-    Vector3( 0.0, -1.0, 0.0),
-    Vector3( 0.0, -1.0, 0.0),
-    Vector3( 0.0, -1.0, 0.0),
-    Vector3( 0.0, 1.0, 0.0),
-    Vector3( 0.0, 1.0, 0.0),
-    Vector3( 0.0, 1.0, 0.0),
-    Vector3( 0.0, 1.0, 0.0),
-    Vector3( -1.0, 0.0, 0.0),
-    Vector3( -1.0, 0.0, 0.0),
-    Vector3( -1.0, 0.0, 0.0),
-    Vector3( -1.0, 0.0, 0.0),
-    Vector3( 0.0, 0.0, 1.0),
-    Vector3( 0.0, 0.0, 1.0),
-    Vector3( 0.0, 0.0, 1.0),
-    Vector3( 0.0, 0.0, 1.0),
-    Vector3( 1.0, 0.0, 0.0),
-    Vector3( 1.0, 0.0, 0.0),
-    Vector3( 1.0, 0.0, 0.0),
-    Vector3( 1.0, 0.0, 0.0),
-    Vector3( 0.0, -1.0, 0.0),
-    Vector3( 0.0, -1.0, 0.0),
-    Vector3( 0.0, -1.0, 0.0),
-    Vector3( 0.0, -1.0, 0.0),
+    Vector3( 0.0f, -1.0f, 0.0f),
+    Vector3( 0.0f, -1.0f, 0.0f),
+    Vector3( 0.0f, -1.0f, 0.0f),
+    Vector3( 0.0f, -1.0f, 0.0f),
+    Vector3( 0.0f, 1.0f, 0.0f),
+    Vector3( 0.0f, 1.0f, 0.0f),
+    Vector3( 0.0f, 1.0f, 0.0f),
+    Vector3( 0.0f, 1.0f, 0.0f),
+    Vector3( -1.0f, 0.0f, 0.0f),
+    Vector3( -1.0f, 0.0f, 0.0f),
+    Vector3( -1.0f, 0.0f, 0.0f),
+    Vector3( -1.0f, 0.0f, 0.0f),
+    Vector3( 0.0f, 0.0f, 1.0f),
+    Vector3( 0.0f, 0.0f, 1.0f),
+    Vector3( 0.0f, 0.0f, 1.0f),
+    Vector3( 0.0f, 0.0f, 1.0f),
+    Vector3( 1.0f, 0.0f, 0.0f),
+    Vector3( 1.0f, 0.0f, 0.0f),
+    Vector3( 1.0f, 0.0f, 0.0f),
+    Vector3( 1.0f, 0.0f, 0.0f),
+    Vector3( 0.0f, -1.0f, 0.0f),
+    Vector3( 0.0f, -1.0f, 0.0f),
+    Vector3( 0.0f, -1.0f, 0.0f),
+    Vector3( 0.0f, -1.0f, 0.0f)
 };
 
 Triangle* CreateTriangle(int i0, int i1, int i2, Shader* shader)
@@ -174,7 +174,8 @@ void main()
     // Setup camera
     Camera* camera = new Pinhole(0.06f, 0.0001f, 0.3f);	
     camera->SetImageSensor(ccd);     
-    camera->SetPosition(Point3(0,1,3.1));
+    camera->SetPosition(Point3(0.0f, 1.0f, 3.1f));
+
 
     // Setup integrator
     Integrator* integrator = new PathTracer(4);
@@ -183,7 +184,7 @@ void main()
     RenderContext* rc = new RenderContext(scene, camera, integrator);   
         
     // Enter the main rendering loop   
-    image = new RGBA[canvasWidth*canvasHeight];
+    //image = new RGBA[canvasWidth*canvasHeight];
 
     MSG  msg;
     while(true)

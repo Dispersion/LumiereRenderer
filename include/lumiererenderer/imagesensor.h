@@ -33,91 +33,77 @@
 
 namespace LumiereRenderer
 {
-    struct RGBA
-    {
-        float red;
-        float green;
-        float blue;
-        float alpha;
-    };
+	/// @class ImageSensor
+	/// The image sensor is responsible for measuring the light at each pixel. This could
+	/// be a CCD, CMOS, or a piece of film. 
+	/// @brief A base class for an image sensor.	
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @struct ImageSensorSample
-    /// @brief A sample from the the image sensor.
-    /// @var ImageSensorSample::x 
-    /// x coordinate of the pixel.
-    /// @var ImageSensorSample::y 
-    /// y coordinate of the pixel.
-    /// @var ImageSensorSample::position 
-    /// The position of the pixel in world coordinates.
-    ////////////////////////////////////////////////////////////////////////////////////
+	class ImageSensor : public Node
+	{
+	public:
 
-    struct ImageSensorSample
-    {	
-        unsigned int x;
-        unsigned int y;
-        Point3 position;
-        float wavelength;
-    };
+		struct Pixel
+		{
+			float red;
+			float green;
+			float blue;
+			float alpha;
+		};
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class ImageSensor
-    /// The image sensor is responsible for measuring the light at each pixel. This could
-    /// be a CCD, CMOS, or a piece of film. 
-    /// @brief A base class for an image sensor.	
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+		/// @struct Sample
+		/// @brief A sample from the the image sensor.
+		struct Sample
+		{	
+			Point3 position; ///@var The position of the pixel in world coordinates. */
+			float wavelength; /**< enum value 1 */
+		};
 
-    class ImageSensor : public Node
-    {
-    public:
+	public:
+		/// Constructor for an image sensor.
+		/// @param width The width of the pixel area of the image sensor in meters.
+		/// @param height The height of the pixel area of the image sensor in meters.
+		/// @param resolutionWidth The number of pixel on the width of the sensor.
+		/// @param resolutionHeight The number of pixel on the height of the sensor.
+		ImageSensor(float width, float height, int resolutionWidth, int resolutionHeight);
+		virtual ~ImageSensor();		
 
-        /// Constructor for an image sensor.
-        /// @param width The width of the pixel area of the image sensor in meters.
-        /// @param height The height of the pixel area of the image sensor in meters.
-        /// @param resolutionWidth The number of pixel on the width of the sensor.
-        /// @param resolutionHeight The number of pixel on the height of the sensor.
-        ImageSensor(float width, float height, int resolutionWidth, int resolutionHeight);
-        virtual ~ImageSensor();		
+		/// Sample a point on the surface of the sensor. The sample contains both a [x,y] pixel coordinate
+		/// of the sensor and the position of the sample in world coordinates.
+		/// @return The sample function will return an ImageSensorSample.
+		virtual ImageSensor::Sample sample(unsigned int i, unsigned int j) = 0;
 
-        /// Sample a point on the surface of the sensor. The sample contains both a [x,y] pixel coordinate
-        /// of the sensor and the position of the sample in world coordinates.
-        /// @return The sample function will return an ImageSensorSample.
-        virtual ImageSensorSample Sample(unsigned int i, unsigned int j) = 0;
-        
-        /// After we have traced a light ray through the scene, we save the resulting irradiance at a 
-        /// pixel on the sensor. The position of the pixel is given in the ImageSensorSample.
-        /// @param sample The position of the pixel we want to update.
-        /// @param exposure Exposure is irradiance multiplied by shutterspeed in seconds.
-        /// @param alpha Transparency of the first hit point.
-        /// @param wavelength The wavelength of the ray of light.
-        virtual void SetExposure(const ImageSensorSample& sample, float exposure, float alpha, /*float wavelength,*/ RenderContext* rc) = 0;
-        
-        virtual RGBA GetColor(unsigned int i, unsigned int j) = 0;
-        
-        /// Set the number of pixels on the width of the sensor.
-        /// @param resolutionWidth The number of pixels.
-        void SetResolutionWidth(int resolutionWidth);
-        
-        /// Get the number of pixels on the width of the sensor.
-        /// @return The number of pixels.
-        int GetResolutionWidth();
-        
-        /// Set the number of pixels on the height of the sensor.
-        /// @param resolutionHeight The number of pixels.
-        void SetResolutionHeight(int resolutionHeight);
-        
-        /// Get the number of pixels on the height of the sensor.
-        /// @return The number of pixels.
-        int GetResolutionHeight();
+		/// After we have traced a light ray through the scene, we save the resulting irradiance at a 
+		/// pixel on the sensor. The position of the pixel is given in the ImageSensorSample.
+		/// @param i
+		/// @param j
+		/// @param exposure Exposure is irradiance multiplied by shutterspeed in seconds.
+		/// @param alpha Transparency of the first hit point.
+		/// @param wavelength The wavelength of the ray of light.
+		virtual void SetExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext* rc) = 0;
 
-        virtual void Evaluate( Attribute* attr, RenderContext* rc ) = 0;
+		/// Set the number of pixels on the width of the sensor.
+		/// @param resolutionWidth The number of pixels.
+		void SetResolutionWidth(int resolutionWidth);
 
-    protected:        	
-        int mResolutionWidth, mResolutionHeight;
-        float mWidth, mHeight;	
-        float mPixelWidth, mPixelHeight;
-    };
+		/// Get the number of pixels on the width of the sensor.
+		/// @return The number of pixels.
+		int GetResolutionWidth();
+
+		/// Set the number of pixels on the height of the sensor.
+		/// @param resolutionHeight The number of pixels.
+		void SetResolutionHeight(int resolutionHeight);
+
+		/// Get the number of pixels on the height of the sensor.
+		/// @return The number of pixels.
+		int GetResolutionHeight();
+
+     	virtual void Evaluate( Attribute* attr, RenderContext* rc ) = 0;
+
+		virtual ImageSensor::Pixel* Data() = 0;
+
+	protected:        	
+		int mResolutionWidth, mResolutionHeight;
+		float mWidth, mHeight;	
+		float mPixelWidth, mPixelHeight;
+	};
 }

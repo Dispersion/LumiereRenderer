@@ -60,7 +60,7 @@ namespace LumiereRenderer
         /// Sample a point on the surface of the sensor. The sample contains both a [x,y] pixel coordinate
         /// of the sensor and the position of the sample in world coordinates.
         /// @return The sample function will return an ImageSensorSample.
-        virtual ImageSensorSample Sample(unsigned int i, unsigned int j);
+        virtual Sample sample(unsigned int i, unsigned int j);
         
         /// After we have traced a light ray through the scene, we save the resulting irradiance at a 
         /// pixel on the sensor. The position of the pixel is given in the ImageSensorSample.
@@ -68,10 +68,11 @@ namespace LumiereRenderer
         /// @param exposure Exposure is irradiance multiplied by shutterspeed in seconds.
         /// @param alpha Transparency of the first hit point.
         /// @param wavelength The wavelength of the ray of light.
-        virtual void SetExposure(const ImageSensorSample& sample, float exposure, float alpha, /*float wavelength,*/ RenderContext* rc);
+        virtual void SetExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext* rc);
         
-        void Evaluate( Attribute* attr, RenderContext* rc );
-        virtual RGBA GetColor(unsigned int i, unsigned int j);
+        void Evaluate( Attribute*, RenderContext* rc );
+
+        virtual Pixel* Data();
         void Clear();
 
     private:
@@ -85,6 +86,6 @@ namespace LumiereRenderer
         Attribute* mRGBA;
 
         unsigned int* mSamples;
-        RGBA* mImage;        
+        Pixel* mImage;        
     };
 }

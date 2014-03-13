@@ -29,7 +29,6 @@
     <ClCompile Include="..\..\src\core\scene.cpp" />
     <ClCompile Include="..\..\src\core\scenetracer.cpp" />
     <ClCompile Include="..\..\src\core\shader.cpp" />
-    <ClCompile Include="..\..\src\core\shadernode.cpp" />
     <ClCompile Include="..\..\src\core\shape.cpp" />
     <ClCompile Include="..\..\src\core\spectrum.cpp" />
     <ClCompile Include="..\..\src\math\geometry.cpp" />
@@ -63,7 +62,6 @@
     <ClInclude Include="..\..\include\lumiererenderer\scene.h" />
     <ClInclude Include="..\..\include\lumiererenderer\scenetracer.h" />
     <ClInclude Include="..\..\include\lumiererenderer\shader.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\shadernode.h" />
     <ClInclude Include="..\..\include\lumiererenderer\shape.h" />
     <ClInclude Include="..\..\include\lumiererenderer\spectrum.h" />
     <ClInclude Include="..\..\include\lumiererenderer\vector3.h" />
@@ -93,7 +91,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>

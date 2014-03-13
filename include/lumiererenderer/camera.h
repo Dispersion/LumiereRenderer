@@ -35,19 +35,20 @@
 
 namespace LumiereRenderer
 {
-    
-    class Integrator;
+	// Forwad declerations
+	class Integrator;
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class Camera
-    /// The camera is responsible for generating rays. The camera allows you to set your
-    /// own imagesensor. 
-    /// @brief A base class for a camera.	
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
-
-    class Camera : public Node
+	/** @class Camera
+      * @brief A base class for a camera.	
+      *
+	  * The camera is responsible for generating rays. The camera allows you to set your
+      * own imagesensor.
+	  * 
+	  * 
+      * 
+      */
+	
+	class Camera : public Node
     {
     public:
         /// Default constructor.
@@ -55,15 +56,14 @@ namespace LumiereRenderer
         /// Default destructor.
         virtual ~Camera();
         
-        virtual RGBA Trace( unsigned int i, unsigned int j, RenderContext* rc ) = 0;
+		/// Trace the scene from the camera.
+        /// @param[in] x   The pixel position on the X axis of the image sensor.
+        /// @param[in] y   The pixel position on the Y axis of the image sensor.
+		/// @param[in] rc
+        virtual void Trace( unsigned int x, unsigned int y, RenderContext* rc ) = 0;
 
-        /// Trace the scene from the camera.
-        /// @param[in] integrator The integrator the camera should use to trace the scene.
-        /// @param[in] i The pixel position on the X axis of the image sensor.
-        /// @param[in] j The pixel position on the Y axis of the image sensor.
-        //virtual float Trace( Integrator* integrator, unsigned int i, unsigned int j ) = 0;
-        
         /// Set the image sensor.
+		/// @param[in] sensor
         void SetImageSensor( ImageSensor* sensor );
         
         /// Get the current image sensor.
@@ -91,7 +91,6 @@ namespace LumiereRenderer
         /// The up direction is the Y axis on the imagesensor in world space.
         /// @return The up direction.
         Vector3 GetUpDirection();
-
 
         virtual void Evaluate( Attribute* attr, RenderContext* rc ) = 0;
 

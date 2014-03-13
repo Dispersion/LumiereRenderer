@@ -29,47 +29,46 @@
 
 #pragma once
 #include <lumiererenderer\point3.h>
-#include <lumiererenderer\shadernode.h>
+#include <lumiererenderer\node.h>
 #include <lumiererenderer\rendercontext.h>
-
 
 namespace LumiereRenderer 
 {
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class Shader
-    /// A surface shader will shade the surface of an object.
-    /// 
-    /// @brief Shade the surface of an object.
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+    /** @class Shader
+      * @brief Shade the surface of an object.
+	  * 
+	  * A surface shader will shade the surface of an object.
+	  * To determine how light is reflected of the surface if an object in the scene, we need a shader.	  
+      * 
+      */
 
-    class Shader : public ShaderNode
+    class Shader : public Node
     {
     public:
         Shader(void);
         virtual ~Shader(void);
         
-        /// Evaluate the light going through the material between two points.
-        /// @param[in] sc The shadercontext is used to get values from incomming attributes.
-        /// @param[in] from The starting point of the ray.
-        /// @param[in] to The end point of the ray.
-        /// @return Radiance.
+        /** Evaluate the light going through the material between two points.
+          * @param[in] rc   The RenderContext is used to get values from incomming attributes.
+          * @param[in] from The starting point of the ray.
+          * @param[in] to   The end point of the ray.
+          * @return Radiance.
+	      */
         virtual float Evaluate( RenderContext* rc, const Point3& from, const Point3& to ) = 0;
         
         /// Evaluate the light comming from wi.
-        /// @param[in] sc The shadercontext is used to get values from incomming attributes.
-        /// @param[in] wi The ray in the direction of the lightsource.
+        /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
+        /// @param[in] wi   The ray in the direction of the lightsource.
         /// @return Radiance.
         virtual float Evaluate( RenderContext* rc, const Ray& wi ) = 0;
         
         /// Evaluate an outgoing attribute.
         /// @param[in] attr The outgoing attribute.
-        /// @param[in] sc The shadercontext is used to get values from incomming attributes.
+        /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
         virtual void Evaluate( Attribute* attr, RenderContext* rc ) = 0;
 
         /// Get the index of refraction of the material.
-        /// @param[in] sc The shadercontext is used to get values from incomming attributes.
+        /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
         /// @return The IOR.
         virtual float GetIor(RenderContext* rc);
 

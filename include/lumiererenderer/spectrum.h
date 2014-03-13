@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\shadernode.h>
+#include <lumiererenderer\node.h>
 
 namespace LumiereRenderer
 {
@@ -39,7 +39,7 @@ namespace LumiereRenderer
     ///
     ////////////////////////////////////////////////////////////////////////////////////
 
-    class Spectrum : public ShaderNode
+    class Spectrum : public Node
     {
     public:	
         Spectrum();

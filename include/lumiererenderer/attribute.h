@@ -34,15 +34,11 @@
 namespace LumiereRenderer
 {
  
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
     ///	@class Attribute
     /// @brief 
-    /// 
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
 
-    class Node;
+    class Node; // Forward declaration
+
     class Attribute
     {
     public:
@@ -62,9 +58,14 @@ namespace LumiereRenderer
         std::string GetName() const;
         
         virtual void SetValue( void* value ) = 0;
-        virtual void SetValue( float value ) {}
+//        virtual void SetValue( float value ) {}
         virtual void* GetDefaultValue() const;
         
+		void setReadable();
+		void setWriteable();
+
+		bool isReadable();
+		bool isWriteable();
 
     protected:
         Node* mOwner; 

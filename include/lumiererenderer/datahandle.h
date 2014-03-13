@@ -35,9 +35,9 @@
 
 namespace LumiereRenderer
 {    
-    class RenderContext;
-    class Shader;
-    class Shape;
+    class RenderContext;  // Forward declaration
+    class Shader;         // Forward declaration
+    class Shape;          // Forward declaration
 
     class DataHandle
     {

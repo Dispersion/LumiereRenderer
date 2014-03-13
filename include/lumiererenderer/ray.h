@@ -34,15 +34,11 @@
 
 namespace LumiereRenderer
 {	
-    class Shader;
+    class Shader;  // Forward declaration
     
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
     ///	@class Ray
     /// @brief A Ray is a line that goes to infinity starting at the point origin and 
-    ///	going in a certain direction.
-    ///	
-    ////////////////////////////////////////////////////////////////////////////////////
+    ///	       going in a certain direction.
 
     class Ray
     {

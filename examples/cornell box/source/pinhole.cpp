@@ -45,19 +45,21 @@ namespace LumiereRenderer
         mShutterSpeed = shutterSpeed;
 
 
-        mExposure = new AttributeValue<float>("Exposure", 0);
-        AddAttribute( mExposure );
+//		AddAttribute( mAperture );
+
+ //       mExposure = new AttributeValue<float>("Exposure", 0);
+//        AddAttribute( mExposure );
     }
 
     Pinhole::~Pinhole()
     {
     }
 
-    RGBA Pinhole::Trace( unsigned int i, unsigned int j, RenderContext* rc )
+    void Pinhole::Trace( unsigned int i, unsigned int j, RenderContext* rc )
     {
         rc->Push();
 
-        ImageSensorSample imageSensorSample = mImageSensor->Sample( i,j );
+		ImageSensor::Sample imageSensorSample = mImageSensor->sample( i,j );
 
         Point3 pointOnAperture;
         if ( mAperture > 0 )
@@ -83,17 +85,43 @@ namespace LumiereRenderer
         float time = mShutterSpeed;
         float exposure = ( ( time * g ) / pdf ) * rc->Trace( ray );
 
-        mImageSensor->SetExposure( imageSensorSample, exposure, ray.alpha, /*ray.wavelength,*/ rc );
+        mImageSensor->SetExposure( i, j, exposure, ray.alpha, rc );
 
         rc->Pop();
-        return mImageSensor->GetColor(i,j);
     }
 
 
-    void Pinhole::Evaluate( Attribute* /*attr*/, RenderContext* /*rc*/ )
+    void Pinhole::Evaluate( Attribute* attr, RenderContext* rc )
     {
-        //Point3 pointOnSensor = rc->GetInput( mPointOnSensor ).AsPoint3();
-        //float shutterSpeed = rc->GetInput( mShutterSpeed ).AsFloat();
+		/*if( attr == aAperture )
+        {
+			DataHandle outColor = rc->GetOutput(aAperture);
+            outColor.Set( mAperture );
+		}
+
+		if( attr == aFocalLength )
+        {
+			DataHandle outColor = rc->GetOutput(aFocalLength);
+            outColor.Set( mFocalLength );
+		}
+
+		if( attr == aShutterSpeed )
+        {
+			DataHandle outColor = rc->GetOutput(aShutterSpeed);
+            outColor.Set( mShutterSpeed );
+		}*/
+
+        			
+/*		Point3 pointOnSensor = rc->GetInput( mPointOnSensor ).AsPoint3();
+        
+		Point3 pointOnAperture;
+        if ( mAperture > 0 )
+        {
+            pointOnAperture = SampleDisc(Random(), Random()) * mAperture;
+        }
+		
+	*/	
+		//float shutterSpeed = rc->GetInput( mShutterSpeed ).AsFloat();
         //float aperture = rc->GetInput( mAperture ).AsFloat();
         //float focalLength = rc->GetInput( mFocalLength ).AsFloat();
         //float wavelength = rc->GetInput( mWavelength ).AsFloat();
@@ -130,7 +158,7 @@ namespace LumiereRenderer
 
         //float exposure = ( ( shutterSpeed * g ) / pdf ) * rc->Trace( ray );
         //rc->GetOutput( mExposure ).Set( exposure );
-    }
+	}
 
     void Pinhole::SetFocalLength(float length)
     {

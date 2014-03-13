@@ -88,9 +88,6 @@
     <ClCompile Include="..\..\src\core\node.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\shadernode.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\core\rendercontext.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
@@ -157,9 +154,6 @@
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\lumiererenderer\node.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\shadernode.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\lumiererenderer\constants.h">

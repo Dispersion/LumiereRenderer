@@ -28,6 +28,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #include <lumiererenderer\node.h>
+#include <lumiererenderer\shape.h>
 
 namespace LumiereRenderer
 {
@@ -46,7 +47,73 @@ namespace LumiereRenderer
 
     void Node::AddAttribute( Attribute* attribute )
     {
+        //mAttributes[attribute->GetName()] = attribute;
+
+		std::string name = attribute->GetName();
+
+        if (name.compare("Position") == 0 )
+        {
+            attribute->Connect( Shape::POSITION );
+        } 
+        else if (name.compare("Normal") == 0 )
+        {
+            attribute->Connect( Shape::NORMAL );
+        }
+        else if (name.compare("Binormal") == 0 )
+        {
+            attribute->Connect( Shape::BINORMAL );
+        }
+        else if (name.compare("Tangent") == 0 )
+        {
+            attribute->Connect( Shape::TANGENT );
+        }
+        else if (name.compare("Texcoord") == 0 )
+        {
+            attribute->Connect( Shape::TEXCOORD );
+        }
+        else if (name.compare("RayOrigin") == 0 )
+        {
+            attribute->Connect( RenderContext::RAY_ORIGIN );
+        }
+        else if (name.compare("RayDirection") == 0 )
+        {
+            attribute->Connect( RenderContext::RAY_DIRECTION );
+        }
+        else if (name.compare("RayWavelength") == 0 )
+        {
+            attribute->Connect( RenderContext::RAY_WAVELENGTH );
+        }		
+        else if (name.compare("RayDepth") == 0 )
+        {
+            attribute->Connect( RenderContext::RAY_DEPTH );
+        }	
+        else if (name.compare("RayIOR") == 0 )
+        {
+            attribute->Connect( RenderContext::RAY_IOR );
+        }	
+        else if (name.compare("RayBarycentricCoordinates") == 0 )
+        {
+            attribute->Connect( RenderContext::RAY_BARYCENTRIC_COORDINATES );
+        }
+        else if (name.compare("RayLength") == 0 )
+        {
+            attribute->Connect( RenderContext::RAY_LENGTH );
+        }
+        else if ( name.compare("OuterIOR") == 0 )
+        {
+            attribute->Connect( RenderContext::OUTER_IOR );
+        }
+        else if ( name.compare("WorldToShader") == 0 )
+        {
+            attribute->Connect( Shape::WORLD_TO_SHADER );
+        }
+        else if ( name.compare("ShaderToWorld") == 0 )
+        {
+            attribute->Connect( Shape::SHADER_TO_WORLD );
+        }
+
         mAttributes[attribute->GetName()] = attribute;
+        attribute->SetOwner(this);
     }
 
     Attribute& Node::operator[](const char* name)

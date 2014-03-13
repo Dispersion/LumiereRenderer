@@ -73,11 +73,6 @@ namespace LumiereRenderer
         SceneTracer* GetSceneTracer();
         Integrator* GetIntegrator();
 
-        static Attribute* POSITION;
-        static Attribute* NORMAL;
-        static Attribute* BINORMAL;
-        static Attribute* TANGENT;
-        static Attribute* TEXCOORD;
         static Attribute* RAY_ORIGIN;
         static Attribute* RAY_DIRECTION;
         static Attribute* RAY_WAVELENGTH;
@@ -89,8 +84,7 @@ namespace LumiereRenderer
         static Attribute* SHADER;
         static Attribute* SHAPE;
         static Attribute* PDF;
-        static Attribute* WORLD_TO_SHADER;
-        static Attribute* SHADER_TO_WORLD;
+
 
     protected:
         void ResizeBuffer(size_t size);

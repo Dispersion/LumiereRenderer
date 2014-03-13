@@ -125,12 +125,12 @@ void CreateCanvas( unsigned int width, unsigned int height )
 
     glEnable( GL_TEXTURE_2D );   
 
-    glClearColor(0.3, 0.3, 0.3, 1.0);
+    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 
     Resize( width+20, height+20 );
 }
 
-void UpdatePixels(/*unsigned int left, unsigned int right, unsigned int bottom, unsigned int top,*/ LumiereRenderer::RGBA* pixels)
+void UpdatePixels(/*unsigned int left, unsigned int right, unsigned int bottom, unsigned int top,*/ LumiereRenderer::ImageSensor::Pixel* pixels)
 {
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, gWidth, gHeight, 0, GL_RGBA, GL_FLOAT, pixels );
 }

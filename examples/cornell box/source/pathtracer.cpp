@@ -64,8 +64,8 @@ namespace LumiereRenderer
 
         float radiance = 0;
 
-        Point3 surfacePosition = rc->GetInput( RenderContext::POSITION ).AsPoint3();
-        Vector3 surfaceNormal = rc->GetInput( RenderContext::NORMAL ).AsVector3();
+        Point3 surfacePosition = rc->GetInput( Shape::POSITION ).AsPoint3();
+        Vector3 surfaceNormal = rc->GetInput( Shape::NORMAL ).AsVector3();
        // Shader* surfaceShader = static_cast<Shader*>(rc->GetInput( RenderContext::SHADER ).AsPointer());
         Shader* surfaceShader = rc->GetInput( RenderContext::SHADER ).AsShader();
 
@@ -79,8 +79,8 @@ namespace LumiereRenderer
             
             if ( rc->GetScene()->SampleEmitters( rc ) )
             {
-                Point3 emitterPosition = rc->GetInput( RenderContext::POSITION ).AsPoint3();
-                Vector3 emitterNormal = rc->GetInput( RenderContext::NORMAL ).AsVector3();
+                Point3 emitterPosition = rc->GetInput( Shape::POSITION ).AsPoint3();
+                Vector3 emitterNormal = rc->GetInput( Shape::NORMAL ).AsVector3();
                 Shader* emitterShader = rc->GetInput( RenderContext::SHADER ).AsShader();
                 float emitterPdf = rc->GetInput( RenderContext::PDF ).AsFloat();
 
