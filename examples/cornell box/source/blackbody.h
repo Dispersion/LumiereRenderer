@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\shader.h>
+#include <lumiererenderer/shader.h>
 
 namespace LumiereRenderer
 {
@@ -38,9 +38,9 @@ namespace LumiereRenderer
 		BlackBody();
 		~BlackBody(void);
 
-		float Evaluate( RenderContext* rc, const Point3& from, const Point3& to );		
-		float Evaluate( RenderContext* rc, const Ray& wi );
-		void Evaluate( Attribute* attr, RenderContext* rc );
+		float evaluate( RenderContext* rc, const Point3& from, const Point3& to );		
+		float evaluate( RenderContext* rc, const Ray& wi );
+		void evaluate( Attribute* attr, RenderContext* rc );
 		float GetRadiance( float kelvin, float wavelength );
 
 		bool DoEmit();

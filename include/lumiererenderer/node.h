@@ -29,39 +29,76 @@
 
 #pragma once
 
-#include <lumiererenderer\Attribute.h>
+#include <lumiererenderer\AttributeValue.h>
 #include <lumiererenderer\rendercontext.h>
 #include <map>
 #include <string>
 
+
 namespace LumiereRenderer
 {
-    class Plug;
-    class Attribute;
-    class Integrator;
-    class Hitpoint;
+    /*
+    ===========================================================================
+        @class Node
+        @brief 
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class Node
-    /// 
-    /// 
-    /// @brief The base node
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+               This is the base node of a node. The nodes are part of a DAG 
+               each node contains a number of attributes. The nodes can be 
+               connected to each other, by connecting them though their 
+               attributes. 
+               
+               The output of one node will become the input of one or more 
+               other nodes. The connections form a DAG. Data flows through 
+               the nodes by using the attributes. Data comes through 
+               the attributes and the node perform operation of the data. 
+               
+               A node should not require any data than what is through the 
+               attributes. They are connected by a network of nodes. 
+
+    ===========================================================================
+    */
 
     class Node
     {
     public:
-        Node(void);
-        virtual ~Node(void);
+            Node(void);
+            virtual ~Node(void);
+        
+		    /** The evaluate function evaluates the value of an attribute in a certain render context.
+		      * 
+              * @param[in] attribute   The attribute that should be evaluated.
+              * @param[in] rc   Used to get and set values of attributes and to trace new rays.
+	          */
+            virtual void evaluate( Attribute* attribute, RenderContext* rc ) = 0;
+              
+		    /** 
+		      * Get a reference to an attribute by using its name. Use it to either get the attribute
+		      * or to set its value. You can create a connection between two attributes in by using this
+		      * syntax:
+		      *
+		      *		node1["diffuse"] = node0["outColor"];
+		      *
+		      * This will connect in a way that, when node1 needs to use the "diffuse" attribute, it will
+		      * use whatever value is returned by the "outColor" attribute in node0. 
+		      *
+		      *
+              * @param[in] name   The name of the attribute.
+              * @return A reference to the attribute.
+	          */	
+		    Attribute& operator[](const char* name);        
 
-        virtual void AddAttribute( Attribute* attribute );
-        virtual void Evaluate( Attribute* attr, RenderContext* rc ) = 0;
-        virtual Attribute* GetAttribute(std::string name);
-        Attribute& operator[](const char* name);        
+		    template<class T>
+		    Attribute* createAttribute(const char* name, T value)
+		    {
+			    Attribute* attribute = new AttributeValue<T>(name, value);
+			    addAttribute(attribute);
+			    return attribute;
+		    }
 
     protected:
-        std::map<std::string, Attribute*> mAttributes;
+            std::map<std::string, Attribute*> mAttributes;
+	
+    private:
+		    void                        addAttribute( Attribute* attribute );
     };    
 }

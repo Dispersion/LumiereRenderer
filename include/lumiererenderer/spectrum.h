@@ -32,12 +32,13 @@
 
 namespace LumiereRenderer
 {
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class Spectrum
-    /// @brief Represents the visible spectrum of light, which lies between 390 to 750 nm.
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+    /*
+    ===========================================================================
+        @class Spectrum
+        @brief Represents the visible spectrum of light, which lies between 390 to 750 nm.
+
+    ===========================================================================
+    */
 
     class Spectrum : public Node
     {
@@ -46,7 +47,7 @@ namespace LumiereRenderer
         Spectrum(float* wavelength, float* intensity, unsigned int size);	
         virtual ~Spectrum();
         
-        void Evaluate(Attribute* attr, RenderContext* rc);
+        void evaluate(Attribute* attr, RenderContext* rc);
 
       /*  float& operator[]( const unsigned int i );
         const float& operator[]( const unsigned int i ) const;*/

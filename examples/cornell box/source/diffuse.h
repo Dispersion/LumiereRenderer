@@ -38,9 +38,9 @@ namespace LumiereRenderer
         Diffuse();
         ~Diffuse(void);
         
-        float Evaluate( RenderContext* rc, const Point3& from, const Point3& to );		
-        float Evaluate( RenderContext* rc, const Ray& wi );
-        void Evaluate( Attribute* attr, RenderContext* rc );
+        float evaluate( RenderContext* rc, const Point3& from, const Point3& to );		
+        float evaluate( RenderContext* rc, const Ray& wi );
+        void evaluate( Attribute* attr, RenderContext* rc );
 
     private:
         Attribute* mPosition;

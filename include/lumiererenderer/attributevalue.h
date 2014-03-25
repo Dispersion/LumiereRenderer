@@ -32,14 +32,14 @@
 
 namespace LumiereRenderer
 {
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class AttributeValue
-    /// 
-    /// 
-    /// @brief 
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+    /*
+    ===========================================================================
+        @class AttributeValue
+        @brief 
+
+
+    ===========================================================================
+    */
 
     template <class T>
     class AttributeValue : public Attribute
@@ -48,20 +48,14 @@ namespace LumiereRenderer
         AttributeValue(std::string name, T value);
         ~AttributeValue();
 
-        void SetValue( void* value );
-        void* GetDefaultValue() const;
-        size_t GetSize() const;
-        
-
-    //private:    
-      //  size_t mSize;
+    private:
+        size_t getSize() const;
     };
 
     template<class T>
     AttributeValue<T>::AttributeValue(std::string name, T value) : Attribute()
     {
-        mDefaultValue = new T(value);
-        //mSize = sizeof(T);
+        mDefaultValue = new T(value);        
         mName = name;    
     }
 
@@ -72,19 +66,7 @@ namespace LumiereRenderer
     }
 
     template<class T>
-    void AttributeValue<T>::SetValue( void* value )
-    {
-        mDefaultValue = (T*)value;
-    }
-
-    template<class T>
-    void* AttributeValue<T>::GetDefaultValue() const
-    {
-        return mDefaultValue;
-    }
-
-    template<class T>
-    size_t AttributeValue<T>::GetSize() const
+    size_t AttributeValue<T>::getSize() const
     {
         return sizeof(T);
     }

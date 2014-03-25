@@ -33,20 +33,27 @@
 
 namespace LumiereRenderer
 {
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    ///	@class SceneTracer
-    /// 
-    /// @brief Trace a ray into the scene.
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+    ===========================================================================
+        @class SceneTracer
+        @brief Trace a ray into the scene.
+
+               The SceneTracer is used to find the closest intersection 
+               point on the ray with an object in the scene. 
+               
+               Each implementation of a Scene must have an implementation
+               of a corresponding SceneTracer.
+
+    ===========================================================================
+    */
 
     class SceneTracer
     {
     public:
-        SceneTracer();
-        virtual ~SceneTracer(void);
-        virtual bool Trace(const Point3 from, const Point3 to) = 0;
-        virtual bool Trace(Ray& Ray, RenderContext* rc) = 0;
+            SceneTracer();
+            virtual ~SceneTracer(void);
+            virtual bool Trace(const Point3 from, const Point3 to) = 0;
+            virtual bool Trace(Ray& Ray, RenderContext* rc) = 0;
     };
 }

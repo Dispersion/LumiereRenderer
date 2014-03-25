@@ -37,29 +37,23 @@ namespace LumiereRenderer
 {
     Diffuse::Diffuse()
     {		
-        mPosition = new AttributeValue<Point3>("Position", 0);
-        mNormal = new AttributeValue<Vector3>("Normal", 0);
-        mReflectance = new AttributeValue<float>("Reflectance", 0);
-        mRayWavelength = new AttributeValue<float>("RayWavelength", 0);
-        mShaderToWorld = new AttributeValue<Matrix>("ShaderToWorld", Matrix());
-
-        AddAttribute( mPosition );
-        AddAttribute( mNormal );
-        AddAttribute( mReflectance );
-        AddAttribute( mRayWavelength );
-        AddAttribute( mShaderToWorld );
+		mPosition = createAttribute<Point3>("Position", 0);
+		mNormal = createAttribute<Vector3>("Normal", 0);
+        mReflectance = createAttribute<float>("Reflectance", 0);
+        mRayWavelength = createAttribute<float>("RayWavelength", 0);
+        mShaderToWorld = createAttribute<Matrix>("ShaderToWorld", Matrix());
     }
 
     Diffuse::~Diffuse(void)
     {
     }
 
-    float Diffuse::Evaluate( RenderContext* /*sc*/, const Point3& /*from*/, const Point3& /*to*/ )
+    float Diffuse::evaluate( RenderContext* /*sc*/, const Point3& /*from*/, const Point3& /*to*/ )
     {
         return 1;
     }
 
-    float Diffuse::Evaluate( RenderContext* sc, const Ray& /*wi*/ )
+    float Diffuse::evaluate( RenderContext* sc, const Ray& /*wi*/ )
     {
         if ( mReflectance )
         {			
@@ -68,7 +62,7 @@ namespace LumiereRenderer
         return 0;
     }
 
-     void Diffuse::Evaluate(Attribute* attr, RenderContext* rc)
+     void Diffuse::evaluate(Attribute* attr, RenderContext* rc)
     {               
         if (attr == Shader::RADIANCE || attr == NULL)
         {

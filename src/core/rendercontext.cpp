@@ -63,17 +63,7 @@ namespace LumiereRenderer
         delete []mData;
     }
 
-    void* RenderContext::GetData(int index)
-    {
-        return &mData[index];
-    }
-
-    void RenderContext::SetData(int index, void* data, size_t size)
-    {
-        memcpy(mData+index, data, size);
-    }
-
-    void RenderContext::Push()
+	void RenderContext::Push()
     {
         ResizeHandles( mNextAvailable + 1 );
         mHandles[mNextAvailable] = mCurrentBlock;
@@ -92,7 +82,7 @@ namespace LumiereRenderer
 
     DataHandle RenderContext::GetInput(Attribute* attribute)
     {
-        Attribute* connection = attribute->GetConnection();
+        Attribute* connection = attribute->getConnection();
 
         // Test to see if the attribute is connected to anything
         if ( connection )
@@ -106,9 +96,9 @@ namespace LumiereRenderer
             }
             else
             {   
-                if (connection->GetOwner())
+                if (connection->getOwner())
                 {
-                    connection->GetOwner()->Evaluate( connection, this );
+                    connection->getOwner()->evaluate( connection, this );
                     index = Find( connection );
                     if ( index != -1 )
                     {
@@ -121,7 +111,7 @@ namespace LumiereRenderer
                     // We have to send the request to the shape to get the result.
 
                     index = Find(SHAPE);
-                    (static_cast<Shape**>(GetData(index)))[0]->Evaluate( connection, this );
+                    (static_cast<Shape**>(GetData(index)))[0]->evaluate( connection, this );
                     index = Find( connection );
                     if ( index != -1 )
                     {
@@ -143,7 +133,7 @@ namespace LumiereRenderer
             // We have to find out if it is a value such as position or normal, that is computed by
             // the shape.
             index = Find(SHAPE);
-            (static_cast<Shape**>(GetData(index)))[0]->Evaluate( attribute, this );
+            (static_cast<Shape**>(GetData(index)))[0]->evaluate( attribute, this );
             index = Find( attribute );
             if ( index != -1 )
             {
@@ -154,7 +144,7 @@ namespace LumiereRenderer
                 // Since the shape could not calculate the value of this attribute, we use
                 // the default value of the attribute.
                 index = Allocate(attribute);
-                memcpy(mData+index, attribute->GetDefaultValue(), attribute->GetSize());
+                memcpy(mData+index, attribute->getDefaultValue(), attribute->getSize());
                 return DataHandle(this, index);
             }
         }
@@ -170,6 +160,16 @@ namespace LumiereRenderer
         }
 
         return DataHandle(this, index);   
+    }
+	
+    void* RenderContext::GetData(int index)
+    {
+        return &mData[index];
+    }
+
+    void RenderContext::SetData(int index, void* data, size_t size)
+    {
+        memcpy(mData+index, data, size);
     }
 
     void RenderContext::ResizeBuffer( size_t size )
@@ -225,7 +225,7 @@ namespace LumiereRenderer
         mHandles[mNextAvailable++] = reinterpret_cast<int>(attribute);
         mHandles[mNextAvailable++] = index;
 
-        mNextDataAvailable += attribute->GetSize();
+        mNextDataAvailable += attribute->getSize();
 
         // If we are going to use more memory than allocated for the
         // data buffer, we have to resize it.

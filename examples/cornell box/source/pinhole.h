@@ -55,7 +55,7 @@ namespace LumiereRenderer
         void Trace( unsigned int i, unsigned int j, RenderContext* rc );
 
         ///
-		void Evaluate( Attribute* attr, RenderContext* rc );
+		void evaluate( Attribute* attr, RenderContext* rc );
 
         /// Set the focal length to a new value.
         /// @param length The distance from the image sensor to the pinhole, given in meters.

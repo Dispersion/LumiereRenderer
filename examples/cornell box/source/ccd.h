@@ -70,7 +70,7 @@ namespace LumiereRenderer
         /// @param wavelength The wavelength of the ray of light.
         virtual void SetExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext* rc);
         
-        void Evaluate( Attribute*, RenderContext* rc );
+        void evaluate( Attribute*, RenderContext* rc );
 
         virtual Pixel* Data();
         void Clear();

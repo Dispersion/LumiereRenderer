@@ -33,17 +33,20 @@
 
 namespace LumiereRenderer
 {	
+    // Forward declarations
     class Ray;
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class Integrator
-    /// An integrator will integrate over the rendering equation using 
-    /// common strategies include: Path tracing, Bidirectional path tracing, Metropolis 
-    /// light transport.
-    /// @brief Integrate over the rendering equation.
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+    /*
+    ===========================================================================
+        @class Integrator
+        @brief Integrate over the rendering equation.
+
+               An integrator will integrate over the rendering equation using 
+               common strategies include: Path tracing, Bidirectional path 
+               tracing, Metropolis light transport.
+
+    ===========================================================================
+    */
 
     class Integrator
     {
@@ -54,7 +57,9 @@ namespace LumiereRenderer
         /// Default destructor.
         virtual ~Integrator();        
         
-
-        virtual float Trace( Ray& Ray, RenderContext* rc ) = 0;       
+        /// 
+        /// @param ray
+        /// @param rc
+        virtual float Trace( Ray& ray, RenderContext* rc ) = 0;       
     };
 }

@@ -35,30 +35,30 @@ namespace LumiereRenderer
 {
     BlackBody::BlackBody()
     {
-        mTemperature = new AttributeValue<float>( "Temperature", 6500 ); ;
-        mNormal = new AttributeValue<Vector3>( "Normal", 0 );
-        mRayDirection = new AttributeValue<Vector3>( "RayDirection", 0 );
-        mRayWavelength = new AttributeValue<float>( "RayWavelength", 0 );     
+        mTemperature = createAttribute<float>( "Temperature", 6500 ); ;
+        mNormal = createAttribute<Vector3>( "Normal", 0 );
+        mRayDirection = createAttribute<Vector3>( "RayDirection", 0 );
+        mRayWavelength = createAttribute<float>( "RayWavelength", 0 );     
 
-        AddAttribute( mTemperature );
-        AddAttribute( mNormal );
-        AddAttribute( mRayDirection );
-        AddAttribute( mRayWavelength );
+       // AddAttribute( mTemperature );
+        //AddAttribute( mNormal );
+       // AddAttribute( mRayDirection );
+       // AddAttribute( mRayWavelength );
     }
 
     BlackBody::~BlackBody(void)
     {
     }
 
-    float BlackBody::Evaluate(RenderContext* /*sc*/, const Point3& /*from*/, const Point3& /*to*/ )
+    float BlackBody::evaluate(RenderContext* /*sc*/, const Point3& /*from*/, const Point3& /*to*/ )
     {
         return 1;
     }
 
-    float BlackBody::Evaluate( RenderContext* rc, const Ray& /*wi*/ )
+    float BlackBody::evaluate( RenderContext* rc, const Ray& /*wi*/ )
     {
-        /*Vector3 wo = sc->Evaluate( mRayDirection ).AsVector3();
-        float wavelength = sc->Evaluate( mRayWavelength ).AsFloat();
+        /*Vector3 wo = sc->evaluate( mRayDirection ).AsVector3();
+        float wavelength = sc->evaluate( mRayWavelength ).AsFloat();
 
         if (Dot( from->normal, wi.direction ) < 0 )
             return 0;
@@ -75,7 +75,7 @@ namespace LumiereRenderer
         return GetRadiance(temperature, wavelength);
     }
 
-    void BlackBody::Evaluate(Attribute* attr, RenderContext* rc)
+    void BlackBody::evaluate(Attribute* attr, RenderContext* rc)
     {	
 
         if (attr ==  Shader::RADIANCE || attr == NULL)

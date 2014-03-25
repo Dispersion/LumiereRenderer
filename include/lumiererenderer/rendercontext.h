@@ -34,76 +34,76 @@
 
 namespace LumiereRenderer
 {    
-    class Shader;
+    // Forward declarations
     class Camera;
     class Integrator;
     class Scene;
     class SceneTracer;
-    class Hitpoint;
-    class Ray;
     class Attribute;
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class RenderContext
-    /// The render context contains everything you need when rendering.
-    ///  
-    /// @brief Storage for data being transfered between nodes.
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+    /*
+    ===========================================================================
+        @class RenderContext
+        @brief Storage for data being transfered between nodes.
+
+               The render context contains everything you need when rendering.
+               
+    ===========================================================================
+    */
 
     class RenderContext
     {
+		    friend DataHandle;
+
     public:
-        RenderContext(Scene* scene, Camera* camera, Integrator* integrator);
-        ~RenderContext();
+            RenderContext(Scene* scene, Camera* camera, Integrator* integrator);
+            ~RenderContext();
 
-        void* GetData(int index);
-        void SetData(int index, void* data, size_t size);
-        void Push();
-        void Pop();
+            void Push();
+            void Pop();
 
-        DataHandle GetInput(Attribute* attribute);
-        DataHandle GetOutput(Attribute* attribute);
+            DataHandle GetInput(Attribute* attribute);
+            DataHandle GetOutput(Attribute* attribute);
   
-        float Trace( Ray& ray );
-        std::stack<Shader*>* GetShaderStack();
-        Camera* GetCamera();
-        Scene* GetScene();
-        SceneTracer* GetSceneTracer();
-        Integrator* GetIntegrator();
+            float Trace( Ray& ray );
+            std::stack<Shader*>* GetShaderStack();
+            Camera* GetCamera();
+            Scene* GetScene();
+            SceneTracer* GetSceneTracer();
+            Integrator* GetIntegrator();
 
-        static Attribute* RAY_ORIGIN;
-        static Attribute* RAY_DIRECTION;
-        static Attribute* RAY_WAVELENGTH;
-        static Attribute* RAY_DEPTH;
-        static Attribute* RAY_IOR;
-        static Attribute* RAY_BARYCENTRIC_COORDINATES;
-        static Attribute* RAY_LENGTH;
-        static Attribute* OUTER_IOR;
-        static Attribute* SHADER;
-        static Attribute* SHAPE;
-        static Attribute* PDF;
+            static Attribute*           RAY_ORIGIN;
+            static Attribute*           RAY_DIRECTION;
+            static Attribute*           RAY_WAVELENGTH;
+            static Attribute*           RAY_DEPTH;
+            static Attribute*           RAY_IOR;
+            static Attribute*           RAY_BARYCENTRIC_COORDINATES;
+            static Attribute*           RAY_LENGTH;
+            static Attribute*           OUTER_IOR;
+            static Attribute*           SHADER;
+            static Attribute*           SHAPE;
+            static Attribute*           PDF;
 
+    private:
+		    void*                       GetData(int index);
+		    void                        SetData(int index, void* data, size_t size);
+            void                        ResizeBuffer(size_t size);
+            void                        ResizeHandles(size_t size);
+            int                         Find( Attribute* attribute );
+            int                         Allocate( Attribute* attribute );
 
-    protected:
-        void ResizeBuffer(size_t size);
-        void ResizeHandles(size_t size);
-        int Find( Attribute* attribute );
-        int Allocate( Attribute* attribute );
+            char*                       mData;
+            int*                        mHandles;
+            size_t                      mBufferSize;
+            size_t                      mHandlesSize;
+            int                         mNextDataAvailable;
+            int                         mNextAvailable;
+            int                         mCurrentBlock;
 
-        char* mData;
-        int* mHandles;
-        size_t mBufferSize;
-        size_t mHandlesSize;
-        int mNextDataAvailable;
-        int mNextAvailable;
-        int mCurrentBlock;
-
-        Scene* mScene;
-        SceneTracer* mSceneTracer;
-        Integrator* mIntegrator;
-        Camera* mCamera;        
-        std::stack<Shader*> mShaderStack;    
+            Scene*                      mScene;
+            SceneTracer*                mSceneTracer;
+            Integrator*                 mIntegrator;
+            Camera*                     mCamera;        
+            std::stack<Shader*>         mShaderStack;    
     };
 }

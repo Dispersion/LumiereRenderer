@@ -25,142 +25,145 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\core\camera.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\imagesensor.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\shape.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\scene.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\shader.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\spectrum.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\integrator.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\random.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\sampler.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\radiometry.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\matrix.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\point3.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\ray.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\vector3.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\vector4.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\geometry.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\linearalgebra.cpp">
-      <Filter>Math\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\scenetracer.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\datahandle.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\attribute.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\node.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\rendercontext.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="..\..\include\lumiererenderer\Vector4.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Geometry.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\LinearAlgebra.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Matrix.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Point3.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Radiometry.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Random.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Ray.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Sampler.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Vector3.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Constants.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Attribute.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\AttributeValue.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Camera.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\DataHandle.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\ImageSensor.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Integrator.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Node.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\RenderContext.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Scene.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\SceneTracer.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Shader.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Shape.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Spectrum.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\lumiererenderer\camera.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\imagesensor.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\scene.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\shader.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\shape.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\spectrum.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\integrator.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\random.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\sampler.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\radiometry.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\matrix.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\point3.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\ray.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\vector3.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\vector4.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\geometry.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\linearalgebra.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\scenetracer.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\datahandle.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\attribute.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\node.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\constants.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\rendercontext.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="..\..\src\math\Geometry.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\LinearAlgebra.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Matrix.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Point3.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Radiometry.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Random.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Ray.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Sampler.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Vector3.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Vector4.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Attribute.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Camera.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\DataHandle.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\ImageSensor.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Integrator.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Node.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\RenderContext.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Scene.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\SceneTracer.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Shader.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Shape.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Spectrum.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

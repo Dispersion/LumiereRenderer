@@ -48,23 +48,23 @@ namespace LumiereRenderer
             mPixelWidth = mPixelHeight / pixelAspect;
         }      
 
-        mRed = new AttributeValue<float>("Red", 0);
-        mGreen = new AttributeValue<float>("Green", 0);
-        mBlue = new AttributeValue<float>("Blue", 0);
-        mExposure = new AttributeValue<float>("Exposure", 0);
-        mSampleX = new AttributeValue<float>("SampleX", 0);
-        mSampleY = new AttributeValue<float>("SampleY", 0);
-        mPosition = new AttributeValue<float>("Position", 0);
-        mRGBA = new AttributeValue<Vector4>("RGBA", 0);
+        mRed = createAttribute<float>("Red", 0);
+        mGreen = createAttribute<float>("Green", 0);
+        mBlue = createAttribute<float>("Blue", 0);
+        mExposure = createAttribute<float>("Exposure", 0);
+        mSampleX = createAttribute<float>("SampleX", 0);
+        mSampleY = createAttribute<float>("SampleY", 0);
+        mPosition = createAttribute<float>("Position", 0);
+        mRGBA = createAttribute<Vector4>("RGBA", 0);
 
-        AddAttribute( mRed );
+        /*AddAttribute( mRed );
         AddAttribute( mGreen );
         AddAttribute( mBlue );
         AddAttribute( mExposure );
         AddAttribute( mSampleX );
         AddAttribute( mSampleY );
         AddAttribute( mPosition );
-        AddAttribute( mRGBA );
+        AddAttribute( mRGBA );*/
 
         mSamples = new unsigned int[ resolutionWidth * resolutionHeight ];
         mImage = new Pixel[resolutionWidth * resolutionHeight];
@@ -114,12 +114,9 @@ namespace LumiereRenderer
         mSamples[j * mResolutionWidth + i]++;
     }
 
-	void CCD::Evaluate( Attribute* attr, RenderContext* rc )
+	void CCD::evaluate( Attribute* attr, RenderContext* rc )
 	{
-
 	}
-
-
 
 	CCD::Pixel* CCD::Data()
 	{

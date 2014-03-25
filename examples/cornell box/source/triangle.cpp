@@ -123,7 +123,7 @@ namespace LumiereRenderer
         return true;
     }
 
-    void Triangle::Evaluate( Attribute* attr, RenderContext* rc )
+    void Triangle::evaluate( Attribute* attr, RenderContext* rc )
     { 
         if( attr == Shape::POSITION )
         {

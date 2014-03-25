@@ -19,53 +19,54 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\core\attribute.cpp" />
-    <ClCompile Include="..\..\src\core\camera.cpp" />
-    <ClCompile Include="..\..\src\core\datahandle.cpp" />
-    <ClCompile Include="..\..\src\core\imagesensor.cpp" />
-    <ClCompile Include="..\..\src\core\integrator.cpp" />
-    <ClCompile Include="..\..\src\core\node.cpp" />
-    <ClCompile Include="..\..\src\core\rendercontext.cpp" />
-    <ClCompile Include="..\..\src\core\scene.cpp" />
-    <ClCompile Include="..\..\src\core\scenetracer.cpp" />
-    <ClCompile Include="..\..\src\core\shader.cpp" />
-    <ClCompile Include="..\..\src\core\shape.cpp" />
-    <ClCompile Include="..\..\src\core\spectrum.cpp" />
-    <ClCompile Include="..\..\src\math\geometry.cpp" />
-    <ClCompile Include="..\..\src\math\linearalgebra.cpp" />
-    <ClCompile Include="..\..\src\math\matrix.cpp" />
-    <ClCompile Include="..\..\src\math\point3.cpp" />
-    <ClCompile Include="..\..\src\math\radiometry.cpp" />
-    <ClCompile Include="..\..\src\math\random.cpp" />
-    <ClCompile Include="..\..\src\math\ray.cpp" />
-    <ClCompile Include="..\..\src\math\sampler.cpp" />
-    <ClCompile Include="..\..\src\math\vector3.cpp" />
-    <ClCompile Include="..\..\src\math\vector4.cpp" />
+    <ClInclude Include="..\..\include\lumiererenderer\Attribute.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\AttributeValue.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Camera.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Constants.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\DataHandle.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Geometry.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\ImageSensor.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Integrator.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\LinearAlgebra.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Matrix.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Node.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Point3.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Radiometry.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Random.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Ray.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\RenderContext.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Sampler.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Scene.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\SceneTracer.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Shader.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Shape.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Spectrum.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Vector3.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\lumiererenderer\attribute.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\camera.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\constants.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\datahandle.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\geometry.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\imagesensor.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\integrator.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\linearalgebra.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\matrix.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\node.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\point3.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\radiometry.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\random.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\ray.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\rendercontext.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\sampler.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\scene.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\scenetracer.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\shader.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\shape.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\spectrum.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\vector3.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\vector4.h" />
+    <ClCompile Include="..\..\src\core\Attribute.cpp" />
+    <ClCompile Include="..\..\src\core\Camera.cpp" />
+    <ClCompile Include="..\..\src\core\DataHandle.cpp" />
+    <ClCompile Include="..\..\src\core\ImageSensor.cpp" />
+    <ClCompile Include="..\..\src\core\Integrator.cpp" />
+    <ClCompile Include="..\..\src\core\Node.cpp" />
+    <ClCompile Include="..\..\src\core\RenderContext.cpp" />
+    <ClCompile Include="..\..\src\core\Scene.cpp" />
+    <ClCompile Include="..\..\src\core\SceneTracer.cpp" />
+    <ClCompile Include="..\..\src\core\Shader.cpp" />
+    <ClCompile Include="..\..\src\core\Shape.cpp" />
+    <ClCompile Include="..\..\src\core\Spectrum.cpp" />
+    <ClCompile Include="..\..\src\math\Geometry.cpp" />
+    <ClCompile Include="..\..\src\math\LinearAlgebra.cpp" />
+    <ClCompile Include="..\..\src\math\Matrix.cpp" />
+    <ClCompile Include="..\..\src\math\Point3.cpp" />
+    <ClCompile Include="..\..\src\math\Radiometry.cpp" />
+    <ClCompile Include="..\..\src\math\Random.cpp" />
+    <ClCompile Include="..\..\src\math\Ray.cpp" />
+    <ClCompile Include="..\..\src\math\Sampler.cpp" />
+    <ClCompile Include="..\..\src\math\Vector3.cpp" />
+    <ClCompile Include="..\..\src\math\Vector4.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}</ProjectGuid>
@@ -78,7 +79,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>

@@ -69,7 +69,7 @@ namespace LumiereRenderer
         Triangle(Vertex v0, Vertex v1, Vertex v2);
         ~Triangle(void);
         bool Trace(Ray& Ray);
-        void Evaluate( Attribute* attr, RenderContext* rc );
+        void evaluate( Attribute* attr, RenderContext* rc );
         void Sample(RenderContext* rc);
 
         Vertex v0, v1, v2;

@@ -40,80 +40,75 @@ namespace LumiereRenderer
     {
     }
 
-    Attribute* Node::GetAttribute(std::string name)
-    {
-        return mAttributes[name];
-    }
-
-    void Node::AddAttribute( Attribute* attribute )
+	void Node::addAttribute( Attribute* attribute )
     {
         //mAttributes[attribute->GetName()] = attribute;
 
-		std::string name = attribute->GetName();
+		std::string name = attribute->getName();
 
         if (name.compare("Position") == 0 )
         {
-            attribute->Connect( Shape::POSITION );
+            attribute->connect( Shape::POSITION );
         } 
         else if (name.compare("Normal") == 0 )
         {
-            attribute->Connect( Shape::NORMAL );
+            attribute->connect( Shape::NORMAL );
         }
         else if (name.compare("Binormal") == 0 )
         {
-            attribute->Connect( Shape::BINORMAL );
+            attribute->connect( Shape::BINORMAL );
         }
         else if (name.compare("Tangent") == 0 )
         {
-            attribute->Connect( Shape::TANGENT );
+            attribute->connect( Shape::TANGENT );
         }
         else if (name.compare("Texcoord") == 0 )
         {
-            attribute->Connect( Shape::TEXCOORD );
+            attribute->connect( Shape::TEXCOORD );
         }
         else if (name.compare("RayOrigin") == 0 )
         {
-            attribute->Connect( RenderContext::RAY_ORIGIN );
+            attribute->connect( RenderContext::RAY_ORIGIN );
         }
         else if (name.compare("RayDirection") == 0 )
         {
-            attribute->Connect( RenderContext::RAY_DIRECTION );
+            attribute->connect( RenderContext::RAY_DIRECTION );
         }
         else if (name.compare("RayWavelength") == 0 )
         {
-            attribute->Connect( RenderContext::RAY_WAVELENGTH );
+            attribute->connect( RenderContext::RAY_WAVELENGTH );
         }		
         else if (name.compare("RayDepth") == 0 )
         {
-            attribute->Connect( RenderContext::RAY_DEPTH );
+            attribute->connect( RenderContext::RAY_DEPTH );
         }	
         else if (name.compare("RayIOR") == 0 )
         {
-            attribute->Connect( RenderContext::RAY_IOR );
+            attribute->connect( RenderContext::RAY_IOR );
         }	
         else if (name.compare("RayBarycentricCoordinates") == 0 )
         {
-            attribute->Connect( RenderContext::RAY_BARYCENTRIC_COORDINATES );
+            attribute->connect( RenderContext::RAY_BARYCENTRIC_COORDINATES );
         }
         else if (name.compare("RayLength") == 0 )
         {
-            attribute->Connect( RenderContext::RAY_LENGTH );
+            attribute->connect( RenderContext::RAY_LENGTH );
         }
         else if ( name.compare("OuterIOR") == 0 )
         {
-            attribute->Connect( RenderContext::OUTER_IOR );
+            attribute->connect( RenderContext::OUTER_IOR );
         }
         else if ( name.compare("WorldToShader") == 0 )
         {
-            attribute->Connect( Shape::WORLD_TO_SHADER );
+            attribute->connect( Shape::WORLD_TO_SHADER );
         }
         else if ( name.compare("ShaderToWorld") == 0 )
         {
-            attribute->Connect( Shape::SHADER_TO_WORLD );
+            attribute->connect( Shape::SHADER_TO_WORLD );
         }
 
-        mAttributes[attribute->GetName()] = attribute;
-        attribute->SetOwner(this);
+        mAttributes[attribute->getName()] = attribute;
+        attribute->setOwner(this);
     }
 
     Attribute& Node::operator[](const char* name)

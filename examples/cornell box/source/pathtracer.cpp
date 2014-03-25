@@ -90,10 +90,10 @@ namespace LumiereRenderer
 
                     DataHandle rayWavelength = rc->GetOutput(RenderContext::RAY_WAVELENGTH);
                     rayWavelength.Set( ray.wavelength );                
-                    float emmittedRadiance = emitterShader->Evaluate( rc, wi );
+                    float emmittedRadiance = emitterShader->evaluate( rc, wi );
                     rc->Pop();
                                         
-                    radiance = ( surfaceShader->Evaluate( rc, -wi ) * G( surfacePosition, emitterPosition, surfaceNormal, emitterNormal ) 
+                    radiance = ( surfaceShader->evaluate( rc, -wi ) * G( surfacePosition, emitterPosition, surfaceNormal, emitterNormal ) 
                         * emmittedRadiance ) / emitterPdf;
                 }
 
@@ -113,15 +113,15 @@ namespace LumiereRenderer
                 float transmittance = 1;
                 if ( !rc->GetShaderStack()->empty())
                 {
-                    transmittance = rc->GetShaderStack()->top()->Evaluate( rc, ray.origin, surfacePosition );
+                    transmittance = rc->GetShaderStack()->top()->evaluate( rc, ray.origin, surfacePosition );
                 }
 
-                surfaceShader->Evaluate( Shader::RADIANCE, rc );
+                surfaceShader->evaluate( Shader::RADIANCE, rc );
                 radiance += rc->GetOutput(Shader::RADIANCE).AsFloat() * transmittance;				
             }
             else
             {
-                surfaceShader->Evaluate( Shader::RADIANCE, rc );
+                surfaceShader->evaluate( Shader::RADIANCE, rc );
             }                       
         }
 

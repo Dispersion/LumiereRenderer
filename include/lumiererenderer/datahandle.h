@@ -35,44 +35,53 @@
 
 namespace LumiereRenderer
 {    
-    class RenderContext;  // Forward declaration
-    class Shader;         // Forward declaration
-    class Shape;          // Forward declaration
+    // Forward declarations
+    class RenderContext;  
+    class Shader;         
+    class Shape;          
 
+    /*
+    ===========================================================================
+        @class DataHandle
+
+
+    ===========================================================================
+    */
+    
     class DataHandle
     {
     public:
-        DataHandle(RenderContext* rc, int index);
-        ~DataHandle(void);
+            DataHandle(RenderContext* rc, int index);
+            ~DataHandle(void);
 
-        void Set(int value);
-        void Set(float value);
-        void Set(double value);
-        void Set(char value);
-        void Set(bool value);
-        void Set(Vector3 value);
-        void Set(Vector4 value);
-        void Set(Point3 value);
-        void Set(Matrix value);
-        //void Set(void* value);
-        void Set(Shader* value);
-        void Set(Shape* value);
+            void Set(int value);
+            void Set(float value);
+            void Set(double value);
+            void Set(char value);
+            void Set(bool value);
+            void Set(Vector3 value);
+            void Set(Vector4 value);
+            void Set(Point3 value);
+            void Set(Matrix value);
+            //void                        Set(void* value);
+            void Set(Shader* value);
+            void Set(Shape* value);
         
-        int AsInt();
-        float AsFloat();
-        double AsDouble();
-        char AsChar();
-        bool AsBool();
-        Vector3 AsVector3();
-        Vector4 AsVector4();
-        Point3 AsPoint3();
-        Matrix AsMatrix();
-        //void* AsPointer();       
-        Shader* AsShader();
-        Shape* AsShape();
+            int AsInt();
+            float AsFloat();
+            double AsDouble();
+            char AsChar();
+            bool AsBool();
+            Vector3 AsVector3();
+            Vector4 AsVector4();
+            Point3 AsPoint3();
+            Matrix AsMatrix();
+            //void* AsPointer();       
+            Shader* AsShader();
+            Shape* AsShape();
 
     private:
-        RenderContext* mRenderContext;
-        int mIndex;
+            RenderContext*              mRenderContext;
+            int                         mIndex;
     };
 }

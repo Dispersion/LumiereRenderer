@@ -40,11 +40,11 @@ namespace LumiereRenderer
             mIntensity[n] = 0;
         }        
 
-        mRayWavelength = new AttributeValue<float>("RayWavelength", 0);
-        aOutColor = new AttributeValue<float>("outColor", 0);		
+        mRayWavelength = createAttribute<float>("RayWavelength", 0);
+        aOutColor = createAttribute<float>("outColor", 0);		
 
-        AddAttribute( mRayWavelength );
-        AddAttribute( aOutColor );
+        //AddAttribute( mRayWavelength );
+        //AddAttribute( aOutColor );
     }
 
     Spectrum::Spectrum(float* wavelength, float* intensity, unsigned int size)
@@ -98,18 +98,18 @@ namespace LumiereRenderer
             }
         }
 
-        mRayWavelength = new AttributeValue<float>("RayWavelength", 0);
-        aOutColor = new AttributeValue<float>("outColor", 0);		
+        mRayWavelength = createAttribute<float>("RayWavelength", 0);
+        aOutColor = createAttribute<float>("outColor", 0);		
 
-        AddAttribute( mRayWavelength );
-        AddAttribute( aOutColor );
+        //AddAttribute( mRayWavelength );
+        //AddAttribute( aOutColor );
     }
 
     Spectrum::~Spectrum()
     {
     }
 
-    void Spectrum::Evaluate( Attribute* attr, RenderContext* rc )
+    void Spectrum::evaluate( Attribute* attr, RenderContext* rc )
     {	
         if (attr == aOutColor)
         {
@@ -344,7 +344,7 @@ namespace LumiereRenderer
         return ret;
     }*/
 
-    Spectrum* RGBToSpectrum(float r, float g, float b)
+    Spectrum* RGBToSpectrum(float /*r*/, float /*g*/, float /*b*/)
     {
         float wavelength[] = {380, 418, 456, 494, 532, 570, 608, 646, 684, 720};
 

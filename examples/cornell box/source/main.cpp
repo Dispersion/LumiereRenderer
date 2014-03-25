@@ -128,6 +128,8 @@ void main()
     whiteShader["Reflectance"] = whiteSpectrum["outColor"];
 
     BlackBody blackbodyShader;
+    //blackbodyShader["Temperature"] = 1200;
+    //blackbodyShader["Temperature"].setDefaultValue(1200);
 
     //Setup scene
     Scene* scene = new List();
@@ -162,18 +164,20 @@ void main()
     float ccdBlue[] = {0.17f, 0.25f, 0.31f, 0.355f, 0.38f, 0.412f, 0.422f, 0.412f, 0.38f, 0.33f, 0.26f, 0.19f, 0.135f, 0.1f, 0.09f, 0.08f, 0.072f, 0.06f, 0.052f, 0.048f, 0.05f, 0.04f, 0.038f, 0.03f, 0.029f, 0.03f, 0.035f, 0.038f, 0.039f, 0.04f, 0.045f, 0.051f, 0.055f, 0.051f, 0.054f, 0.06f, 0.062f};
     float ccdRed[] = {0.06f, 0.04f, 0.03f, 0.022f, 0.018f, 0.012f, 0.01f, 0.011f, 0.019f, 0.02f, 0.022f, 0.03f, 0.045f, 0.052f, 0.07f, 0.07f, 0.068f, 0.052f, 0.079f, 0.18f, 0.325f, 0.352f, 0.332f, 0.305f, 0.297f, 0.282f, 0.26f, 0.222f, 0.208f, 0.195f, 0.19f, 0.19f, 0.189f, 0.188f, 0.191f, 0.199f, 0.198f};
     
-    Spectrum* ccdRedSpectrum = new Spectrum(ccdWavelengths, ccdRed, 37);
-    Spectrum* ccdGreenSpectrum = new Spectrum(ccdWavelengths, ccdGreen, 37);
-    Spectrum* ccdBlueSpectrum = new Spectrum(ccdWavelengths, ccdBlue, 37);
+    Spectrum ccdRedSpectrum = Spectrum(ccdWavelengths, ccdRed, 37);
+    Spectrum ccdGreenSpectrum = Spectrum(ccdWavelengths, ccdGreen, 37);
+    Spectrum ccdBlueSpectrum = Spectrum(ccdWavelengths, ccdBlue, 37);
     
-    CCD* ccd = new CCD(0.0512f, 0.0512f, canvasWidth, canvasHeight, 1.0);  //TODO: Changes values
-    ccd->GetAttribute("Red")->Connect( ccdRedSpectrum->GetAttribute("outColor") );
-    ccd->GetAttribute("Green")->Connect( ccdGreenSpectrum->GetAttribute("outColor") );
-    ccd->GetAttribute("Blue")->Connect( ccdBlueSpectrum->GetAttribute("outColor") );
+    CCD ccd = CCD(0.0512f, 0.0512f, canvasWidth, canvasHeight, 1.0);  //TODO: Changes values
+
+
+	ccd["Red"] = ccdRedSpectrum["outColor"];
+	ccd["Green"] = ccdGreenSpectrum["outColor"];
+	ccd["Blue"] = ccdBlueSpectrum["outColor"];
 
     // Setup camera
     Camera* camera = new Pinhole(0.06f, 0.0001f, 0.3f);	
-    camera->SetImageSensor(ccd);     
+    camera->SetImageSensor(&ccd);     
     camera->SetPosition(Point3(0.0f, 1.0f, 3.1f));
 
 

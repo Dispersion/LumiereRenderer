@@ -29,7 +29,7 @@
 
 #pragma once
 #include <lumiererenderer\geometry.h>
-#include <lumiererenderer\imagesensor.h>
+#include "imagesensor.h"
 #include <lumiererenderer\matrix.h>
 #include <lumiererenderer\rendercontext.h>
 
@@ -38,65 +38,70 @@ namespace LumiereRenderer
 	// Forwad declerations
 	class Integrator;
 
-	/** @class Camera
-      * @brief A base class for a camera.	
-      *
-	  * The camera is responsible for generating rays. The camera allows you to set your
-      * own imagesensor.
-	  * 
-	  * 
-      * 
-      */
-	
+    /*
+    ===========================================================================
+        @class Camera
+        @brief A base class for a camera.
+
+               The camera is responsible for generating rays. The camera 
+               allows you to set your own imagesensor.
+
+    ===========================================================================
+    */
+
 	class Camera : public Node
     {
     public:
-        /// Default constructor.
-        Camera();
-        /// Default destructor.
-        virtual ~Camera();
+            /// Default constructor.
+            Camera();
+            
+            /// Default destructor.
+            virtual ~Camera();
         
-		/// Trace the scene from the camera.
-        /// @param[in] x   The pixel position on the X axis of the image sensor.
-        /// @param[in] y   The pixel position on the Y axis of the image sensor.
-		/// @param[in] rc
-        virtual void Trace( unsigned int x, unsigned int y, RenderContext* rc ) = 0;
+		    /// Trace the scene from the camera.
+            /// @param[in] x   The pixel position on the X axis of the image sensor.
+            /// @param[in] y   The pixel position on the Y axis of the image sensor.
+		    /// @param[in] rc
+            virtual void Trace( unsigned int x, unsigned int y, RenderContext* rc ) = 0;
 
-        /// Set the image sensor.
-		/// @param[in] sensor
-        void SetImageSensor( ImageSensor* sensor );
+            /// Set the image sensor.
+		    /// @param[in] sensor
+            void SetImageSensor( ImageSensor* sensor );
         
-        /// Get the current image sensor.
-        ImageSensor* GetImageSensor();
+            /// Get the current image sensor.
+            ImageSensor* GetImageSensor();
         
-        /// The postion of the camera defines the center of the imagesensor.
-        /// @param[in] position The postion of the camera.
-        void SetPosition( Point3 position );
+            /// The postion of the camera defines the center of the imagesensor.
+            /// @param[in] position The postion of the camera.
+            void SetPosition( Point3 position );
         
-        /// @return The postion of the camera.
-        Point3 GetPosition();
+            /// @return The postion of the camera.
+            Point3 GetPosition();
         
-        /// The view direction is the optical axis of the camera. It is a straight line passing through the geometrical centre of the lens.
-        /// @param[in] viewDirection The view direction.
-        void SetViewDirection( Vector3 viewDirection );
+            /// The view direction is the optical axis of the camera. It is a straight line passing through the geometrical centre of the lens.
+            /// @param[in] viewDirection The view direction.
+            void SetViewDirection( Vector3 viewDirection );
         
-        /// The view direction is the optical axis of the camera. It is a straight line passing through the geometrical centre of the lens.
-        /// @return The view direction.		
-        Vector3 GetViewDirection();
+            /// The view direction is the optical axis of the camera. It is a straight line passing through the geometrical centre of the lens.
+            /// @return The view direction.		
+            Vector3 GetViewDirection();
         
-        /// The up direction is the Y axis on the imagesensor in world space.
-        /// @param[in] upDirection The up direction.
-        void SetUpDirection( Vector3 upDirection );
+            /// The up direction is the Y axis on the imagesensor in world space.
+            /// @param[in] upDirection The up direction.
+            void SetUpDirection( Vector3 upDirection );
         
-        /// The up direction is the Y axis on the imagesensor in world space.
-        /// @return The up direction.
-        Vector3 GetUpDirection();
+            /// The up direction is the Y axis on the imagesensor in world space.
+            /// @return The up direction.
+            Vector3 GetUpDirection();
 
-        virtual void Evaluate( Attribute* attr, RenderContext* rc ) = 0;
+            ///
+            /// @param attribute    
+            /// @param rc          
+            virtual void evaluate( Attribute* attr, RenderContext* rc ) = 0;
 
     protected:
-        ImageSensor* mImageSensor;
-        Matrix mTransform;
+            ImageSensor*                mImageSensor;
+            Matrix                      mTransform;
     };
 
 }

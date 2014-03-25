@@ -33,34 +33,43 @@
 
 namespace LumiereRenderer
 {
+    // Forward declarations
     class SceneTracer;
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    ///
-    /// @class Scene
-    /// The scene is a datastructure for all the objects that can be rendered. The scene
-    /// can use an optimized structure such as a BVH, KD-tree or a use simple list, to
-    /// store a reference to all the objects in the scene.
-    /// The scene is shared among threads and can not be changed during rendering. This
-    /// means that the scene can not hold temporary data during rendering such as which
-    /// object was hit in the last intersection test. Instead each scene, must implement 
-    /// a SceneTracer, which can hold the temporary data. Each thread during rendering will
-    /// have it's own SceneTracer.
-    /// @brief A data structure for storing objects.
-    ///
-    ////////////////////////////////////////////////////////////////////////////////////
+    /*
+    ===========================================================================
+        @class Scene
+        @brief A data structure for storing objects.
 
-    class Scene
-    {
-    public:
-        Scene(void);
-        virtual ~Scene(void);
-        virtual void AddShape(Shape* shape);
-        virtual bool SampleEmitters(RenderContext* rc) const;
-        virtual SceneTracer* GetSceneTracer() = 0;		
+               The scene is a datastructure for all the objects that can be 
+               rendered. The scene can use an optimized structure such as a 
+               BVH, KD-tree or a use simple list, to store a reference to 
+               all the objects in the scene. The scene is shared among threads 
+               and can not be changed during rendering. 
+               
+               This means that the scene can not hold temporary data during 
+               rendering such as which object was hit in the last intersection 
+               test. Instead each scene, must implement a SceneTracer, which 
+               can hold the temporary data. Each thread during rendering will 
+               have it's own SceneTracer.
+               
+    ===========================================================================
+    */
+
+	class Scene
+	{
+	public:
+		    Scene(void);
+		    virtual ~Scene(void);
+		    virtual void AddShape(Shape* shape);
+            virtual bool SampleEmitters(RenderContext* rc) const;
+            virtual SceneTracer* GetSceneTracer() = 0;		
+
+		    //virtual bool Trace(const Point3 from, const Point3 to) = 0;
+            //virtual bool Trace(Ray& Ray, RenderContext* rc) = 0;
 
     protected:
-        std::vector<Shape*> mShapes; 
-        std::vector<Shape*> mEmitters;
+            std::vector<Shape*>         mShapes; 
+            std::vector<Shape*>         mEmitters;
     };
 }

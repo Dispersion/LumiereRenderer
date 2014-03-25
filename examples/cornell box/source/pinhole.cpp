@@ -91,7 +91,7 @@ namespace LumiereRenderer
     }
 
 
-    void Pinhole::Evaluate( Attribute* attr, RenderContext* rc )
+    void Pinhole::evaluate( Attribute* attr, RenderContext* rc )
     {
 		/*if( attr == aAperture )
         {

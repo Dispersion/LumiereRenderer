@@ -32,48 +32,49 @@
 
 namespace LumiereRenderer
 {
-Attribute::Attribute()
-{
-    mConnection = NULL;
-    mOwner = NULL;
-}
+    Attribute::Attribute()
+    {
+        mConnection = NULL;
+        mOwner = NULL;
+    }
 
-Attribute::~Attribute(void)
-{
-}
+    Attribute::~Attribute(void)
+    {
+    }
 
-void Attribute::SetOwner(Node* node)
-{
-    mOwner = node;
-}
+    Attribute&  Attribute::operator=(Attribute& attribute)
+    {
+        mConnection = &attribute;
+        return *this;
+    }
 
-Node* Attribute::GetOwner() const
-{
-    return mOwner;
-}
+    Attribute* Attribute::getConnection() const
+    {
+        return mConnection;
+    }
 
-void Attribute::Connect(Attribute* attribute)
-{
-    mConnection = attribute;
-}
+    std::string Attribute::getName() const
+    {
+        return mName;
+    }
 
-void Attribute::operator=(Attribute& attribute)
-{
-    mConnection = &attribute;
-}
+    void* Attribute::getDefaultValue() const
+    {
+        return mDefaultValue;
+    }
 
-Attribute* Attribute::GetConnection() const
-{
-    return mConnection;
-}
+    void Attribute::connect(Attribute* attribute)
+    {
+        mConnection = attribute;
+    }
 
-std::string Attribute::GetName() const
-{
-    return mName;
-}
+    void Attribute::setOwner(Node* node)
+    {
+        mOwner = node;
+    }
 
-void* Attribute::GetDefaultValue() const
-{
-    return mDefaultValue;
-}
+    Node* Attribute::getOwner() const
+    {
+        return mOwner;
+    }
 }

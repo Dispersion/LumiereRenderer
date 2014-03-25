@@ -33,44 +33,72 @@
 
 namespace LumiereRenderer
 {
- 
-    ///	@class Attribute
-    /// @brief 
+    // Forward declarations
+    class Node; 
+	class RenderContext;
 
-    class Node; // Forward declaration
+    /*
+    ===========================================================================
+        @class Attribute
+
+               Each node have a list of attributes. The attributes connect
+               the nodes together by
+
+    ===========================================================================
+    */
 
     class Attribute
     {
+        friend Node;
+        friend RenderContext;
+
     public:
+        /// Default constructor
         Attribute();    
+
+        /// Default destructor
         virtual ~Attribute(void);
 
-        virtual size_t GetSize() const = 0;
-
-        void SetOwner(Node* node);
-        Node* GetOwner() const;
-
-        void Attribute::Connect(Attribute* attribute);
-        Attribute* Attribute::GetConnection() const;
-
-        void operator=(Attribute& attribute);
-
-        std::string GetName() const;
+        ///        
+        Attribute& operator=(Attribute& attribute);
         
-        virtual void SetValue( void* value ) = 0;
-//        virtual void SetValue( float value ) {}
-        virtual void* GetDefaultValue() const;
+        /// Get the attribute that this attribute is connected to.
+        /// @return The connected attribute.
+        Attribute* getConnection() const;
         
-		void setReadable();
-		void setWriteable();
-
-		bool isReadable();
-		bool isWriteable();
+        /// Get the name of the attribute.
+        /// @return The name of the attribute.
+        std::string getName() const;
+        
+        /// If the attribute is not connected to any other attribute it will use the 
+        /// default value.
+        /// @return The default value.
+        void* getDefaultValue() const;
+        
+        ///
+        /// @param readable
+        void setReadable(bool readable);
+        
+        /// @param writeable
+        void setWriteable(bool writeable);
+        
+        /// @return Returns true if this attribute is allowed to connect to other attributes.
+        bool isReadable();
+        bool isWriteable();
 
     protected:
-        Node* mOwner; 
-        Attribute* mConnection;
-        std::string mName;
-        void* mDefaultValue;
+        virtual size_t getSize() const = 0;
+
+        Node*                       mOwner; 
+        Attribute*                  mConnection;
+        std::string                 mName;
+        void*                       mDefaultValue;
+        bool                        mReadable;
+        bool                        mWriteable;
+
+    private:
+        void connect(Attribute* attribute); //deprecated?
+        void setOwner(Node* node);
+        Node* getOwner() const;
     };
 }
