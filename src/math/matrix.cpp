@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\matrix.h>
+#include <lumiererenderer\Matrix.h>
 
 namespace LumiereRenderer
 {	
@@ -167,14 +167,7 @@ namespace LumiereRenderer
 		return c;
 	}
 
-
-/*	const Matrix& Matrix::operator *=( const Matrix& rhs ) const
-	{
-		//*this = *this * rhs;
-		return *this;
-	}*/
-
-	Matrix& Matrix::operator +=( float s )
+    Matrix& Matrix::operator +=( float s )
 	{
 		for( unsigned int i = 0; i < 4; ++i )
 			for( unsigned int j = 0; j < 4; ++j )

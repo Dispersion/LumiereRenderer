@@ -27,10 +27,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\rendercontext.h>
-#include <lumiererenderer\integrator.h>
-#include <lumiererenderer\scene.h>
-#include <lumiererenderer\attributevalue.h>
+#include <lumiererenderer\RenderContext.h>
+#include <lumiererenderer\Integrator.h>
+#include <lumiererenderer\Scene.h>
+#include <lumiererenderer\AttributeValue.h>
 
 namespace LumiereRenderer
 {

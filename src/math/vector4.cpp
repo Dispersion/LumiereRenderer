@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\vector4.h>
+#include <lumiererenderer\Vector4.h>
 
 namespace LumiereRenderer
 {

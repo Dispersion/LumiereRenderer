@@ -27,10 +27,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\datahandle.h>
-#include <lumiererenderer\rendercontext.h>
-#include <lumiererenderer\shader.h>
-#include <lumiererenderer\shape.h>
+#include <lumiererenderer\DataHandle.h>
+#include <lumiererenderer\RenderContext.h>
+#include <lumiererenderer\Shader.h>
+#include <lumiererenderer\Shape.h>
 
 namespace LumiereRenderer
 {

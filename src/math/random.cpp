@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\random.h>
+#include <lumiererenderer\Random.h>
 #include <iostream>
 
 namespace LumiereRenderer

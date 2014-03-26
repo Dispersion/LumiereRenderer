@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\geometry.h>
+#include <lumiererenderer\Geometry.h>
 
 namespace LumiereRenderer
 {

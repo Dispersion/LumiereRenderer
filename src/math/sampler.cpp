@@ -27,10 +27,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\sampler.h>
-#include <lumiererenderer\random.h>
-#include <lumiererenderer\constants.h>
-#include <lumiererenderer\geometry.h>
+#include <lumiererenderer\Sampler.h>
+#include <lumiererenderer\Random.h>
+#include <lumiererenderer\Constants.h>
+#include <lumiererenderer\Geometry.h>
 
 namespace LumiereRenderer
 {

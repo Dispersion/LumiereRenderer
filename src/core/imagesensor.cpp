@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\imagesensor.h>
+#include <lumiererenderer\ImageSensor.h>
 
 namespace LumiereRenderer
 {

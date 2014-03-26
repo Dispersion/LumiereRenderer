@@ -28,14 +28,13 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\point3.h>
-#include <lumiererenderer\node.h>
-#include <lumiererenderer\rendercontext.h>
+#include <lumiererenderer\Point3.h>
+#include <lumiererenderer\Node.h>
+#include <lumiererenderer\RenderContext.h>
 
 namespace LumiereRenderer 
 {
-    /*
-    ===========================================================================
+    /*!
         @class Shader
         @brief Shade the surface of an object.
 
@@ -43,7 +42,6 @@ namespace LumiereRenderer
                determine how light is reflected of the surface if an object 
                in the scene, we need a shader.	
 
-    ===========================================================================
     */
 
     class Shader : public Node

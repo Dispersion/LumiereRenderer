@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #include <lumiererenderer\Attribute.h>
-#include <lumiererenderer\node.h>
+#include <lumiererenderer\Node.h>
 
 namespace LumiereRenderer
 {

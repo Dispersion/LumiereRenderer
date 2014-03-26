@@ -29,7 +29,7 @@
 
 #pragma once
 
-#include <lumiererenderer\datahandle.h>
+#include <lumiererenderer\DataHandle.h>
 #include <stack>
 
 namespace LumiereRenderer
@@ -41,14 +41,11 @@ namespace LumiereRenderer
     class SceneTracer;
     class Attribute;
 
-    /*
-    ===========================================================================
+    /*!
         @class RenderContext
         @brief Storage for data being transfered between nodes.
 
                The render context contains everything you need when rendering.
-               
-    ===========================================================================
     */
 
     class RenderContext
@@ -72,16 +69,37 @@ namespace LumiereRenderer
             SceneTracer* GetSceneTracer();
             Integrator* GetIntegrator();
 
+            /// The orgin of the current ray.
             static Attribute*           RAY_ORIGIN;
+            
+            /// The direction of the current ray.
             static Attribute*           RAY_DIRECTION;
+            
+            /// The wavelength of the current ray in nm.
             static Attribute*           RAY_WAVELENGTH;
+
+            /// The number of bounces the ray has gone through.
             static Attribute*           RAY_DEPTH;
+
+            /// The index of refraction of the material were moving through.   //TODO: verify this wild claim
             static Attribute*           RAY_IOR;
+
+            /// The barycentric coordinates of the intersection between the ray and the shape it hit.
             static Attribute*           RAY_BARYCENTRIC_COORDINATES;
+
+            /// The length of the ray.
             static Attribute*           RAY_LENGTH;
+            
+            /// ???
             static Attribute*           OUTER_IOR;
+            
+            /// The shader of the shape the ray intersected with.
             static Attribute*           SHADER;
+
+            /// The shape the ray intersected with.
             static Attribute*           SHAPE;
+
+            /// ???
             static Attribute*           PDF;
 
     private:

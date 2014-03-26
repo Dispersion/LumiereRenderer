@@ -27,8 +27,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\radiometry.h>
-#include <lumiererenderer\linearalgebra.h>
+#include <lumiererenderer\Radiometry.h>
+#include <lumiererenderer\LinearAlgebra.h>
 
 namespace LumiereRenderer
 {

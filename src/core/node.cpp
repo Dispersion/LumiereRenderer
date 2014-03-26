@@ -27,8 +27,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\node.h>
-#include <lumiererenderer\shape.h>
+#include <lumiererenderer\Node.h>
+#include <lumiererenderer\Shape.h>
 
 namespace LumiereRenderer
 {

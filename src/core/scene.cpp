@@ -27,9 +27,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\scene.h>
-#include <lumiererenderer\shader.h>
-#include <lumiererenderer\random.h>
+#include <lumiererenderer\Scene.h>
+#include <lumiererenderer\Shader.h>
+#include <lumiererenderer\Random.h>
 
 namespace LumiereRenderer
 {

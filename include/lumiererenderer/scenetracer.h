@@ -29,13 +29,12 @@
 
 #pragma once
 #include <lumiererenderer\Ray.h>
-#include <lumiererenderer\rendercontext.h>
+#include <lumiererenderer\RenderContext.h>
 
 namespace LumiereRenderer
 {
 
-    /*
-    ===========================================================================
+    /*!
         @class SceneTracer
         @brief Trace a ray into the scene.
 
@@ -44,8 +43,6 @@ namespace LumiereRenderer
                
                Each implementation of a Scene must have an implementation
                of a corresponding SceneTracer.
-
-    ===========================================================================
     */
 
     class SceneTracer

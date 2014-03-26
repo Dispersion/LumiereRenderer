@@ -28,10 +28,10 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\vector3.h>
-#include <lumiererenderer\vector4.h>
-#include <lumiererenderer\point3.h>
-#include <lumiererenderer\matrix.h>
+#include <lumiererenderer\Vector3.h>
+#include <lumiererenderer\Vector4.h>
+#include <lumiererenderer\Point3.h>
+#include <lumiererenderer\Matrix.h>
 
 namespace LumiereRenderer
 {    
@@ -40,48 +40,53 @@ namespace LumiereRenderer
     class Shader;         
     class Shape;          
 
-    /*
-    ===========================================================================
+    /*!
         @class DataHandle
+        @brief A handle to the value of an attribute.
 
+               To access the data of an attribute it must go through the RenderContext. 
+               The RenderContext will return a handle to the data of the attribute. Use 
+               the 'As' functions to get the value required type. Make sure you use the 
+               correct type of the attribute otherwise it would create undefined results.
 
-    ===========================================================================
+               If the attribute is an output attribute, you will still get an handle to 
+               the data. Use the 'Set' functions to set the output value.
     */
-    
+
     class DataHandle
     {
     public:
-            DataHandle(RenderContext* rc, int index);
-            ~DataHandle(void);
+        DataHandle(RenderContext* rc, int index);
+        ~DataHandle(void);
 
-            void Set(int value);
-            void Set(float value);
-            void Set(double value);
-            void Set(char value);
-            void Set(bool value);
-            void Set(Vector3 value);
-            void Set(Vector4 value);
-            void Set(Point3 value);
-            void Set(Matrix value);
-            //void                        Set(void* value);
-            void Set(Shader* value);
-            void Set(Shape* value);
-        
-            int AsInt();
-            float AsFloat();
-            double AsDouble();
-            char AsChar();
-            bool AsBool();
-            Vector3 AsVector3();
-            Vector4 AsVector4();
-            Point3 AsPoint3();
-            Matrix AsMatrix();
-            //void* AsPointer();       
-            Shader* AsShader();
-            Shape* AsShape();
+        void Set(int value);
+        void Set(float value);
+        void Set(double value);
+        void Set(char value);
+        void Set(bool value);
+        void Set(Vector3 value);
+        void Set(Vector4 value);
+        void Set(Point3 value);
+        void Set(Matrix value);
+        //void Set(void* value);
+        void Set(Shader* value);
+        void Set(Shape* value);
+
+        int AsInt();
+        float AsFloat();
+        double AsDouble();
+        char AsChar();
+        bool AsBool();
+        Vector3 AsVector3();
+        Vector4 AsVector4();
+        Point3 AsPoint3();
+        Matrix AsMatrix();
+        //void* AsPointer();       
+        Shader* AsShader();
+        Shape* AsShape();
 
     private:
-            RenderContext*              mRenderContext;
-            int                         mIndex;
+        RenderContext*              mRenderContext;
+        int                         mIndex;
     };
 }

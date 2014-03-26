@@ -27,9 +27,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\shape.h>
-#include <lumiererenderer\shader.h>
-#include <lumiererenderer\attributevalue.h>
+#include <lumiererenderer\Shape.h>
+#include <lumiererenderer\Shader.h>
+#include <lumiererenderer\AttributeValue.h>
 
 namespace LumiereRenderer
 {

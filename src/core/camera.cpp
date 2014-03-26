@@ -27,8 +27,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\camera.h>
-#include <lumiererenderer\linearalgebra.h>
+#include <lumiererenderer\Camera.h>
+#include <lumiererenderer\LinearAlgebra.h>
 
 namespace LumiereRenderer
 {	

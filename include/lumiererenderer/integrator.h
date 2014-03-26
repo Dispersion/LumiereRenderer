@@ -29,23 +29,20 @@
 
 #pragma once
 
-#include <lumiererenderer\rendercontext.h>
+#include <lumiererenderer\RenderContext.h>
 
 namespace LumiereRenderer
 {	
     // Forward declarations
     class Ray;
 
-    /*
-    ===========================================================================
+    /*!
         @class Integrator
         @brief Integrate over the rendering equation.
 
                An integrator will integrate over the rendering equation using 
                common strategies include: Path tracing, Bidirectional path 
                tracing, Metropolis light transport.
-
-    ===========================================================================
     */
 
     class Integrator

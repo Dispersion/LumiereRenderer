@@ -27,9 +27,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\ray.h>
-#include <lumiererenderer\constants.h>
-#include <lumiererenderer\geometry.h>
+#include <lumiererenderer\Ray.h>
+#include <lumiererenderer\Constants.h>
+#include <lumiererenderer\Geometry.h>
 
 namespace LumiereRenderer
 {	

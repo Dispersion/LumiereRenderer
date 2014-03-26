@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\linearalgebra.h>
+#include <lumiererenderer\LinearAlgebra.h>
 
 namespace LumiereRenderer
 {

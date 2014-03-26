@@ -28,17 +28,15 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\attribute.h>
+#include <lumiererenderer\Attribute.h>
 
 namespace LumiereRenderer
 {
-    /*
-    ===========================================================================
+    /*!    
         @class AttributeValue
         @brief 
 
-
-    ===========================================================================
+                The is the class for attributes that uses a single value.
     */
 
     template <class T>

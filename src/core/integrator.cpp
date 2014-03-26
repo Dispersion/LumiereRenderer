@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\integrator.h>
+#include <lumiererenderer\Integrator.h>
 
 namespace LumiereRenderer
 {	

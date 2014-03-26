@@ -28,10 +28,9 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-//#include <lumiererenderer\geometry.h>
 #include <lumiererenderer\Ray.h>
-#include <lumiererenderer\rendercontext.h>
-#include <lumiererenderer\node.h>
+#include <lumiererenderer\RenderContext.h>
+#include <lumiererenderer\Node.h>
 
 namespace LumiereRenderer
 {
@@ -40,12 +39,12 @@ namespace LumiereRenderer
     class Shader;
     class Hitpoint;
 
-    /*
-    ===========================================================================
+    /*!
         @class Shape
         @brief Objects in the scene that will reflect light.
 
-    ===========================================================================
+               The is the base node of a shape. The shapes are use to define
+               geometry in the scene. 
     */
 	
     class Shape : public Node
@@ -61,7 +60,7 @@ namespace LumiereRenderer
 		    /// with the shape and not where it intersects. 
             /// @param[in] ray  The ray used to test for intersection.
             /// @return It will return true if the ray intersects with the shape, otherwise it will return false.
-		    virtual bool Trace( Ray& ray ) = 0;
+		    virtual bool Intersect( Ray& ray ) = 0;
   	    
 		    /// Each shape have a pointer to the shader used to shade the shape. This means that, however, we store
 		    /// the shapes in the scene, we can find out which shader we should use to shade the shape.
@@ -93,6 +92,7 @@ namespace LumiereRenderer
             /// @param[in] rc    The RenderContext is used to get values from incomming attributes.
 		    virtual void                Sample( RenderContext* rc ) = 0;
 	
+            /// 
             static Attribute*           POSITION;
             static Attribute*           NORMAL;
             static Attribute*           BINORMAL;

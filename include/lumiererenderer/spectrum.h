@@ -28,16 +28,13 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\node.h>
+#include <lumiererenderer\Node.h>
 
 namespace LumiereRenderer
 {
-    /*
-    ===========================================================================
+    /*!
         @class Spectrum
         @brief Represents the visible spectrum of light, which lies between 390 to 750 nm.
-
-    ===========================================================================
     */
 
     class Spectrum : public Node

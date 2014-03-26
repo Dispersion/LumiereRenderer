@@ -27,8 +27,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\point3.h>
-#include <lumiererenderer\vector3.h>
+#include <lumiererenderer\Point3.h>
+#include <lumiererenderer\Vector3.h>
 
 namespace LumiereRenderer
 {

@@ -84,7 +84,7 @@ namespace LumiereRenderer
     {
     }
 
-    bool Triangle::Trace(Ray& ray)
+    bool Triangle::Intersect(Ray& ray)
     {
         ////Walds method
 #define ku modulo[mWaldTriangle.k+1]

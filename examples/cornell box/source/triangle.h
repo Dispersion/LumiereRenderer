@@ -68,7 +68,7 @@ namespace LumiereRenderer
     public:
         Triangle(Vertex v0, Vertex v1, Vertex v2);
         ~Triangle(void);
-        bool Trace(Ray& Ray);
+        bool Intersect(Ray& Ray);
         void evaluate( Attribute* attr, RenderContext* rc );
         void Sample(RenderContext* rc);
 

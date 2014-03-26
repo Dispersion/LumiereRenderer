@@ -28,25 +28,22 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\geometry.h>
-#include "imagesensor.h"
-#include <lumiererenderer\matrix.h>
-#include <lumiererenderer\rendercontext.h>
+#include <lumiererenderer\Geometry.h>
+#include "Imagesensor.h"
+#include <lumiererenderer\Matrix.h>
+#include <lumiererenderer\Rendercontext.h>
 
 namespace LumiereRenderer
 {
 	// Forwad declerations
 	class Integrator;
 
-    /*
-    ===========================================================================
+    /*!
         @class Camera
         @brief A base class for a camera.
 
                The camera is responsible for generating rays. The camera 
                allows you to set your own imagesensor.
-
-    ===========================================================================
     */
 
 	class Camera : public Node

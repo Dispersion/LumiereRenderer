@@ -37,14 +37,12 @@ namespace LumiereRenderer
     class Node; 
 	class RenderContext;
 
-    /*
-    ===========================================================================
+    /*!
         @class Attribute
+        @brief Attributes are used to connect nodes.
 
                Each node have a list of attributes. The attributes connect
                the nodes together by
-
-    ===========================================================================
     */
 
     class Attribute

@@ -30,15 +30,14 @@
 #pragma once
 
 #include <lumiererenderer\AttributeValue.h>
-#include <lumiererenderer\rendercontext.h>
+#include <lumiererenderer\RenderContext.h>
 #include <map>
 #include <string>
 
 
 namespace LumiereRenderer
 {
-    /*
-    ===========================================================================
+    /*!
         @class Node
         @brief 
 
@@ -54,8 +53,6 @@ namespace LumiereRenderer
                
                A node should not require any data than what is through the 
                attributes. They are connected by a network of nodes. 
-
-    ===========================================================================
     */
 
     class Node

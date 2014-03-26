@@ -69,7 +69,7 @@ namespace LumiereRenderer
         std::vector<Shape*>::const_iterator shape;
         for (shape = mList->GetShapes().begin(); shape != mList->GetShapes().end(); shape++)
         {
-            if ((*shape)->Trace(ray) /*&& shape != to->shape*/)
+            if ((*shape)->Intersect(ray) /*&& shape != to->shape*/)
             {
                 return true;
             }
@@ -85,7 +85,7 @@ namespace LumiereRenderer
         std::vector<Shape*>::const_iterator shape;
         for (shape = mList->GetShapes().begin(); shape != mList->GetShapes().end(); shape++)
         {
-            if ((*shape)->Trace(ray))
+            if ((*shape)->Intersect(ray))
             {
                 hitShape = *shape;
             }

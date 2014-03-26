@@ -1,4 +1,4 @@
-#include <lumiererenderer\scenetracer.h>
+#include <lumiererenderer\SceneTracer.h>
 
 namespace LumiereRenderer
 {

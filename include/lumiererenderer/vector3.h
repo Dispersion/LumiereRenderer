@@ -34,8 +34,10 @@ namespace LumiereRenderer
 {
 	class Point3;
 
-	///	@class Vector3
-	/// @brief A vector in three dimensional space.
+	/*!
+        @class Vector3
+	    @brief A vector in three dimensional space.
+    */
 
 	class Vector3
 	{
@@ -61,12 +63,12 @@ namespace LumiereRenderer
 		~Vector3();
 		
 		/// Get an element from a vector.
-		/// @param[in] i Index.
+		/// @param[in] index Index.
 		/// @return The i'th element of a vector.
 		float& operator []( const unsigned int index );
 		
 		/// Get an element from a const vector.
-		/// @param[in] i Index.
+		/// @param[in] index Index.
 		/// @return The i'th element of a const vector.
 		const float& operator []( const unsigned int index ) const;
 		
@@ -163,7 +165,14 @@ namespace LumiereRenderer
 		/// @return False if (A.x == B.x, A.y == B.y, A.z == B.z)
 		bool operator !=( const Vector3& b );
 
-		float x, y, z;
+        /// The 'x' variable of the vector
+		float x;
+        
+        /// The 'y' variable of the vector
+        float y;
+        
+        /// The 'z' variable of the vector
+        float z;
 	};
 
 	/// Add a scalar s to a vector A.

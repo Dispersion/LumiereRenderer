@@ -29,15 +29,14 @@
 
 #pragma once
 #include <vector>
-#include <lumiererenderer\shape.h>
+#include <lumiererenderer\Shape.h>
 
 namespace LumiereRenderer
 {
     // Forward declarations
     class SceneTracer;
 
-    /*
-    ===========================================================================
+    /*!
         @class Scene
         @brief A data structure for storing objects.
 
@@ -52,8 +51,6 @@ namespace LumiereRenderer
                test. Instead each scene, must implement a SceneTracer, which 
                can hold the temporary data. Each thread during rendering will 
                have it's own SceneTracer.
-               
-    ===========================================================================
     */
 
 	class Scene

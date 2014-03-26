@@ -27,9 +27,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\spectrum.h>
-#include <lumiererenderer\geometry.h>
-#include <lumiererenderer\attributevalue.h>
+#include <lumiererenderer\Spectrum.h>
+#include <lumiererenderer\Geometry.h>
+#include <lumiererenderer\AttributeValue.h>
 
 namespace LumiereRenderer
 {
