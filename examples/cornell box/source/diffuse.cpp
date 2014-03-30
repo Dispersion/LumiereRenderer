@@ -62,28 +62,21 @@ namespace LumiereRenderer
         return 0;
     }
 
-     void Diffuse::evaluate(Attribute* attr, RenderContext* rc)
+    float Diffuse::evaluate(RenderContext* rc)
     {               
-        if (attr == Shader::RADIANCE || attr == NULL)
-        {
-            float pdf;
+        float pdf;
 
-            Point3 P  = rc->GetInput( mPosition ).asPoint3();
-            Vector3 N = rc->GetInput( mNormal ).asVector3();
-            float rayWavelength = rc->GetInput( mRayWavelength ).asFloat();
-            float reflectance = rc->GetInput( mReflectance ).asFloat() / PI;
-            Matrix ShaderToWorld = rc->GetInput( mShaderToWorld ).asMatrix();
-            
-            //Vector3 dir = ShaderToWorld * SampleHemisphere( pdf );
-            Vector3 dir = ShaderToWorld * SampleCosineHemisphere( pdf );
+        Point3 P  = rc->GetInput( mPosition ).asPoint3();
+        Vector3 N = rc->GetInput( mNormal ).asVector3();
+        float rayWavelength = rc->GetInput( mRayWavelength ).asFloat();
+        float reflectance = rc->GetInput( mReflectance ).asFloat() / PI;
+        Matrix ShaderToWorld = rc->GetInput( mShaderToWorld ).asMatrix();
 
-           //Ray wi = Ray(P, SampleHemisphere( N, pdf ));
-            Ray wi = Ray(P, dir);
-            wi.wavelength = rayWavelength;
-            wi.origin = wi.origin + wi.direction * EPSILON*10;
+        Vector3 dir = ShaderToWorld * SampleCosineHemisphere( pdf );
 
-            DataHandle outColor = rc->GetOutput(Shader::RADIANCE);
-            outColor.set( (reflectance * rc->Trace(wi) * Dot(wi.direction, N)) / pdf );
-        }
+        Ray wi = Ray(P, dir, rayWavelength);        
+        wi.origin = wi.origin + wi.direction * EPSILON*10;
+
+        return (reflectance * rc->Trace(wi) * Dot(wi.direction, N)) / pdf;
     }
 }

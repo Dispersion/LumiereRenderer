@@ -75,24 +75,18 @@ namespace LumiereRenderer
         return GetRadiance(temperature, wavelength);
     }
 
-    void BlackBody::evaluate(Attribute* attr, RenderContext* rc)
+    float BlackBody::evaluate(RenderContext* rc)
     {	
+        /*if (Dot(hit->normal, -wo.direction) < 0 )
+        {
+        data.Set(0.0f);
+        return data;
+        }*/
 
-        if (attr ==  Shader::RADIANCE || attr == NULL)
-        {		
-            /*if (Dot(hit->normal, -wo.direction) < 0 )
-            {
-                data.Set(0.0f);
-                return data;
-            }*/
+        float wavelength = rc->GetInput( mRayWavelength ).asFloat();
+        float temperature = rc->GetInput( mTemperature ).asFloat();
 
-            float wavelength = rc->GetInput( mRayWavelength ).asFloat();
-            float temperature = rc->GetInput( mTemperature ).asFloat();
-
-            DataHandle radiance = rc->GetOutput(  Shader::RADIANCE );
-            radiance.set( GetRadiance(temperature, wavelength) );
-        }
-
+        return GetRadiance(temperature, wavelength);
     }
 
     float BlackBody::GetRadiance(float kelvin, float wavelength)

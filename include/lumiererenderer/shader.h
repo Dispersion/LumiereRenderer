@@ -66,7 +66,9 @@ namespace LumiereRenderer
             /// Evaluate an outgoing attribute.
             /// @param[in] attr The outgoing attribute.
             /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
-            virtual void evaluate( Attribute* attr, RenderContext* rc ) = 0;
+            virtual float evaluate( RenderContext* rc ) = 0;
+
+            virtual void evaluate( Attribute* /*attr*/, RenderContext* /*rc*/ ) {};
 
             /// If a material is used as a light source, this function should return true.
             virtual bool isEmitter();

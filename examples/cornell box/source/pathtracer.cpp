@@ -85,7 +85,7 @@ namespace LumiereRenderer
                     Shader* emitterShader = rc->GetInput( RenderContext::SHADER ).asShader();
                     float emitterPdf = rc->GetInput( RenderContext::PDF ).asFloat();          
 
-                    Ray wi = Ray( surfacePosition, emitterPosition );   
+                    Ray wi = Ray( surfacePosition, emitterPosition, ray.wavelength );   
 
                     DataHandle rayWavelength = rc->GetOutput(RenderContext::RAY_WAVELENGTH);
                     rayWavelength.set( ray.wavelength );
@@ -117,12 +117,11 @@ namespace LumiereRenderer
                     transmittance = shader->evaluate( rc, ray.origin, surfacePosition );
                 }
 
-                surfaceShader->evaluate( Shader::RADIANCE, rc );
-                radiance += rc->GetOutput(Shader::RADIANCE).asFloat() * transmittance;				
+                radiance += surfaceShader->evaluate( rc ) * transmittance;
             }
             else
             {
-                surfaceShader->evaluate( Shader::RADIANCE, rc );
+                surfaceShader->evaluate( rc );
             }                       
         }
 

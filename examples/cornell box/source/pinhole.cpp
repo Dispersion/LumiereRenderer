@@ -66,13 +66,12 @@ namespace LumiereRenderer
         }
 
         imageSensorSample.position.z = mFocalLength;
-        Ray ray = Ray( imageSensorSample.position, pointOnAperture );
+        Ray ray = Ray( imageSensorSample.position, pointOnAperture, imageSensorSample.wavelength );
         ray.origin = pointOnAperture;
 
         // Transform ray with camera transformation.
         ray = mTransform * ray;
-
-        ray.wavelength = imageSensorSample.wavelength;
+        
         ray.t = INFINITY;
 
         rc->GetOutput( RenderContext::RAY_DEPTH ).set( -1 );

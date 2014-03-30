@@ -40,7 +40,7 @@ namespace LumiereRenderer
         
         float evaluate( RenderContext* rc, const Point3& from, const Point3& to );		
         float evaluate( RenderContext* rc, const Ray& wi );
-        void evaluate( Attribute* attr, RenderContext* rc );
+        float evaluate( RenderContext* rc );
 
     private:
         Attribute* mPosition;

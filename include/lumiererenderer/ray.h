@@ -50,12 +50,12 @@ namespace LumiereRenderer
         /// Constructor for a Ray.
         /// @param[in] origin The starting point for the Ray.
         /// @param[in] direction The direction of the Ray.
-        Ray( Point3 origin, Vector3 direction );
+        Ray( Point3 origin, Vector3 direction, float wavelength );
 
         /// Construct a Ray that starts at point A and goes in the direction of B.
         /// @param[in] a Origin of the Ray.
         /// @param[in] b The point that defines the direction
-        Ray( Point3 a, Point3 b );	
+        Ray( Point3 a, Point3 b, float wavelength );	
 
 
         Ray operator-();

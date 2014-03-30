@@ -40,21 +40,26 @@ namespace LumiereRenderer
         transmission = false;
         entered = false;
         exited = false;
+        wavelength = 0;
     }
 
-    Ray::Ray( Point3 origin, Vector3 direction ) : origin(origin)
+    Ray::Ray( Point3 origin, Vector3 direction, float wavelength ) 
+        : origin(origin)
+        , wavelength(wavelength)
     {		
         this->direction = Normalize(direction);
         t = INFINITY;
         specular = false;
         transmission = false;
         entered = false;
-        exited = false;
+        exited = false;        
     }
 
-    Ray::Ray( Point3 a, Point3 b )
+    Ray::Ray( Point3 a, Point3 b, float wavelength ) 
+        : origin(a)
+        , wavelength(wavelength)
     {
-        origin = a;
+
         direction = Normalize(b-a);
         t = INFINITY;
         specular = false;
@@ -69,7 +74,7 @@ namespace LumiereRenderer
 
     Ray Ray::operator-()
     {
-        return Ray(origin, -direction);
+        return Ray(origin, -direction, wavelength);
         
     }
 }
