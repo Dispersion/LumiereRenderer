@@ -46,32 +46,32 @@ namespace LumiereRenderer
 
 	}
 	
-	void Camera::SetImageSensor(ImageSensor* sensor)
+	void Camera::setImageSensor(ImageSensor* sensor)
 	{
 		mImageSensor = sensor;
 	}
 
-	ImageSensor* Camera::GetImageSensor()
+	ImageSensor* Camera::getImageSensor()
 	{
 		return mImageSensor;
 	}
 
-	void Camera::SetPosition( Point3 position )
+	void Camera::setPosition( Point3 position )
 	{		
 		mTransform[0][3] = position[0];
 		mTransform[1][3] = position[1];
 		mTransform[2][3] = position[2];
 	}
 
-	Point3 Camera::GetPosition()
+	Point3 Camera::getPosition()
 	{
 		return Point3(mTransform[0][3], mTransform[1][3], mTransform[2][3]);
 	}
 
-	void Camera::SetViewDirection( Vector3 viewDirection )
+	void Camera::setViewDirection( Vector3 viewDirection )
 	{
 		viewDirection = Normalize(viewDirection);
-		Vector3 right = Normalize( Cross( GetUpDirection(), viewDirection ) );
+		Vector3 right = Normalize( Cross( getUpDirection(), viewDirection ) );
 
 		mTransform[0][2] = viewDirection[0];
 		mTransform[1][2] = viewDirection[1];
@@ -82,15 +82,15 @@ namespace LumiereRenderer
 		mTransform[2][0] = right[2];
 	}
 
-	Vector3 Camera::GetViewDirection()
+	Vector3 Camera::getViewDirection()
 	{
 		return Vector3(mTransform[0][2], mTransform[1][2], mTransform[2][2]);
 	}
 
-	void Camera::SetUpDirection( Vector3 upDirection )
+	void Camera::setUpDirection( Vector3 upDirection )
 	{
 		upDirection = Normalize(upDirection);
-		Vector3 right = Cross(GetViewDirection(), upDirection);
+		Vector3 right = Cross(getViewDirection(), upDirection);
 
 		mTransform[0][1] = upDirection[0];
 		mTransform[1][1] = upDirection[1];
@@ -101,7 +101,7 @@ namespace LumiereRenderer
 		mTransform[2][0] = right[2];
 	}
 
-	Vector3 Camera::GetUpDirection()
+	Vector3 Camera::getUpDirection()
 	{
 		return Vector3(mTransform[0][1], mTransform[1][1], mTransform[2][1]);
 	}

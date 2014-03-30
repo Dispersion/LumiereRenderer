@@ -127,27 +127,27 @@ namespace LumiereRenderer
     { 
         if( attr == Shape::POSITION )
         {
-            Point3 rayOrigin = rc->GetInput(RenderContext::RAY_ORIGIN).AsPoint3();
-            Vector3 rayDirection = rc->GetInput(RenderContext::RAY_DIRECTION).AsVector3();
-            float rayLength = rc->GetInput(RenderContext::RAY_LENGTH).AsFloat();
+            Point3 rayOrigin = rc->GetInput(RenderContext::RAY_ORIGIN).asPoint3();
+            Vector3 rayDirection = rc->GetInput(RenderContext::RAY_DIRECTION).asVector3();
+            float rayLength = rc->GetInput(RenderContext::RAY_LENGTH).asFloat();
             DataHandle position = rc->GetOutput(Shape::POSITION);
-            position.Set( rayDirection * rayLength + rayOrigin );
+            position.set( rayDirection * rayLength + rayOrigin );
         }
         else if( attr == Shape::NORMAL )
         {
-            Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).AsVector3();
+            Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).asVector3();
             DataHandle normal = rc->GetOutput(Shape::NORMAL);
-            normal.Set( Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal) );
+            normal.set( Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal) );
         }
         else if( attr == Shape::TEXCOORD )
         {
-            Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).AsVector3();
+            Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).asVector3();
             DataHandle texcoord = rc->GetOutput(Shape::TEXCOORD);
-            texcoord.Set( rayBarycentric.z * v0.texcoord + rayBarycentric.x * v1.texcoord + rayBarycentric.y * v2.texcoord );
+            texcoord.set( rayBarycentric.z * v0.texcoord + rayBarycentric.x * v1.texcoord + rayBarycentric.y * v2.texcoord );
         }
         else if ( attr == Shape::SHADER_TO_WORLD )
         {
-            Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).AsVector3();
+            Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).asVector3();
             Vector3 n = Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal);
             Vector3 t = Normalize(v1.position - v0.position);
             Vector3 b = Cross(n,t);
@@ -155,11 +155,11 @@ namespace LumiereRenderer
             
             Matrix m( t.x, b.x, n.x, 0, t.y, b.y, n.y, 0, t.z, b.z, n.z, 0, 0, 0, 0, 1 );
             DataHandle shaderToWorld = rc->GetOutput(Shape::SHADER_TO_WORLD);
-            shaderToWorld.Set(m);
+            shaderToWorld.set(m);
         }
         else if ( attr == Shape::WORLD_TO_SHADER )
         {
-            Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).AsVector3();
+            Vector3 rayBarycentric = rc->GetInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).asVector3();
             Vector3 n = Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal);
             Vector3 t = Normalize(v1.position - v0.position);
             Vector3 b = Cross(n,t);
@@ -167,7 +167,7 @@ namespace LumiereRenderer
 
             Matrix m( t.x, t.y, t.z, 0, b.x, b.y, b.z, 0, n.x, n.y, n.z, 0, 0, 0, 0, 1 );
             DataHandle shaderToWorld = rc->GetOutput(Shape::WORLD_TO_SHADER);
-            shaderToWorld.Set(m);
+            shaderToWorld.set(m);
         }
     }
 
@@ -194,11 +194,11 @@ namespace LumiereRenderer
         DataHandle shape = rc->GetOutput( RenderContext::SHAPE );
         DataHandle pdf = rc->GetOutput( RenderContext::PDF );
 
-        position.Set( a * p0 + b * p1 + c * p2 );
-        normal.Set( a * v0.normal + b * v1.normal + c * v2.normal );
-        texcoord.Set( a * v0.texcoord + b * v1.texcoord + c * v2.texcoord );
-        shader.Set( mShader );
-        shape.Set( this );		
-        pdf.Set( 1/area );
+        position.set( a * p0 + b * p1 + c * p2 );
+        normal.set( a * v0.normal + b * v1.normal + c * v2.normal );
+        texcoord.set( a * v0.texcoord + b * v1.texcoord + c * v2.texcoord );
+        shader.set( mShader );
+        shape.set( this );		
+        pdf.set( 1/area );
     }
 }

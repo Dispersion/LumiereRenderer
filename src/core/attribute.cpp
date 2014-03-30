@@ -36,15 +36,20 @@ namespace LumiereRenderer
     {
         mConnection = NULL;
         mOwner = NULL;
+        mReadable = true;
+        mWriteable = true;
     }
 
     Attribute::~Attribute(void)
     {
     }
 
-    Attribute&  Attribute::operator=(Attribute& attribute)
+    Attribute& Attribute::operator=(Attribute& attribute)
     {
-        mConnection = &attribute;
+        if( mWriteable && attribute.isReadable() )
+        {
+            mConnection = &attribute;
+        }
         return *this;
     }
 
@@ -76,5 +81,25 @@ namespace LumiereRenderer
     Node* Attribute::getOwner() const
     {
         return mOwner;
+    }
+
+    void Attribute::setReadable(bool readable)
+    {
+        mReadable = readable;
+    }
+
+    void Attribute::setWriteable(bool writeable)
+    {
+        mWriteable = writeable;
+    }
+
+    bool Attribute::isReadable()
+    {
+        return mReadable;
+    }
+
+    bool Attribute::isWriteable()
+    {
+        return mWriteable;
     }
 }

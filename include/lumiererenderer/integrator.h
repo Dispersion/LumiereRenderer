@@ -57,6 +57,6 @@ namespace LumiereRenderer
         /// 
         /// @param ray
         /// @param rc
-        virtual float Trace( Ray& ray, RenderContext* rc ) = 0;       
+        virtual float trace( Ray& ray, RenderContext* rc ) = 0;       
     };
 }

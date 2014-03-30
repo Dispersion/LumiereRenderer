@@ -22,11 +22,15 @@ void Render(RenderContext* rc, Camera* camera)
     for (int j = canvasHeight-1; j >= 0; j--)
     {
         for (int i = 0; i < canvasWidth; i++)
-        {                                        
-            /*image[j*canvasWidth+i] = */camera->Trace(i, j, rc);
+        {                                
+            rc->clear();
+            /*image[j*canvasWidth+i] = */camera->trace(i, j, rc);
+            
+            //rc->pop();
+            //rc->push();
         }		
 
-		UpdatePixels(camera->GetImageSensor()->Data());
+		UpdatePixels(camera->getImageSensor()->Data());
         RefreshCanvas();
 
     }
@@ -135,28 +139,28 @@ void main()
     Scene* scene = new List();
      
     // Light 
-    scene->AddShape(CreateTriangle(0, 1, 2, &blackbodyShader));
-    scene->AddShape(CreateTriangle(0, 2, 3, &blackbodyShader));
+    scene->addShape(CreateTriangle(0, 1, 2, &blackbodyShader));
+    scene->addShape(CreateTriangle(0, 2, 3, &blackbodyShader));
     
     // Floor
-    scene->AddShape(CreateTriangle(4, 5, 6, &whiteShader));
-    scene->AddShape(CreateTriangle(4, 6, 7, &whiteShader));
+    scene->addShape(CreateTriangle(4, 5, 6, &whiteShader));
+    scene->addShape(CreateTriangle(4, 6, 7, &whiteShader));
 
     // Rightwall 
-    scene->AddShape(CreateTriangle(8, 9, 10, &greenShader));
-    scene->AddShape(CreateTriangle(8, 10, 11, &greenShader));
+    scene->addShape(CreateTriangle(8, 9, 10, &greenShader));
+    scene->addShape(CreateTriangle(8, 10, 11, &greenShader));
 
     // Backwall
-    scene->AddShape(CreateTriangle(12, 13, 14, &whiteShader));
-    scene->AddShape(CreateTriangle(12, 14, 15, &whiteShader));
+    scene->addShape(CreateTriangle(12, 13, 14, &whiteShader));
+    scene->addShape(CreateTriangle(12, 14, 15, &whiteShader));
 
     // Leftwall 
-    scene->AddShape(CreateTriangle(16, 17, 18, &redShader));
-    scene->AddShape(CreateTriangle(16, 18, 19, &redShader));
+    scene->addShape(CreateTriangle(16, 17, 18, &redShader));
+    scene->addShape(CreateTriangle(16, 18, 19, &redShader));
 
     // Ceiling
-    scene->AddShape(CreateTriangle(20, 21, 22, &whiteShader));
-    scene->AddShape(CreateTriangle(20, 22, 23, &whiteShader));
+    scene->addShape(CreateTriangle(20, 21, 22, &whiteShader));
+    scene->addShape(CreateTriangle(20, 22, 23, &whiteShader));
 
     // Setup CCD chip
     float ccdWavelengths[] = {390.f, 400.f, 410.f, 420.f, 430.f, 440.f, 450.f, 460.f, 470.f, 480.f, 490.f, 500.f, 510.f, 520.f, 530.f, 540.f, 550.f, 560.f, 570.f, 580.f, 590.f, 600.f, 610.f, 620.f, 630.f, 640.f, 650.f, 660.f, 670.f, 680.f, 690.f, 700.f, 710.f, 720.f, 730.f, 740.f, 750.f};
@@ -177,8 +181,8 @@ void main()
 
     // Setup camera
     Camera* camera = new Pinhole(0.06f, 0.0001f, 0.3f);	
-    camera->SetImageSensor(&ccd);     
-    camera->SetPosition(Point3(0.0f, 1.0f, 3.1f));
+    camera->setImageSensor(&ccd);     
+    camera->setPosition(Point3(0.0f, 1.0f, 3.1f));
 
 
     // Setup integrator
@@ -187,6 +191,7 @@ void main()
     // Setup render context
     RenderContext* rc = new RenderContext(scene, camera, integrator);   
         
+    
     // Enter the main rendering loop   
     //image = new RGBA[canvasWidth*canvasHeight];
 

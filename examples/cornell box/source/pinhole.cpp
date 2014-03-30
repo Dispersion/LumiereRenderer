@@ -55,10 +55,8 @@ namespace LumiereRenderer
     {
     }
 
-    void Pinhole::Trace( unsigned int i, unsigned int j, RenderContext* rc )
+    void Pinhole::trace( unsigned int i, unsigned int j, RenderContext* rc )
     {
-        rc->Push();
-
 		ImageSensor::Sample imageSensorSample = mImageSensor->sample( i,j );
 
         Point3 pointOnAperture;
@@ -77,17 +75,15 @@ namespace LumiereRenderer
         ray.wavelength = imageSensorSample.wavelength;
         ray.t = INFINITY;
 
-        rc->GetOutput( RenderContext::RAY_DEPTH ).Set( -1 );
-        rc->GetOutput( RenderContext::RAY_WAVELENGTH ).Set( imageSensorSample.wavelength );
-
+        rc->GetOutput( RenderContext::RAY_DEPTH ).set( -1 );
+        rc->GetOutput( RenderContext::RAY_WAVELENGTH ).set( imageSensorSample.wavelength );
+    
         float pdf = 1.0f / ( PI*mAperture*mAperture );
         float g = G( imageSensorSample.position, pointOnAperture, Vector3( 0, 0, -1 ), Vector3( 0, 0, 1) );
         float time = mShutterSpeed;
         float exposure = ( ( time * g ) / pdf ) * rc->Trace( ray );
 
         mImageSensor->SetExposure( i, j, exposure, ray.alpha, rc );
-
-        rc->Pop();
     }
 
 
@@ -160,12 +156,12 @@ namespace LumiereRenderer
         //rc->GetOutput( mExposure ).Set( exposure );
 	}
 
-    void Pinhole::SetFocalLength(float length)
+    void Pinhole::setFocalLength(float length)
     {
         mFocalLength = length;
     }
 
-    float Pinhole::GetFocalLength()
+    float Pinhole::getFocalLength()
     {
         return mFocalLength;
     }

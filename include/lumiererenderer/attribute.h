@@ -77,9 +77,11 @@ namespace LumiereRenderer
         /// @param readable
         void setReadable(bool readable);
         
+        ///
         /// @param writeable
         void setWriteable(bool writeable);
         
+        //
         /// @return Returns true if this attribute is allowed to connect to other attributes.
         bool isReadable();
         bool isWriteable();

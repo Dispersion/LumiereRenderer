@@ -41,12 +41,12 @@ namespace LumiereRenderer
     {
     }
 
-    SceneTracer* List::GetSceneTracer()
+    SceneTracer* List::getSceneTracer()
     {
         return new ListTracer(this);
     }
 
-    std::vector<Shape*>& List::GetShapes()
+    std::vector<Shape*>& List::getShapes()
     {
         return mShapes;
     }
@@ -59,7 +59,7 @@ namespace LumiereRenderer
     {
     }
 
-    bool List::ListTracer::Trace(const Point3 from, const Point3 to)
+    bool List::ListTracer::intersect(const Point3 from, const Point3 to)
     {
         Ray ray;		
         ray.t = Length(to - from)-(EPSILON*20);
@@ -67,7 +67,7 @@ namespace LumiereRenderer
         ray.origin = from + ray.direction * EPSILON*10;
 
         std::vector<Shape*>::const_iterator shape;
-        for (shape = mList->GetShapes().begin(); shape != mList->GetShapes().end(); shape++)
+        for (shape = mList->getShapes().begin(); shape != mList->getShapes().end(); shape++)
         {
             if ((*shape)->Intersect(ray) /*&& shape != to->shape*/)
             {
@@ -78,12 +78,12 @@ namespace LumiereRenderer
         return false;
     }
 
-    bool List::ListTracer::Trace(Ray& ray, RenderContext* rc)// const 
+    bool List::ListTracer::intersect(Ray& ray, RenderContext* rc)// const 
     {
         Shape* hitShape = NULL;
 
         std::vector<Shape*>::const_iterator shape;
-        for (shape = mList->GetShapes().begin(); shape != mList->GetShapes().end(); shape++)
+        for (shape = mList->getShapes().begin(); shape != mList->getShapes().end(); shape++)
         {
             if ((*shape)->Intersect(ray))
             {
@@ -93,13 +93,13 @@ namespace LumiereRenderer
 
         if (hitShape)
         {
-            rc->GetOutput(RenderContext::SHAPE).Set( hitShape );
-            rc->GetOutput(RenderContext::SHADER).Set( hitShape->GetShader() );
-            rc->GetOutput(RenderContext::RAY_BARYCENTRIC_COORDINATES).Set( Vector3(ray.u, ray.v, (1-ray.u-ray.v)) );
-            rc->GetOutput(RenderContext::RAY_LENGTH).Set( ray.t );
-            rc->GetOutput(RenderContext::RAY_ORIGIN).Set( ray.origin );
-            rc->GetOutput(RenderContext::RAY_DIRECTION).Set( ray.direction );
-            rc->GetOutput(RenderContext::RAY_WAVELENGTH).Set( ray.wavelength ); 
+            rc->GetOutput(RenderContext::SHAPE).set( hitShape );
+            rc->GetOutput(RenderContext::SHADER).set( hitShape->GetShader() );
+            rc->GetOutput(RenderContext::RAY_BARYCENTRIC_COORDINATES).set( Vector3(ray.u, ray.v, (1-ray.u-ray.v)) );
+            rc->GetOutput(RenderContext::RAY_LENGTH).set( ray.t );
+            rc->GetOutput(RenderContext::RAY_ORIGIN).set( ray.origin );
+            rc->GetOutput(RenderContext::RAY_DIRECTION).set( ray.direction );
+            rc->GetOutput(RenderContext::RAY_WAVELENGTH).set( ray.wavelength ); 
 
             return true;
         }

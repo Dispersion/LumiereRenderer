@@ -56,14 +56,13 @@ namespace LumiereRenderer
             RenderContext(Scene* scene, Camera* camera, Integrator* integrator);
             ~RenderContext();
 
-            void Push();
-            void Pop();
-
+            void clear();
             DataHandle GetInput(Attribute* attribute);
             DataHandle GetOutput(Attribute* attribute);
   
-            float Trace( Ray& ray );
-            std::stack<Shader*>* GetShaderStack();
+            float Trace( Ray& ray );            
+            Shader* getCurrenShader();
+
             Camera* GetCamera();
             Scene* GetScene();
             SceneTracer* GetSceneTracer();
@@ -101,14 +100,17 @@ namespace LumiereRenderer
 
             /// ???
             static Attribute*           PDF;
-
+                        void push();
+            void pop();
     private:
-		    void*                       GetData(int index);
-		    void                        SetData(int index, void* data, size_t size);
-            void                        ResizeBuffer(size_t size);
-            void                        ResizeHandles(size_t size);
-            int                         Find( Attribute* attribute );
-            int                         Allocate( Attribute* attribute );
+		    void* GetData(int index);
+		    void SetData(int index, void* data, size_t size);
+            void ResizeBuffer(size_t size);
+            void ResizeHandles(size_t size);
+            int  Find( Attribute* attribute );
+            int  Allocate( Attribute* attribute );
+
+
 
             char*                       mData;
             int*                        mHandles;

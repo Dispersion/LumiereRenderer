@@ -43,6 +43,8 @@ namespace LumiereRenderer
         mRayWavelength = createAttribute<float>("RayWavelength", 0);
         aOutColor = createAttribute<float>("outColor", 0);		
 
+        aOutColor->setWriteable(false);
+
         //AddAttribute( mRayWavelength );
         //AddAttribute( aOutColor );
     }
@@ -100,7 +102,7 @@ namespace LumiereRenderer
 
         mRayWavelength = createAttribute<float>("RayWavelength", 0);
         aOutColor = createAttribute<float>("outColor", 0);		
-
+        aOutColor->setWriteable(false);
         //AddAttribute( mRayWavelength );
         //AddAttribute( aOutColor );
     }
@@ -113,10 +115,10 @@ namespace LumiereRenderer
     {	
         if (attr == aOutColor)
         {
-            float wavelength = rc->GetInput( mRayWavelength ).AsFloat();
+            float wavelength = rc->GetInput( mRayWavelength ).asFloat();
 
             DataHandle outColor = rc->GetOutput(aOutColor);
-            outColor.Set( GetIntensity(wavelength) );
+            outColor.set( GetIntensity(wavelength) );
         }
     }
 

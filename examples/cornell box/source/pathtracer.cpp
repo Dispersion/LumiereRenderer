@@ -43,31 +43,29 @@ namespace LumiereRenderer
     {
     }
 
-    float PathTracer::Trace( Ray& ray, RenderContext* rc )
+    float PathTracer::trace( Ray& ray, RenderContext* rc )
     {        
-        int rayDepth = rc->GetInput(RenderContext::RAY_DEPTH).AsInt();
+        int rayDepth = rc->GetInput(RenderContext::RAY_DEPTH).asInt();
 
         if (rayDepth == mMaxPathLength)
             return 0;
 
-        if ( !rc->GetSceneTracer()->Trace( ray, rc ) )
+        if ( !rc->GetSceneTracer()->intersect( ray, rc ) )
         {			
             if ( rayDepth == 0 )
                 ray.alpha = 0;
             return 0;
         }        
         
-
-
         if ( rayDepth == 0 )
             ray.alpha = 1;
 
         float radiance = 0;
 
-        Point3 surfacePosition = rc->GetInput( Shape::POSITION ).AsPoint3();
-        Vector3 surfaceNormal = rc->GetInput( Shape::NORMAL ).AsVector3();
+        Point3 surfacePosition = rc->GetInput( Shape::POSITION ).asPoint3();
+        Vector3 surfaceNormal = rc->GetInput( Shape::NORMAL ).asVector3();
        // Shader* surfaceShader = static_cast<Shader*>(rc->GetInput( RenderContext::SHADER ).AsPointer());
-        Shader* surfaceShader = rc->GetInput( RenderContext::SHADER ).AsShader();
+        Shader* surfaceShader = rc->GetInput( RenderContext::SHADER ).asShader();
 
         //if (Dot(Normalize(hit.normal), Normalize(-ray.direction)) > 0)
         {
@@ -75,49 +73,52 @@ namespace LumiereRenderer
             // Sample a point on the emitter and find out if there are any obstruction between 
             // the point on the surface and the point on the emitter.
              
-            rc->Push();
+            rc->push();
             
-            if ( rc->GetScene()->SampleEmitters( rc ) )
+            if ( rc->GetScene()->sampleEmitters( rc ) )
             {
-                Point3 emitterPosition = rc->GetInput( Shape::POSITION ).AsPoint3();
-                Vector3 emitterNormal = rc->GetInput( Shape::NORMAL ).AsVector3();
-                Shader* emitterShader = rc->GetInput( RenderContext::SHADER ).AsShader();
-                float emitterPdf = rc->GetInput( RenderContext::PDF ).AsFloat();
-
-                if( !rc->GetSceneTracer()->Trace( surfacePosition, emitterPosition ) )
+                Point3 emitterPosition = rc->GetInput( Shape::POSITION ).asPoint3();
+                
+                if( !rc->GetSceneTracer()->intersect( surfacePosition, emitterPosition ) )
                 {
+                    Vector3 emitterNormal = rc->GetInput( Shape::NORMAL ).asVector3();
+                    Shader* emitterShader = rc->GetInput( RenderContext::SHADER ).asShader();
+                    float emitterPdf = rc->GetInput( RenderContext::PDF ).asFloat();          
+
                     Ray wi = Ray( surfacePosition, emitterPosition );   
 
                     DataHandle rayWavelength = rc->GetOutput(RenderContext::RAY_WAVELENGTH);
-                    rayWavelength.Set( ray.wavelength );                
+                    rayWavelength.set( ray.wavelength );
                     float emmittedRadiance = emitterShader->evaluate( rc, wi );
-                    rc->Pop();
-                                        
+                    rc->pop();
+
                     radiance = ( surfaceShader->evaluate( rc, -wi ) * G( surfacePosition, emitterPosition, surfaceNormal, emitterNormal ) 
                         * emmittedRadiance ) / emitterPdf;
                 }
 
                 else
                 {
-                    rc->Pop();
+                    rc->pop();
                 }
             }
             else
             {
-                rc->Pop();
+                rc->pop();
             }         
 
             // Indirect lighting
-            if ( rayDepth == 0 || !surfaceShader->DoEmit() || ray.specular )
+            if ( rayDepth == 0 || !surfaceShader->isEmitter() || ray.specular )
             {	
                 float transmittance = 1;
-                if ( !rc->GetShaderStack()->empty())
+
+                Shader* shader = rc->getCurrenShader();
+                if ( shader )
                 {
-                    transmittance = rc->GetShaderStack()->top()->evaluate( rc, ray.origin, surfacePosition );
+                    transmittance = shader->evaluate( rc, ray.origin, surfacePosition );
                 }
 
                 surfaceShader->evaluate( Shader::RADIANCE, rc );
-                radiance += rc->GetOutput(Shader::RADIANCE).AsFloat() * transmittance;				
+                radiance += rc->GetOutput(Shader::RADIANCE).asFloat() * transmittance;				
             }
             else
             {

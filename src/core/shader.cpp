@@ -42,12 +42,7 @@ namespace LumiereRenderer
     {
     }
 
-    float Shader::GetIor(RenderContext* /*sc*/)
-    {
-        return 1.0f;
-    }
-
-    bool Shader::DoEmit()
+    bool Shader::isEmitter()
     {
         return false;
     }

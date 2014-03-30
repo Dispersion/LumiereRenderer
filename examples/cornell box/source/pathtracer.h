@@ -38,7 +38,7 @@ namespace LumiereRenderer
     public:
         PathTracer( int maxPathLength );
         ~PathTracer();
-        float Trace( Ray& ray, RenderContext* rc );	      
+        float trace( Ray& ray, RenderContext* rc );	      
 
     protected:
         int mMaxPathLength;

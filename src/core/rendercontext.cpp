@@ -55,29 +55,21 @@ namespace LumiereRenderer
         mNextDataAvailable = 0;
         mData = new char[mBufferSize];
         mHandles = new int[mHandlesSize];
-        mSceneTracer = scene->GetSceneTracer();
+        mSceneTracer = scene->getSceneTracer();
+        push();
     }
 
     RenderContext::~RenderContext(void)
     {
+        pop();
         delete []mData;
     }
 
-	void RenderContext::Push()
+    void RenderContext::clear()
     {
-        ResizeHandles( mNextAvailable + 1 );
-        mHandles[mNextAvailable] = mCurrentBlock;
-        mCurrentBlock = ++mNextAvailable;
-    }
-
-    void RenderContext::Pop()
-    {
-        if( mCurrentBlock != mNextAvailable )
-        {
-            mNextDataAvailable = mHandles[mCurrentBlock+1];
-        }
-        mNextAvailable = mCurrentBlock-1;
-        mCurrentBlock = mHandles[mCurrentBlock-1];
+        mNextAvailable = 0;
+        mCurrentBlock = 0;
+        mNextDataAvailable = 0;
     }
 
     DataHandle RenderContext::GetInput(Attribute* attribute)
@@ -233,6 +225,23 @@ namespace LumiereRenderer
         return index;
     }
 
+    void RenderContext::push()
+    {
+        ResizeHandles( mNextAvailable + 1 );
+        mHandles[mNextAvailable] = mCurrentBlock;
+        mCurrentBlock = ++mNextAvailable;
+    }
+
+    void RenderContext::pop()
+    {
+        if( mCurrentBlock != mNextAvailable )
+        {
+            mNextDataAvailable = mHandles[mCurrentBlock+1];
+        }
+        mNextAvailable = mCurrentBlock-1;
+        mCurrentBlock = mHandles[mCurrentBlock-1];
+    }
+
     float RenderContext::Trace( Ray& ray )
     {        
         // When the trace function is called, we send the request to the integrator,
@@ -252,7 +261,7 @@ namespace LumiereRenderer
         {
            // mShaderStack->push( mHitPoint->shader );
            //Shader* shader = static_cast<Shader*>(GetInput( RenderContext::SHADER ).AsPointer());
-            Shader* shader = GetInput( RenderContext::SHADER ).AsShader();
+            Shader* shader = GetInput( RenderContext::SHADER ).asShader();
             mShaderStack.push( shader );
         }
 
@@ -266,14 +275,14 @@ namespace LumiereRenderer
         }
 
 
-        int rayDepth = GetInput(RAY_DEPTH).AsInt();
+        int rayDepth = GetInput(RAY_DEPTH).asInt();
         // Use the assigned integrator, to trace the ray.
-        this->Push();
+        this->push();
 
-        GetOutput(RAY_DEPTH).Set(rayDepth+1);
+        GetOutput(RAY_DEPTH).set(rayDepth+1);
 
-        float radiance = mIntegrator->Trace( ray, this );
-        this->Pop();
+        float radiance = mIntegrator->trace( ray, this );
+        this->pop();
 
         // Some shaders can shoot out more than one ray, e.g. a glass shader could shoot 
         // out a ray in the reflected and the refracted direction. Since we only have one
@@ -295,9 +304,19 @@ namespace LumiereRenderer
         return radiance;  
     }
 
-    std::stack<Shader*>* RenderContext::GetShaderStack()
+    /*std::stack<Shader*>* RenderContext::GetShaderStack()
     {
         return &mShaderStack;
+    }*/
+
+    Shader* RenderContext::getCurrenShader()
+    {
+        if( mShaderStack.empty() )
+        {
+            return NULL;
+        }
+        
+        return mShaderStack.top();
     }
 
     Camera* RenderContext::GetCamera()

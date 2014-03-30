@@ -50,7 +50,7 @@ namespace LumiereRenderer
     public:
             SceneTracer();
             virtual ~SceneTracer(void);
-            virtual bool Trace(const Point3 from, const Point3 to) = 0;
-            virtual bool Trace(Ray& Ray, RenderContext* rc) = 0;
+            virtual bool intersect(const Point3 from, const Point3 to) = 0;
+            virtual bool intersect(Ray& Ray, RenderContext* rc) = 0;
     };
 }

@@ -65,9 +65,9 @@ namespace LumiereRenderer
 
         return GetRadiance(mT, wavelength);*/
         
-        Vector3 normal = rc->GetInput( mNormal ).AsVector3();
-        float wavelength = rc->GetInput( mRayWavelength ).AsFloat();
-        float temperature = rc->GetInput( mTemperature ).AsFloat();
+        Vector3 normal = rc->GetInput( mNormal ).asVector3();
+        float wavelength = rc->GetInput( mRayWavelength ).asFloat();
+        float temperature = rc->GetInput( mTemperature ).asFloat();
         
         /*if (Dot( normal, wi.direction ) < 0 )
             return 0;*/
@@ -86,11 +86,11 @@ namespace LumiereRenderer
                 return data;
             }*/
 
-            float wavelength = rc->GetInput( mRayWavelength ).AsFloat();
-            float temperature = rc->GetInput( mTemperature ).AsFloat();
+            float wavelength = rc->GetInput( mRayWavelength ).asFloat();
+            float temperature = rc->GetInput( mTemperature ).asFloat();
 
             DataHandle radiance = rc->GetOutput(  Shader::RADIANCE );
-            radiance.Set( GetRadiance(temperature, wavelength) );
+            radiance.set( GetRadiance(temperature, wavelength) );
         }
 
     }
@@ -123,7 +123,7 @@ namespace LumiereRenderer
     }
 
 
-    bool BlackBody::DoEmit()
+    bool BlackBody::isEmitter()
     {
         return true;
     }

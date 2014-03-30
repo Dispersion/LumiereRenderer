@@ -59,31 +59,31 @@ namespace LumiereRenderer
         DataHandle(RenderContext* rc, int index);
         ~DataHandle(void);
 
-        void Set(int value);
-        void Set(float value);
-        void Set(double value);
-        void Set(char value);
-        void Set(bool value);
-        void Set(Vector3 value);
-        void Set(Vector4 value);
-        void Set(Point3 value);
-        void Set(Matrix value);
-        //void Set(void* value);
-        void Set(Shader* value);
-        void Set(Shape* value);
+        void set(int value);
+        void set(float value);
+        void set(double value);
+        void set(char value);
+        void set(bool value);
+        void set(Vector3 value);
+        void set(Vector4 value);
+        void set(Point3 value);
+        void set(Matrix value);
+        //void set(void* value);
+        void set(Shader* value);
+        void set(Shape* value);
 
-        int AsInt();
-        float AsFloat();
-        double AsDouble();
-        char AsChar();
-        bool AsBool();
-        Vector3 AsVector3();
-        Vector4 AsVector4();
-        Point3 AsPoint3();
-        Matrix AsMatrix();
-        //void* AsPointer();       
-        Shader* AsShader();
-        Shape* AsShape();
+        int asInt();
+        float asFloat();
+        double asDouble();
+        char asChar();
+        bool asBool();
+        Vector3 asVector3();
+        Vector4 asVector4();
+        Point3 asPoint3();
+        Matrix asMatrix();
+        //void* asPointer();       
+        Shader* asShader();
+        Shape* asShape();
 
     private:
         RenderContext*              mRenderContext;

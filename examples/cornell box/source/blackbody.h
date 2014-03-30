@@ -43,7 +43,7 @@ namespace LumiereRenderer
 		void evaluate( Attribute* attr, RenderContext* rc );
 		float GetRadiance( float kelvin, float wavelength );
 
-		bool DoEmit();
+		bool isEmitter();
 	private:
 		Attribute* mTemperature;
 		Attribute* mNormal;

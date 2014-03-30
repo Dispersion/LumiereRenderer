@@ -41,9 +41,9 @@ namespace LumiereRenderer
     {
     }
 
-    void Scene::AddShape(Shape* shape)
+    void Scene::addShape(Shape* shape)
     {
-        if (shape->GetShader()->DoEmit())
+        if (shape->GetShader()->isEmitter())
         {
             mEmitters.push_back(shape);
         }
@@ -51,7 +51,7 @@ namespace LumiereRenderer
         mShapes.push_back(shape);
     }
 
-    bool Scene::SampleEmitters(RenderContext* rc) const
+    bool Scene::sampleEmitters(RenderContext* rc) const
     {
         if (mEmitters.empty())
             return false;
@@ -60,7 +60,7 @@ namespace LumiereRenderer
         
         mEmitters[i]->Sample( rc );       
         DataHandle pdf = rc->GetInput( RenderContext::PDF );
-        pdf.Set( pdf.AsFloat() / mEmitters.size() );
+        pdf.set( pdf.asFloat() / mEmitters.size() );
 
         return true;
     }

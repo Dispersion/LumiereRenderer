@@ -41,8 +41,8 @@ namespace LumiereRenderer
         public:
             ListTracer(List* list);
             virtual ~ListTracer(void);
-            bool Trace(const Point3 from, const Point3 to);
-            bool Trace(Ray& ray, RenderContext* rc);
+            bool intersect(const Point3 from, const Point3 to);
+            bool intersect(Ray& ray, RenderContext* rc);
 
         private:
             List* mList;
@@ -50,7 +50,7 @@ namespace LumiereRenderer
 
         List(void);
         virtual ~List(void);
-        SceneTracer* GetSceneTracer();
-        std::vector<Shape*>& GetShapes();
+        SceneTracer* getSceneTracer();
+        std::vector<Shape*>& getShapes();
     };
 }

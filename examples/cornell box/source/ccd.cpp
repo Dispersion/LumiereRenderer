@@ -85,9 +85,9 @@ namespace LumiereRenderer
 
     void CCD::SetExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext* rc)
     {
-        float red = rc->GetInput( mRed ).AsFloat();
-        float green = rc->GetInput( mGreen ).AsFloat();
-        float blue = rc->GetInput( mBlue ).AsFloat();
+        float red = rc->GetInput( mRed ).asFloat();
+        float green = rc->GetInput( mGreen ).asFloat();
+        float blue = rc->GetInput( mBlue ).asFloat();
 
         Vector3 c = std::max(0.0f, exposure) * Vector3( red, green, blue ) * 255;
 

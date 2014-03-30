@@ -68,13 +68,8 @@ namespace LumiereRenderer
             /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
             virtual void evaluate( Attribute* attr, RenderContext* rc ) = 0;
 
-            /// Get the index of refraction of the material.
-            /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
-            /// @return The IOR.
-            virtual float GetIor(RenderContext* rc);
-
             /// If a material is used as a light source, this function should return true.
-            virtual bool DoEmit();
+            virtual bool isEmitter();
 
             static Attribute* RADIANCE;
     };

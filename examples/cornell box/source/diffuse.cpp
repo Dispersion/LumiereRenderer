@@ -57,7 +57,7 @@ namespace LumiereRenderer
     {
         if ( mReflectance )
         {			
-            return sc->GetInput( mReflectance ).AsFloat() / PI;
+            return sc->GetInput( mReflectance ).asFloat() / PI;
         }		
         return 0;
     }
@@ -68,11 +68,11 @@ namespace LumiereRenderer
         {
             float pdf;
 
-            Point3 P  = rc->GetInput( mPosition ).AsPoint3();
-            Vector3 N = rc->GetInput( mNormal ).AsVector3();
-            float rayWavelength = rc->GetInput( mRayWavelength ).AsFloat();
-            float reflectance = rc->GetInput( mReflectance ).AsFloat() / PI;
-            Matrix ShaderToWorld = rc->GetInput( mShaderToWorld ).AsMatrix();
+            Point3 P  = rc->GetInput( mPosition ).asPoint3();
+            Vector3 N = rc->GetInput( mNormal ).asVector3();
+            float rayWavelength = rc->GetInput( mRayWavelength ).asFloat();
+            float reflectance = rc->GetInput( mReflectance ).asFloat() / PI;
+            Matrix ShaderToWorld = rc->GetInput( mShaderToWorld ).asMatrix();
             
             //Vector3 dir = ShaderToWorld * SampleHemisphere( pdf );
             Vector3 dir = ShaderToWorld * SampleCosineHemisphere( pdf );
@@ -83,7 +83,7 @@ namespace LumiereRenderer
             wi.origin = wi.origin + wi.direction * EPSILON*10;
 
             DataHandle outColor = rc->GetOutput(Shader::RADIANCE);
-            outColor.Set( (reflectance * rc->Trace(wi) * Dot(wi.direction, N)) / pdf );
+            outColor.set( (reflectance * rc->Trace(wi) * Dot(wi.direction, N)) / pdf );
         }
     }
 }

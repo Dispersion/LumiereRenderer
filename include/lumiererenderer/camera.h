@@ -59,37 +59,37 @@ namespace LumiereRenderer
             /// @param[in] x   The pixel position on the X axis of the image sensor.
             /// @param[in] y   The pixel position on the Y axis of the image sensor.
 		    /// @param[in] rc
-            virtual void Trace( unsigned int x, unsigned int y, RenderContext* rc ) = 0;
+            virtual void trace( unsigned int x, unsigned int y, RenderContext* rc ) = 0;
 
             /// Set the image sensor.
 		    /// @param[in] sensor
-            void SetImageSensor( ImageSensor* sensor );
+            void setImageSensor( ImageSensor* sensor );
         
             /// Get the current image sensor.
-            ImageSensor* GetImageSensor();
+            ImageSensor* getImageSensor();
         
             /// The postion of the camera defines the center of the imagesensor.
             /// @param[in] position The postion of the camera.
-            void SetPosition( Point3 position );
+            void setPosition( Point3 position );
         
             /// @return The postion of the camera.
-            Point3 GetPosition();
+            Point3 getPosition();
         
             /// The view direction is the optical axis of the camera. It is a straight line passing through the geometrical centre of the lens.
             /// @param[in] viewDirection The view direction.
-            void SetViewDirection( Vector3 viewDirection );
+            void setViewDirection( Vector3 viewDirection );
         
             /// The view direction is the optical axis of the camera. It is a straight line passing through the geometrical centre of the lens.
             /// @return The view direction.		
-            Vector3 GetViewDirection();
+            Vector3 getViewDirection();
         
             /// The up direction is the Y axis on the imagesensor in world space.
             /// @param[in] upDirection The up direction.
-            void SetUpDirection( Vector3 upDirection );
+            void setUpDirection( Vector3 upDirection );
         
             /// The up direction is the Y axis on the imagesensor in world space.
             /// @return The up direction.
-            Vector3 GetUpDirection();
+            Vector3 getUpDirection();
 
             ///
             /// @param attribute    
