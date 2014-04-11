@@ -40,7 +40,7 @@ namespace LumiereRenderer
             mIntensity[n] = 0;
         }        
 
-        mRayWavelength = createAttribute<float>("RayWavelength", 0);
+        mRayWavelength = createAttribute<float>("WoWavelength", 0);
         aOutColor = createAttribute<float>("outColor", 0);		
 
         aOutColor->setWriteable(false);
@@ -100,7 +100,7 @@ namespace LumiereRenderer
             }
         }
 
-        mRayWavelength = createAttribute<float>("RayWavelength", 0);
+        mRayWavelength = createAttribute<float>("WoWavelength", 0);
         aOutColor = createAttribute<float>("outColor", 0);		
         aOutColor->setWriteable(false);
         //AddAttribute( mRayWavelength );

@@ -36,60 +36,35 @@ namespace LumiereRenderer
     BlackBody::BlackBody()
     {
         mTemperature = createAttribute<float>( "Temperature", 6500 ); ;
-        mNormal = createAttribute<Vector3>( "Normal", 0 );
-        mRayDirection = createAttribute<Vector3>( "RayDirection", 0 );
-        mRayWavelength = createAttribute<float>( "RayWavelength", 0 );     
-
-       // AddAttribute( mTemperature );
-        //AddAttribute( mNormal );
-       // AddAttribute( mRayDirection );
-       // AddAttribute( mRayWavelength );
+        mWoWavelength = createAttribute<float>( "WoWavelength", 0 );     
     }
 
     BlackBody::~BlackBody(void)
     {
+        delete mTemperature;
+        delete mWoWavelength;
     }
 
-    float BlackBody::evaluate(RenderContext* /*sc*/, const Point3& /*from*/, const Point3& /*to*/ )
+    float BlackBody::evaluateDir( RenderContext* rc )
     {
-        return 1;
+        float wavelength = rc->GetInput( mWoWavelength ).asFloat();
+        float temperature = rc->GetInput( mTemperature ).asFloat();       
+        return getRadiance(temperature, wavelength);
     }
 
-    float BlackBody::evaluate( RenderContext* rc, const Ray& /*wi*/ )
-    {
-        /*Vector3 wo = sc->evaluate( mRayDirection ).AsVector3();
-        float wavelength = sc->evaluate( mRayWavelength ).AsFloat();
-
-        if (Dot( from->normal, wi.direction ) < 0 )
-            return 0;
-
-        return GetRadiance(mT, wavelength);*/
-        
-        Vector3 normal = rc->GetInput( mNormal ).asVector3();
-        float wavelength = rc->GetInput( mRayWavelength ).asFloat();
-        float temperature = rc->GetInput( mTemperature ).asFloat();
-        
-        /*if (Dot( normal, wi.direction ) < 0 )
-            return 0;*/
-
-        return GetRadiance(temperature, wavelength);
-    }
-
-    float BlackBody::evaluate(RenderContext* rc)
+    float BlackBody::evaluateSample(RenderContext* rc)
     {	
-        /*if (Dot(hit->normal, -wo.direction) < 0 )
-        {
-        data.Set(0.0f);
-        return data;
-        }*/
-
-        float wavelength = rc->GetInput( mRayWavelength ).asFloat();
+        float wavelength = rc->GetInput( mWoWavelength ).asFloat();
         float temperature = rc->GetInput( mTemperature ).asFloat();
-
-        return GetRadiance(temperature, wavelength);
+        return getRadiance(temperature, wavelength);
     }
 
-    float BlackBody::GetRadiance(float kelvin, float wavelength)
+    bool BlackBody::isEmitter()
+    {
+        return true;
+    }
+
+    float BlackBody::getRadiance(float kelvin, float wavelength)
     {
         //Planck's constant in J*s
         float h = 6.6260696e-34f;
@@ -114,11 +89,5 @@ namespace LumiereRenderer
         //float p = ((2*h*c*c) / pow(w,5)) * (1.0f / ( pow(e, (h*c) / (w*k*mT)) - 1.0f));
 
         return n2*m2;
-    }
-
-
-    bool BlackBody::isEmitter()
-    {
-        return true;
     }
 }

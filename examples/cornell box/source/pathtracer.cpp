@@ -45,7 +45,7 @@ namespace LumiereRenderer
 
     float PathTracer::trace( Ray& ray, RenderContext* rc )
     {        
-        int rayDepth = rc->GetInput(RenderContext::RAY_DEPTH).asInt();
+        int rayDepth = rc->GetInput(RenderContext::TRACE_DEPTH).asInt();
 
         if (rayDepth == mMaxPathLength)
             return 0;
@@ -66,62 +66,68 @@ namespace LumiereRenderer
         Vector3 surfaceNormal = rc->GetInput( Shape::NORMAL ).asVector3();
        // Shader* surfaceShader = static_cast<Shader*>(rc->GetInput( RenderContext::SHADER ).AsPointer());
         Shader* surfaceShader = rc->GetInput( RenderContext::SHADER ).asShader();
+        rc->GetOutput(RenderContext::WO_WAVELENGTH).set( ray.wavelength );
+        rc->GetOutput(RenderContext::WI_WAVELENGTH).set( ray.wavelength );
+
+
+            float directLight = false;
+            Point3 emitterPosition;
 
         //if (Dot(Normalize(hit.normal), Normalize(-ray.direction)) > 0)
         {
             // Direct lighting
             // Sample a point on the emitter and find out if there are any obstruction between 
             // the point on the surface and the point on the emitter.
-             
+                     
+            // Start by pushing a new context and sample the emitters in the scene.
             rc->push();
-            
             if ( rc->GetScene()->sampleEmitters( rc ) )
             {
-                Point3 emitterPosition = rc->GetInput( Shape::POSITION ).asPoint3();
-                
+                emitterPosition = rc->GetInput( Shape::POSITION ).asPoint3();
+
+                // Test if there are anything blocking the path between the emitter and the point on the surface we are shading
                 if( !rc->GetSceneTracer()->intersect( surfacePosition, emitterPosition ) )
                 {
+                    directLight = true;
                     Vector3 emitterNormal = rc->GetInput( Shape::NORMAL ).asVector3();
                     Shader* emitterShader = rc->GetInput( RenderContext::SHADER ).asShader();
                     float emitterPdf = rc->GetInput( RenderContext::PDF ).asFloat();          
 
-                    Ray wi = Ray( surfacePosition, emitterPosition, ray.wavelength );   
+                    rc->GetOutput(RenderContext::WI_DIRECTION).set( Normalize(emitterPosition - surfacePosition) );
+                    rc->GetOutput(RenderContext::WO_WAVELENGTH).set( ray.wavelength );
 
-                    DataHandle rayWavelength = rc->GetOutput(RenderContext::RAY_WAVELENGTH);
-                    rayWavelength.set( ray.wavelength );
-                    float emmittedRadiance = emitterShader->evaluate( rc, wi );
-                    rc->pop();
-
-                    radiance = ( surfaceShader->evaluate( rc, -wi ) * G( surfacePosition, emitterPosition, surfaceNormal, emitterNormal ) 
-                        * emmittedRadiance ) / emitterPdf;
+                    float emmittedRadiance = emitterShader->evaluateDir( rc );
+                    radiance = G( surfacePosition, emitterPosition, surfaceNormal, emitterNormal ) * emmittedRadiance  / emitterPdf;
                 }
 
-                else
-                {
-                    rc->pop();
-                }
             }
-            else
+            rc->pop();
+
+            if( directLight )
             {
-                rc->pop();
-            }         
+                rc->GetOutput(RenderContext::WI_DIRECTION).set( Normalize(surfacePosition-emitterPosition) );
+                float surfaceRadiance = surfaceShader->evaluateDir( rc );
+                radiance *= surfaceRadiance;
+            }
+
 
             // Indirect lighting
             if ( rayDepth == 0 || !surfaceShader->isEmitter() || ray.specular )
             {	
                 float transmittance = 1;
 
-                Shader* shader = rc->getCurrenShader();
+                /*Shader* shader = rc->getCurrenShader();
                 if ( shader )
                 {
                     transmittance = shader->evaluate( rc, ray.origin, surfacePosition );
-                }
+                }*/
 
-                radiance += surfaceShader->evaluate( rc ) * transmittance;
+                ;
+                radiance += surfaceShader->evaluateSample( rc ) * transmittance;
             }
             else
             {
-                surfaceShader->evaluate( rc );
+                surfaceShader->evaluateSample( rc );
             }                       
         }
 

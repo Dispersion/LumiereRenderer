@@ -36,12 +36,22 @@ namespace LumiereRenderer
 {
     Attribute* RenderContext::RAY_ORIGIN = new AttributeValue<Point3>("RayOrigin", 0);
     Attribute* RenderContext::RAY_DIRECTION = new AttributeValue<Vector3>("RayDirection", 0);
-    Attribute* RenderContext::RAY_WAVELENGTH = new AttributeValue<float>("RayWavelength", 0);
-    Attribute* RenderContext::RAY_DEPTH = new AttributeValue<int>("RayDepth", 0);
-    Attribute* RenderContext::RAY_IOR = new AttributeValue<float>("RayIOR", 0);
+//    Attribute* RenderContext::RAY_WAVELENGTH = new AttributeValue<float>("RayWavelength", 0);
+    Attribute* RenderContext::TRACE_DEPTH = new AttributeValue<int>("RayDepth", 0);
+//    Attribute* RenderContext::RAY_IOR = new AttributeValue<float>("RayIOR", 0);
     Attribute* RenderContext::RAY_BARYCENTRIC_COORDINATES = new AttributeValue<Point3>("RayBarycentricCoordinates", 0);
     Attribute* RenderContext::RAY_LENGTH = new AttributeValue<float>("RayLength", 0);
-    Attribute* RenderContext::OUTER_IOR = new AttributeValue<float>("OuterIOR", 0);
+    
+    Attribute* RenderContext::WO_DIRECTION = new AttributeValue<Vector3>("WoDirection", 0);
+    Attribute* RenderContext::WO_WAVELENGTH = new AttributeValue<float>("WoWavelength", 0);    
+    Attribute* RenderContext::WO_IOR = new AttributeValue<float>("WoIor", 0);
+    Attribute* RenderContext::WO_PDF = new AttributeValue<float>("WoPdf", 0);
+
+    Attribute* RenderContext::WI_DIRECTION = new AttributeValue<Vector3>("WiDirection", 0);
+    Attribute* RenderContext::WI_WAVELENGTH = new AttributeValue<float>("WiWavelength", 0);    
+    Attribute* RenderContext::WI_IOR = new AttributeValue<float>("WiIor", 0);
+    Attribute* RenderContext::WI_PDF = new AttributeValue<float>("WiPdf", 0);
+
     Attribute* RenderContext::SHADER = new AttributeValue<Shader*>("Shader", 0);
     Attribute* RenderContext::SHAPE = new AttributeValue<Shape*>("Shape", 0);
     Attribute* RenderContext::PDF = new AttributeValue<float>("Pdf", 0);
@@ -275,11 +285,11 @@ namespace LumiereRenderer
         }
 
 
-        int rayDepth = GetInput(RAY_DEPTH).asInt();
+        int rayDepth = GetInput(TRACE_DEPTH).asInt();
         // Use the assigned integrator, to trace the ray.
         this->push();
 
-        GetOutput(RAY_DEPTH).set(rayDepth+1);
+        GetOutput(TRACE_DEPTH).set(rayDepth+1);
 
         float radiance = mIntegrator->trace( ray, this );
         this->pop();

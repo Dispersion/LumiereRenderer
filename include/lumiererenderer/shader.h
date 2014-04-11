@@ -49,30 +49,25 @@ namespace LumiereRenderer
     public:
             Shader(void);
             virtual ~Shader(void);
-        
+
             /// Evaluate the light going through the material between two points.
             /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
-            /// @param[in] from The starting point of the ray.
-            /// @param[in] to   The end point of the ray.
             /// @return Radiance.	        
-            virtual float evaluate( RenderContext* rc, const Point3& from, const Point3& to ) = 0;
+            //virtual float evaulateTransmission( RenderContext* rc ) = 0;
         
             /// Evaluate the light comming from wi.
             /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
-            /// @param[in] wi   The ray in the direction of the lightsource.
             /// @return Radiance.
-            virtual float evaluate( RenderContext* rc, const Ray& wi ) = 0;
+            virtual float evaluateDir( RenderContext* rc ) = 0;
         
-            /// Evaluate an outgoing attribute.
-            /// @param[in] attr The outgoing attribute.
+            /// Sample a direction wi towards the light source and evaluate the radiance comming from 
+            /// wi going in the direction of wo. 
             /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
-            virtual float evaluate( RenderContext* rc ) = 0;
+            virtual float evaluateSample( RenderContext* rc ) = 0;
 
-            virtual void evaluate( Attribute* /*attr*/, RenderContext* /*rc*/ ) {};
-
+            virtual void evaluate( Attribute* attribute, RenderContext* rc ) {}
+           
             /// If a material is used as a light source, this function should return true.
             virtual bool isEmitter();
-
-            static Attribute* RADIANCE;
     };
 }

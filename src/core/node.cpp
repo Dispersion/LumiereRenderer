@@ -66,25 +66,41 @@ namespace LumiereRenderer
         {
             attribute->connect( Shape::TEXCOORD );
         }
-        else if (name.compare("RayOrigin") == 0 )
+        else if (name.compare("WiDirection") == 0 )
         {
-            attribute->connect( RenderContext::RAY_ORIGIN );
+            attribute->connect( RenderContext::WI_DIRECTION );
         }
-        else if (name.compare("RayDirection") == 0 )
+        else if (name.compare("WiWavelength") == 0 )
         {
-            attribute->connect( RenderContext::RAY_DIRECTION );
-        }
-        else if (name.compare("RayWavelength") == 0 )
-        {
-            attribute->connect( RenderContext::RAY_WAVELENGTH );
+            attribute->connect( RenderContext::WI_WAVELENGTH );
         }		
-        else if (name.compare("RayDepth") == 0 )
+        else if (name.compare("WiIor") == 0 )
         {
-            attribute->connect( RenderContext::RAY_DEPTH );
+            attribute->connect( RenderContext::WI_IOR );
         }	
-        else if (name.compare("RayIOR") == 0 )
+        else if (name.compare("WiPdf") == 0 )
         {
-            attribute->connect( RenderContext::RAY_IOR );
+            attribute->connect( RenderContext::WI_PDF );
+        }	
+        else if (name.compare("WoDirection") == 0 )
+        {
+            attribute->connect( RenderContext::WO_DIRECTION );
+        }
+        else if (name.compare("WoWavelength") == 0 )
+        {
+            attribute->connect( RenderContext::WO_WAVELENGTH );
+        }		
+        else if (name.compare("WoIor") == 0 )
+        {
+            attribute->connect( RenderContext::WO_IOR );
+        }
+        else if (name.compare("WoPdf") == 0 )
+        {
+            attribute->connect( RenderContext::WO_PDF );
+        }
+        else if (name.compare("TraceDepth") == 0 )
+        {
+            attribute->connect( RenderContext::TRACE_DEPTH );
         }	
         else if (name.compare("RayBarycentricCoordinates") == 0 )
         {
@@ -94,10 +110,10 @@ namespace LumiereRenderer
         {
             attribute->connect( RenderContext::RAY_LENGTH );
         }
-        else if ( name.compare("OuterIOR") == 0 )
+        /*else if ( name.compare("OuterIOR") == 0 )
         {
             attribute->connect( RenderContext::OUTER_IOR );
-        }
+        }*/
         else if ( name.compare("WorldToShader") == 0 )
         {
             attribute->connect( Shape::WORLD_TO_SHADER );

@@ -32,7 +32,7 @@
 
 namespace LumiereRenderer
 {
-    Attribute* Shader::RADIANCE = new AttributeValue<float>("Radiance", 0);
+//    Attribute* Shader::RADIANCE = new AttributeValue<float>("Radiance", 0);
 
     Shader::Shader(void)
     {

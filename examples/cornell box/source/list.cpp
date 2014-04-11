@@ -99,7 +99,7 @@ namespace LumiereRenderer
             rc->GetOutput(RenderContext::RAY_LENGTH).set( ray.t );
             rc->GetOutput(RenderContext::RAY_ORIGIN).set( ray.origin );
             rc->GetOutput(RenderContext::RAY_DIRECTION).set( ray.direction );
-            rc->GetOutput(RenderContext::RAY_WAVELENGTH).set( ray.wavelength ); 
+//            rc->GetOutput(RenderContext::RAY_WAVELENGTH).set( ray.wavelength ); 
 
             return true;
         }

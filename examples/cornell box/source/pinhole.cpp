@@ -74,8 +74,8 @@ namespace LumiereRenderer
         
         ray.t = INFINITY;
 
-        rc->GetOutput( RenderContext::RAY_DEPTH ).set( -1 );
-        rc->GetOutput( RenderContext::RAY_WAVELENGTH ).set( imageSensorSample.wavelength );
+        rc->GetOutput( RenderContext::TRACE_DEPTH ).set( -1 );
+        rc->GetOutput( RenderContext::WO_WAVELENGTH ).set( imageSensorSample.wavelength );
     
         float pdf = 1.0f / ( PI*mAperture*mAperture );
         float g = G( imageSensorSample.position, pointOnAperture, Vector3( 0, 0, -1 ), Vector3( 0, 0, 1) );
@@ -84,7 +84,6 @@ namespace LumiereRenderer
 
         mImageSensor->SetExposure( i, j, exposure, ray.alpha, rc );
     }
-
 
     void Pinhole::evaluate( Attribute* attr, RenderContext* rc )
     {

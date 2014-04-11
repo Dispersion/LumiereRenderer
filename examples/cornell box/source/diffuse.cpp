@@ -37,10 +37,10 @@ namespace LumiereRenderer
 {
     Diffuse::Diffuse()
     {		
-		mPosition = createAttribute<Point3>("Position", 0);
-		mNormal = createAttribute<Vector3>("Normal", 0);
+        mPosition = createAttribute<Point3>("Position", 0);
+        mNormal = createAttribute<Vector3>("Normal", 0);
         mReflectance = createAttribute<float>("Reflectance", 0);
-        mRayWavelength = createAttribute<float>("RayWavelength", 0);
+        mWoWavelength = createAttribute<float>("WoWavelength", 0);
         mShaderToWorld = createAttribute<Matrix>("ShaderToWorld", Matrix());
     }
 
@@ -48,33 +48,24 @@ namespace LumiereRenderer
     {
     }
 
-    float Diffuse::evaluate( RenderContext* /*sc*/, const Point3& /*from*/, const Point3& /*to*/ )
+    float Diffuse::evaluateDir( RenderContext* rc )
     {
-        return 1;
+        return rc->GetInput( mReflectance ).asFloat() / PI;
     }
 
-    float Diffuse::evaluate( RenderContext* sc, const Ray& /*wi*/ )
+    float Diffuse::evaluateSample( RenderContext* rc )
     {
-        if ( mReflectance )
-        {			
-            return sc->GetInput( mReflectance ).asFloat() / PI;
-        }		
-        return 0;
-    }
-
-    float Diffuse::evaluate(RenderContext* rc)
-    {               
         float pdf;
 
         Point3 P  = rc->GetInput( mPosition ).asPoint3();
         Vector3 N = rc->GetInput( mNormal ).asVector3();
-        float rayWavelength = rc->GetInput( mRayWavelength ).asFloat();
+        float wavelength = rc->GetInput( mWoWavelength ).asFloat();
         float reflectance = rc->GetInput( mReflectance ).asFloat() / PI;
         Matrix ShaderToWorld = rc->GetInput( mShaderToWorld ).asMatrix();
 
         Vector3 dir = ShaderToWorld * SampleCosineHemisphere( pdf );
 
-        Ray wi = Ray(P, dir, rayWavelength);        
+        Ray wi = Ray(P, dir, wavelength);        
         wi.origin = wi.origin + wi.direction * EPSILON*10;
 
         return (reflectance * rc->Trace(wi) * Dot(wi.direction, N)) / pdf;

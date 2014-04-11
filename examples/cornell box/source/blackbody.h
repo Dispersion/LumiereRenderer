@@ -38,16 +38,13 @@ namespace LumiereRenderer
 		BlackBody();
 		~BlackBody(void);
 
-		float evaluate( RenderContext* rc, const Point3& from, const Point3& to );		
-		float evaluate( RenderContext* rc, const Ray& wi );
-		float evaluate( RenderContext* rc );
-		float GetRadiance( float kelvin, float wavelength );
+        float evaluateDir( RenderContext* rc );
+        float evaluateSample( RenderContext* rc );
 
 		bool isEmitter();
 	private:
+        float getRadiance( float kelvin, float wavelength );
 		Attribute* mTemperature;
-		Attribute* mNormal;
-		Attribute* mRayDirection;
-		Attribute* mRayWavelength;		
+		Attribute* mWoWavelength;		
 	};
 }

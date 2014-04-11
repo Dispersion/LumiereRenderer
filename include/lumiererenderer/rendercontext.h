@@ -67,31 +67,45 @@ namespace LumiereRenderer
             Scene* GetScene();
             SceneTracer* GetSceneTracer();
             Integrator* GetIntegrator();
+           
+            /// The direction of the current ray.
+            static Attribute*           WI_DIRECTION;
+            
+            /// The wavelength of the current ray in nm.
+            static Attribute*           WI_WAVELENGTH;
+
+            /// The index of refraction of the material were moving through.   //TODO: verify this wild claim
+            static Attribute*           WI_IOR;
+
+            static Attribute*           WI_PDF;
+
+            /// The direction of the current ray.
+            static Attribute*           WO_DIRECTION;
+            
+            /// The wavelength of the current ray in nm.
+            static Attribute*           WO_WAVELENGTH;
+
+            /// The index of refraction of the material were moving through.   //TODO: verify this wild claim
+            static Attribute*           WO_IOR;
+
+            static Attribute*           WO_PDF;
 
             /// The orgin of the current ray.
             static Attribute*           RAY_ORIGIN;
             
             /// The direction of the current ray.
             static Attribute*           RAY_DIRECTION;
-            
-            /// The wavelength of the current ray in nm.
-            static Attribute*           RAY_WAVELENGTH;
-
-            /// The number of bounces the ray has gone through.
-            static Attribute*           RAY_DEPTH;
-
-            /// The index of refraction of the material were moving through.   //TODO: verify this wild claim
-            static Attribute*           RAY_IOR;
 
             /// The barycentric coordinates of the intersection between the ray and the shape it hit.
             static Attribute*           RAY_BARYCENTRIC_COORDINATES;
 
             /// The length of the ray.
             static Attribute*           RAY_LENGTH;
-            
-            /// ???
-            static Attribute*           OUTER_IOR;
-            
+
+            /// The number of bounces the ray has gone through.
+            static Attribute*           TRACE_DEPTH;
+
+          
             /// The shader of the shape the ray intersected with.
             static Attribute*           SHADER;
 
