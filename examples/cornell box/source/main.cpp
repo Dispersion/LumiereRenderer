@@ -6,7 +6,7 @@
 #include "pathtracer.h"
 #include <lumiererenderer\imagesensor.h>
 #include "ccd.h"
-#include <lumiererenderer\spectrum.h>
+#include "spectrum.h"
 #include "triangle.h"
 #include "diffuse.h"
 #include "blackbody.h"

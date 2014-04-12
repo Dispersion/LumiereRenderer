@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\Spectrum.h>
+#include "Spectrum.h"
 #include <lumiererenderer\Geometry.h>
 #include <lumiererenderer\AttributeValue.h>
 

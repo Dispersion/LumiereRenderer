@@ -21,6 +21,7 @@
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\pathtracer.cpp" />
     <ClCompile Include="..\..\source\pinhole.cpp" />
+    <ClCompile Include="..\..\source\spectrum.cpp" />
     <ClCompile Include="..\..\source\triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +32,7 @@
     <ClInclude Include="..\..\source\list.h" />
     <ClInclude Include="..\..\source\pathtracer.h" />
     <ClInclude Include="..\..\source\pinhole.h" />
+    <ClInclude Include="..\..\source\Spectrum.h" />
     <ClInclude Include="..\..\source\triangle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -40,7 +40,6 @@
     <ClInclude Include="..\..\include\lumiererenderer\SceneTracer.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Shader.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Shape.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\Spectrum.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Vector3.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Vector4.h" />
   </ItemGroup>
@@ -56,7 +55,6 @@
     <ClCompile Include="..\..\src\core\SceneTracer.cpp" />
     <ClCompile Include="..\..\src\core\Shader.cpp" />
     <ClCompile Include="..\..\src\core\Shape.cpp" />
-    <ClCompile Include="..\..\src\core\Spectrum.cpp" />
     <ClCompile Include="..\..\src\math\Geometry.cpp" />
     <ClCompile Include="..\..\src\math\LinearAlgebra.cpp" />
     <ClCompile Include="..\..\src\math\Matrix.cpp" />

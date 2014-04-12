@@ -94,9 +94,6 @@
     <ClInclude Include="..\..\include\lumiererenderer\Shape.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\Spectrum.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\math\Geometry.cpp">
@@ -160,9 +157,6 @@
       <Filter>Core\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\Shape.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\Spectrum.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
