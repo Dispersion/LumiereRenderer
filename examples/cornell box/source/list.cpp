@@ -78,7 +78,7 @@ namespace LumiereRenderer
         return false;
     }
 
-    bool List::ListTracer::intersect(Ray& ray, RenderContext* rc)// const 
+    bool List::ListTracer::intersect(Ray& ray, RenderContext& rc)// const 
     {
         Shape* hitShape = NULL;
 
@@ -93,14 +93,12 @@ namespace LumiereRenderer
 
         if (hitShape)
         {
-            rc->GetOutput(RenderContext::SHAPE).set( hitShape );
-            rc->GetOutput(RenderContext::SHADER).set( hitShape->GetShader() );
-            rc->GetOutput(RenderContext::RAY_BARYCENTRIC_COORDINATES).set( Vector3(ray.u, ray.v, (1-ray.u-ray.v)) );
-            rc->GetOutput(RenderContext::RAY_LENGTH).set( ray.t );
-            rc->GetOutput(RenderContext::RAY_ORIGIN).set( ray.origin );
-            rc->GetOutput(RenderContext::RAY_DIRECTION).set( ray.direction );
-//            rc->GetOutput(RenderContext::RAY_WAVELENGTH).set( ray.wavelength ); 
-
+            rc.setOutput(RenderContext::SHAPE, hitShape);
+            rc.setOutput(RenderContext::SHADER, hitShape->GetShader());
+            rc.setOutput(RenderContext::RAY_BARYCENTRIC_COORDINATES, Vector3(ray.u, ray.v, (1-ray.u-ray.v)));
+            rc.setOutput(RenderContext::RAY_LENGTH, ray.t);
+            rc.setOutput(RenderContext::RAY_ORIGIN, ray.origin);
+            rc.setOutput(RenderContext::RAY_DIRECTION, ray.direction);
             return true;
         }
 

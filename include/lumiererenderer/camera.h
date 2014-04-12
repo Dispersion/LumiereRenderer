@@ -59,7 +59,7 @@ namespace LumiereRenderer
             /// @param[in] x   The pixel position on the X axis of the image sensor.
             /// @param[in] y   The pixel position on the Y axis of the image sensor.
 		    /// @param[in] rc
-            virtual void trace( unsigned int x, unsigned int y, RenderContext* rc ) = 0;
+            virtual void trace( unsigned int x, unsigned int y, RenderContext& rc ) = 0;
 
             /// Set the image sensor.
 		    /// @param[in] sensor
@@ -94,7 +94,7 @@ namespace LumiereRenderer
             ///
             /// @param attribute    
             /// @param rc          
-            virtual void evaluate( Attribute* attr, RenderContext* rc ) = 0;
+            virtual void evaluate( Attribute* attr, RenderContext& rc ) = 0;
 
     protected:
             ImageSensor*                mImageSensor;

@@ -66,7 +66,7 @@ namespace LumiereRenderer
               * @param[in] attribute   The attribute that should be evaluated.
               * @param[in] rc   Used to get and set values of attributes and to trace new rays.
 	          */
-            virtual void evaluate( Attribute* attribute, RenderContext* rc ) = 0;
+            virtual void evaluate( Attribute* attribute, RenderContext& rc ) = 0;
               
 		    /** 
 		      * Get a reference to an attribute by using its name. Use it to either get the attribute

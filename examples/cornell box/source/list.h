@@ -42,7 +42,7 @@ namespace LumiereRenderer
             ListTracer(List* list);
             virtual ~ListTracer(void);
             bool intersect(const Point3 from, const Point3 to);
-            bool intersect(Ray& ray, RenderContext* rc);
+            bool intersect(Ray& ray, RenderContext& rc);
 
         private:
             List* mList;

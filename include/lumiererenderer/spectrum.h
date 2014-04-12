@@ -44,33 +44,8 @@ namespace LumiereRenderer
         Spectrum(float* wavelength, float* intensity, unsigned int size);	
         virtual ~Spectrum();
         
-        void evaluate(Attribute* attr, RenderContext* rc);
-
-      /*  float& operator[]( const unsigned int i );
-        const float& operator[]( const unsigned int i ) const;*/
+        void evaluate(Attribute* attr, RenderContext& rc);
         float GetIntensity(float wavelength);
-
-        //SetFromRGB(float r, float g, float b);        
-        //SetFromHSV(float h, float s, float v);
-        //SetFromCurve(Curve curve);
-
-        /*Spectrum operator+(const Spectrum& b) const;	
-        Spectrum operator-(const Spectrum& b) const;	
-        Spectrum operator*(const Spectrum& b) const;	
-        Spectrum operator/(const Spectrum& b) const;	
-        Spectrum& operator+=(const Spectrum& b);
-        Spectrum& operator-=(const Spectrum& b);
-        Spectrum& operator*=(const Spectrum& b);
-        Spectrum& operator/=(const Spectrum& b);
-
-        Spectrum operator+(float s) const;
-        Spectrum operator-(float s) const;
-        Spectrum operator*(float s) const;
-        Spectrum operator/(float s) const;
-        Spectrum& operator+=(float s);
-        Spectrum& operator-=(float s);
-        Spectrum& operator*=(float s);
-        Spectrum& operator/=(float s);*/
         
     private:
         float mIntensity[37];
@@ -78,10 +53,10 @@ namespace LumiereRenderer
         Attribute* aOutColor;
     };
 
-    Spectrum operator+(float s, Spectrum spectrum);
+   /* Spectrum operator+(float s, Spectrum spectrum);
     Spectrum operator-(float s, Spectrum spectrum);
     Spectrum operator*(float s, Spectrum spectrum);
     Spectrum operator/(float s, Spectrum spectrum);
 
-    Spectrum* RGBToSpectrum(float r, float g, float b);
+    Spectrum* RGBToSpectrum(float r, float g, float b);*/
 }

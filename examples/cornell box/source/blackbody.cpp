@@ -45,17 +45,17 @@ namespace LumiereRenderer
         delete mWoWavelength;
     }
 
-    float BlackBody::evaluateDir( RenderContext* rc )
+    float BlackBody::evaluateDir( RenderContext& rc )
     {
-        float wavelength = rc->GetInput( mWoWavelength ).asFloat();
-        float temperature = rc->GetInput( mTemperature ).asFloat();       
+        float wavelength = rc.getInput( mWoWavelength ).asFloat();
+        float temperature = rc.getInput( mTemperature ).asFloat();       
         return getRadiance(temperature, wavelength);
     }
 
-    float BlackBody::evaluateSample(RenderContext* rc)
+    float BlackBody::evaluateSample(RenderContext& rc)
     {	
-        float wavelength = rc->GetInput( mWoWavelength ).asFloat();
-        float temperature = rc->GetInput( mTemperature ).asFloat();
+        float wavelength = rc.getInput( mWoWavelength ).asFloat();
+        float temperature = rc.getInput( mTemperature ).asFloat();
         return getRadiance(temperature, wavelength);
     }
 

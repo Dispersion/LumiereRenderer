@@ -43,14 +43,14 @@ namespace LumiereRenderer
     {
     }
 
-    float PathTracer::trace( Ray& ray, RenderContext* rc )
+    float PathTracer::trace( Ray& ray, RenderContext& rc )
     {        
-        int rayDepth = rc->GetInput(RenderContext::TRACE_DEPTH).asInt();
+        int rayDepth = rc.getInput(RenderContext::TRACE_DEPTH).asInt();
 
         if (rayDepth == mMaxPathLength)
             return 0;
 
-        if ( !rc->GetSceneTracer()->intersect( ray, rc ) )
+        if ( !rc.getSceneTracer()->intersect( ray, rc ) )
         {			
             if ( rayDepth == 0 )
                 ray.alpha = 0;
@@ -62,12 +62,12 @@ namespace LumiereRenderer
 
         float radiance = 0;
 
-        Point3 surfacePosition = rc->GetInput( Shape::POSITION ).asPoint3();
-        Vector3 surfaceNormal = rc->GetInput( Shape::NORMAL ).asVector3();
-       // Shader* surfaceShader = static_cast<Shader*>(rc->GetInput( RenderContext::SHADER ).AsPointer());
-        Shader* surfaceShader = rc->GetInput( RenderContext::SHADER ).asShader();
-        rc->GetOutput(RenderContext::WO_WAVELENGTH).set( ray.wavelength );
-        rc->GetOutput(RenderContext::WI_WAVELENGTH).set( ray.wavelength );
+        Point3 surfacePosition = rc.getInput( Shape::POSITION ).asPoint3();
+        Vector3 surfaceNormal = rc.getInput( Shape::NORMAL ).asVector3();
+        Shader* surfaceShader = static_cast<Shader*>(rc.getInput( RenderContext::SHADER ).asPointer());
+        //Shader* surfaceShader = rc->GetInput( RenderContext::SHADER ).asShader();
+        rc.setOutput(RenderContext::WO_WAVELENGTH, ray.wavelength);
+        rc.setOutput(RenderContext::WI_WAVELENGTH, ray.wavelength);
 
 
             float directLight = false;
@@ -80,32 +80,31 @@ namespace LumiereRenderer
             // the point on the surface and the point on the emitter.
                      
             // Start by pushing a new context and sample the emitters in the scene.
-            rc->push();
-            if ( rc->GetScene()->sampleEmitters( rc ) )
+            rc.push();
+            if ( rc.getScene()->sampleEmitters( rc ) )
             {
-                emitterPosition = rc->GetInput( Shape::POSITION ).asPoint3();
+                emitterPosition = rc.getInput( Shape::POSITION ).asPoint3();
 
                 // Test if there are anything blocking the path between the emitter and the point on the surface we are shading
-                if( !rc->GetSceneTracer()->intersect( surfacePosition, emitterPosition ) )
+                if( !rc.getSceneTracer()->intersect( surfacePosition, emitterPosition ) )
                 {
                     directLight = true;
-                    Vector3 emitterNormal = rc->GetInput( Shape::NORMAL ).asVector3();
-                    Shader* emitterShader = rc->GetInput( RenderContext::SHADER ).asShader();
-                    float emitterPdf = rc->GetInput( RenderContext::PDF ).asFloat();          
+                    Vector3 emitterNormal = rc.getInput( Shape::NORMAL ).asVector3();
+                    Shader* emitterShader = rc.getInput( RenderContext::SHADER ).asShader();
+                    float emitterPdf = rc.getInput( RenderContext::PDF ).asFloat();          
 
-                    rc->GetOutput(RenderContext::WI_DIRECTION).set( Normalize(emitterPosition - surfacePosition) );
-                    rc->GetOutput(RenderContext::WO_WAVELENGTH).set( ray.wavelength );
+                    rc.setOutput(RenderContext::WI_DIRECTION, Normalize(emitterPosition - surfacePosition));
+                    rc.setOutput(RenderContext::WO_WAVELENGTH, ray.wavelength);
 
                     float emmittedRadiance = emitterShader->evaluateDir( rc );
                     radiance = G( surfacePosition, emitterPosition, surfaceNormal, emitterNormal ) * emmittedRadiance  / emitterPdf;
                 }
-
             }
-            rc->pop();
+            rc.pop();
 
             if( directLight )
             {
-                rc->GetOutput(RenderContext::WI_DIRECTION).set( Normalize(surfacePosition-emitterPosition) );
+                rc.setOutput(RenderContext::WI_DIRECTION, Normalize(surfacePosition-emitterPosition));
                 float surfaceRadiance = surfaceShader->evaluateDir( rc );
                 radiance *= surfaceRadiance;
             }

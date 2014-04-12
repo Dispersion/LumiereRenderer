@@ -111,27 +111,27 @@ namespace LumiereRenderer
         /// @param exposure Exposure is irradiance multiplied by shutterspeed in seconds.
         /// @param alpha Transparency of the first hit point.
         /// @param wavelength The wavelength of the ray of light.
-        virtual void SetExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext* rc) = 0;
+        virtual void setExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext& rc) = 0;
 
         /// Set the number of pixels on the width of the sensor.
         /// @param resolutionWidth The number of pixels.
-        void SetResolutionWidth(int resolutionWidth);
+        void setResolutionWidth(int resolutionWidth);
 
         /// Get the number of pixels on the width of the sensor.
         /// @return The number of pixels.
-        int GetResolutionWidth();
+        int getResolutionWidth();
 
         /// Set the number of pixels on the height of the sensor.
         /// @param resolutionHeight The number of pixels.
-        void SetResolutionHeight(int resolutionHeight);
+        void setResolutionHeight(int resolutionHeight);
 
         /// Get the number of pixels on the height of the sensor.
         /// @return The number of pixels.
-        int GetResolutionHeight();
+        int getResolutionHeight();
 
-        virtual void evaluate( Attribute* attr, RenderContext* rc ) = 0;
+        virtual void evaluate( Attribute* attr, RenderContext& rc ) = 0;
 
-        virtual ImageSensor::Pixel* Data() = 0;
+        virtual ImageSensor::Pixel* getData() = 0;
 
     protected:        	
         /// The number of pixels on the ???

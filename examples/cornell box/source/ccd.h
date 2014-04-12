@@ -68,12 +68,12 @@ namespace LumiereRenderer
         /// @param exposure Exposure is irradiance multiplied by shutterspeed in seconds.
         /// @param alpha Transparency of the first hit point.
         /// @param wavelength The wavelength of the ray of light.
-        virtual void SetExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext* rc);
+        virtual void setExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext& rc);
         
-        void evaluate( Attribute*, RenderContext* rc );
+        void evaluate( Attribute*, RenderContext& rc );
 
-        virtual Pixel* Data();
-        void Clear();
+        virtual Pixel* getData();
+        void clear();
 
     private:
         Attribute* mRed;

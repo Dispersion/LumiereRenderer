@@ -38,8 +38,8 @@ namespace LumiereRenderer
 		BlackBody();
 		~BlackBody(void);
 
-        float evaluateDir( RenderContext* rc );
-        float evaluateSample( RenderContext* rc );
+        float evaluateDir( RenderContext& rc );
+        float evaluateSample( RenderContext& rc );
 
 		bool isEmitter();
 	private:

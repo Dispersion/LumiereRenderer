@@ -82,7 +82,7 @@ namespace LumiereRenderer
         mNextDataAvailable = 0;
     }
 
-    DataHandle RenderContext::GetInput(Attribute* attribute)
+    DataHandle RenderContext::getInput(Attribute* attribute)
     {
         Attribute* connection = attribute->getConnection();
 
@@ -91,7 +91,7 @@ namespace LumiereRenderer
         {
             // We have a connection to something, so let us find out if
             // the result is cached.
-            int index = Find(connection);
+            int index = find(connection);
             if ( index != -1 )
             {
                 return DataHandle( this, index );
@@ -100,8 +100,8 @@ namespace LumiereRenderer
             {   
                 if (connection->getOwner())
                 {
-                    connection->getOwner()->evaluate( connection, this );
-                    index = Find( connection );
+                    connection->getOwner()->evaluate( connection, *this );
+                    index = find( connection );
                     if ( index != -1 )
                     {
                         return DataHandle( this, index );
@@ -112,9 +112,9 @@ namespace LumiereRenderer
                     // We have a connection to one of the default attributes
                     // We have to send the request to the shape to get the result.
 
-                    index = Find(SHAPE);
-                    (static_cast<Shape**>(GetData(index)))[0]->evaluate( connection, this );
-                    index = Find( connection );
+                    index = find(SHAPE);
+                    (static_cast<Shape**>(getData(index)))[0]->evaluate( connection, *this );
+                    index = find( connection );
                     if ( index != -1 )
                     {
                         return DataHandle( this, index );
@@ -124,7 +124,7 @@ namespace LumiereRenderer
         }
 
         // The attribute did not have any connection, so we will use the default value.
-        int index = Find(attribute);
+        int index = find(attribute);
         if ( index != -1 )
         {
             // The attribute value have already been calculated, we just have to return it.
@@ -134,47 +134,183 @@ namespace LumiereRenderer
         {
             // We have to find out if it is a value such as position or normal, that is computed by
             // the shape.
-            index = Find(SHAPE);
-            (static_cast<Shape**>(GetData(index)))[0]->evaluate( attribute, this );
-            index = Find( attribute );
-            if ( index != -1 )
+            index = find(SHAPE);
+            if( index != -1)
             {
-                return DataHandle( this, index );
+                (static_cast<Shape**>(getData(index)))[0]->evaluate( attribute, *this );
+                index = find( attribute );
+                if ( index != -1 )
+                {
+                    return DataHandle( this, index );
+                }
             }
-            else
-            {
-                // Since the shape could not calculate the value of this attribute, we use
-                // the default value of the attribute.
-                index = Allocate(attribute);
-                memcpy(mData+index, attribute->getDefaultValue(), attribute->getSize());
-                return DataHandle(this, index);
-            }
+
+            // Since the shape could not calculate the value of this attribute, we use
+            // the default value of the attribute.
+            index = allocate(attribute);
+            memcpy(mData+index, attribute->getDefaultValue(), attribute->getSize());
+            return DataHandle(this, index);
+
         }
     }
 
-    DataHandle RenderContext::GetOutput(Attribute* attribute)
+    /*DataHandle RenderContext::getOutput(Attribute* attribute)
     {
-        int index = Find(attribute);
+        int index = find(attribute);
 
         if( index == -1 )
         {
-            index = Allocate(attribute);
+            index = allocate(attribute);
+        }
+
+        return DataHandle(this, index);   
+    }*/
+
+
+    void RenderContext::setOutput(Attribute* attribute, int value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(int));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, float value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(float));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, double value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(double));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, char value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(char));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, bool value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(bool));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, Vector3 value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(Vector3));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, Vector4 value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(Vector4));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, Point3 value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(Point3));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, Matrix value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(Matrix));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, void* value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(void*));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, Shader* value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(Shader*));
+    }
+
+    void RenderContext::setOutput(Attribute* attribute, Shape* value)
+    {
+        int index = find(attribute);
+        if( index == -1 )
+        {
+            index = allocate(attribute);
+        }
+        setData(index, &value, sizeof(Shape*));
+    }
+
+
+    DataHandle RenderContext::operator[](Attribute* attribute)
+    {
+       int index = find(attribute);
+
+        if( index == -1 )
+        {
+            index = allocate(attribute);
         }
 
         return DataHandle(this, index);   
     }
 	
-    void* RenderContext::GetData(int index)
+    void* RenderContext::getData(int index)
     {
         return &mData[index];
     }
 
-    void RenderContext::SetData(int index, void* data, size_t size)
+    void RenderContext::setData(int index, void* data, size_t size)
     {
         memcpy(mData+index, data, size);
     }
 
-    void RenderContext::ResizeBuffer( size_t size )
+    void RenderContext::resizeBuffer( size_t size )
     {
         if( size > mBufferSize )
         {            
@@ -190,7 +326,7 @@ namespace LumiereRenderer
         }
     }
 
-    void RenderContext::ResizeHandles( size_t size )
+    void RenderContext::resizeHandles( size_t size )
     {
         if( size > mHandlesSize )
         {            
@@ -206,7 +342,7 @@ namespace LumiereRenderer
         }
     }
 
-    int RenderContext::Find( Attribute* attribute)
+    int RenderContext::find( Attribute* attribute)
     {
         for(int n = mCurrentBlock; n < mNextAvailable; n += 2)
         {
@@ -219,9 +355,9 @@ namespace LumiereRenderer
         return -1;
     }
 
-    int RenderContext::Allocate( Attribute* attribute )
+    int RenderContext::allocate( Attribute* attribute )
     {
-        ResizeHandles( mNextAvailable + 2 );
+        resizeHandles( mNextAvailable + 2 );
 
         int index = mNextDataAvailable;
         mHandles[mNextAvailable++] = reinterpret_cast<int>(attribute);
@@ -231,13 +367,13 @@ namespace LumiereRenderer
 
         // If we are going to use more memory than allocated for the
         // data buffer, we have to resize it.
-        ResizeBuffer( mNextDataAvailable );
+        resizeBuffer( mNextDataAvailable );
         return index;
     }
 
     void RenderContext::push()
     {
-        ResizeHandles( mNextAvailable + 1 );
+        resizeHandles( mNextAvailable + 1 );
         mHandles[mNextAvailable] = mCurrentBlock;
         mCurrentBlock = ++mNextAvailable;
     }
@@ -252,7 +388,7 @@ namespace LumiereRenderer
         mCurrentBlock = mHandles[mCurrentBlock-1];
     }
 
-    float RenderContext::Trace( Ray& ray )
+    float RenderContext::trace( Ray& ray )
     {        
         // When the trace function is called, we send the request to the integrator,
         // but first we have to push the current shader onto the shader stack. The
@@ -271,7 +407,7 @@ namespace LumiereRenderer
         {
            // mShaderStack->push( mHitPoint->shader );
            //Shader* shader = static_cast<Shader*>(GetInput( RenderContext::SHADER ).AsPointer());
-            Shader* shader = GetInput( RenderContext::SHADER ).asShader();
+            Shader* shader = getInput( RenderContext::SHADER ).asShader();
             mShaderStack.push( shader );
         }
 
@@ -285,13 +421,13 @@ namespace LumiereRenderer
         }
 
 
-        int rayDepth = GetInput(TRACE_DEPTH).asInt();
+        int rayDepth = getInput(TRACE_DEPTH).asInt();
         // Use the assigned integrator, to trace the ray.
         this->push();
 
-        GetOutput(TRACE_DEPTH).set(rayDepth+1);
+        setOutput(TRACE_DEPTH, rayDepth+1);
 
-        float radiance = mIntegrator->trace( ray, this );
+        float radiance = mIntegrator->trace( ray, *this );
         this->pop();
 
         // Some shaders can shoot out more than one ray, e.g. a glass shader could shoot 
@@ -329,22 +465,22 @@ namespace LumiereRenderer
         return mShaderStack.top();
     }
 
-    Camera* RenderContext::GetCamera()
+    Camera* RenderContext::getCamera()
     {
         return mCamera;
     }
 
-    Scene* RenderContext::GetScene()
+    Scene* RenderContext::getScene()
     {
         return mScene;
     }
 
-    SceneTracer* RenderContext::GetSceneTracer()
+    SceneTracer* RenderContext::getSceneTracer()
     {
         return mSceneTracer;
     }
 
-    Integrator* RenderContext::GetIntegrator()
+    Integrator* RenderContext::getIntegrator()
     {
         return mIntegrator;
     }

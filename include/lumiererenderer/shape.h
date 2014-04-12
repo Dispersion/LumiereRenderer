@@ -86,11 +86,11 @@ namespace LumiereRenderer
 		    ///
             /// @param[in] attr  The attribute we want to find the value of.
 		    /// @param[in] rc    The RenderContext is used to get values from incomming attributes.
-            virtual void evaluate( Attribute* attr, RenderContext* rc ) = 0;
+            virtual void evaluate( Attribute* attr, RenderContext& rc ) = 0;
         
 		    ///
             /// @param[in] rc    The RenderContext is used to get values from incomming attributes.
-		    virtual void                Sample( RenderContext* rc ) = 0;
+		    virtual void                Sample( RenderContext& rc ) = 0;
 	
             /// 
             static Attribute*           POSITION;

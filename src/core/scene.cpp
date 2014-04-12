@@ -51,7 +51,7 @@ namespace LumiereRenderer
         mShapes.push_back(shape);
     }
 
-    bool Scene::sampleEmitters(RenderContext* rc) const
+    bool Scene::sampleEmitters(RenderContext& rc) const
     {
         if (mEmitters.empty())
             return false;
@@ -59,8 +59,10 @@ namespace LumiereRenderer
         int i = static_cast<int>(floor(Random() * (mEmitters.size()-1)+0.5));
         
         mEmitters[i]->Sample( rc );       
-        DataHandle pdf = rc->GetInput( RenderContext::PDF );
-        pdf.set( pdf.asFloat() / mEmitters.size() );
+        DataHandle pdf = rc.getInput( RenderContext::PDF );
+        //pdf.set( pdf.asFloat() / mEmitters.size() );
+
+        rc.setOutput(RenderContext::PDF, pdf.asFloat() / mEmitters.size());
 
         return true;
     }

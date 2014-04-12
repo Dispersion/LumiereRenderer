@@ -68,7 +68,7 @@ namespace LumiereRenderer
 
         mSamples = new unsigned int[ resolutionWidth * resolutionHeight ];
         mImage = new Pixel[resolutionWidth * resolutionHeight];
-        Clear();        
+        clear();        
     }
 
     CCD::~CCD(void)
@@ -83,11 +83,11 @@ namespace LumiereRenderer
         return _sample;
     }
 
-    void CCD::SetExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext* rc)
+    void CCD::setExposure(unsigned int i, unsigned int j, float exposure, float alpha, RenderContext& rc)
     {
-        float red = rc->GetInput( mRed ).asFloat();
-        float green = rc->GetInput( mGreen ).asFloat();
-        float blue = rc->GetInput( mBlue ).asFloat();
+        float red = rc.getInput( mRed ).asFloat();
+        float green = rc.getInput( mGreen ).asFloat();
+        float blue = rc.getInput( mBlue ).asFloat();
 
         Vector3 c = std::max(0.0f, exposure) * Vector3( red, green, blue ) * 255;
 
@@ -114,16 +114,16 @@ namespace LumiereRenderer
         mSamples[j * mResolutionWidth + i]++;
     }
 
-	void CCD::evaluate( Attribute* attr, RenderContext* rc )
+	void CCD::evaluate( Attribute* attr, RenderContext& rc )
 	{
 	}
 
-	CCD::Pixel* CCD::Data()
+	CCD::Pixel* CCD::getData()
 	{
 		return &mImage[0];
 	}
     
-    void CCD::Clear()
+    void CCD::clear()
     {
         for(int i = 0; i < mResolutionWidth; i++)
         {

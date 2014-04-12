@@ -69,8 +69,8 @@ namespace LumiereRenderer
         Triangle(Vertex v0, Vertex v1, Vertex v2);
         ~Triangle(void);
         bool Intersect(Ray& Ray);
-        void evaluate( Attribute* attr, RenderContext* rc );
-        void Sample(RenderContext* rc);
+        void evaluate( Attribute* attr, RenderContext& rc );
+        void Sample(RenderContext& rc);
 
         Vertex v0, v1, v2;
 

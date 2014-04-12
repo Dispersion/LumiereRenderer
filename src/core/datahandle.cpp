@@ -42,124 +42,64 @@ namespace LumiereRenderer
     {
     }
 
-    void DataHandle::set(int value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(int));
-    }
-
-    void DataHandle::set(float value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(float));
-    }
-
-    void DataHandle::set(double value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(double));
-    }
-
-    void DataHandle::set(char value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(char));
-    }
-
-    void DataHandle::set(bool value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(bool));
-    }
-
-    void DataHandle::set(Vector3 value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(Vector3));
-    }
-
-    void DataHandle::set(Vector4 value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(Vector4));
-    }
-
-    void DataHandle::set(Point3 value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(Point3));
-    }
-
-    void DataHandle::set(Matrix value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(Matrix));
-    }
-
-  /*  void DataHandle::set(void* value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(void*));
-    }*/
-
-    void DataHandle::set(Shader* value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(Shader*));
-    }
-
-    void DataHandle::set(Shape* value)
-    {
-        mRenderContext->SetData(mIndex, &value, sizeof(Shape*));
-    }
-
     float DataHandle::asFloat()
     {    
-        return (static_cast<float*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<float*>(mRenderContext->getData(mIndex)))[0];
     }
 
     int DataHandle::asInt()
     {
-        return (static_cast<int*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<int*>(mRenderContext->getData(mIndex)))[0];
     }
 
     double DataHandle::asDouble()
     {
-        return (static_cast<double*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<double*>(mRenderContext->getData(mIndex)))[0];
     }
 
     char DataHandle::asChar()
     {
-        return (static_cast<char*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<char*>(mRenderContext->getData(mIndex)))[0];
     }
 
     bool DataHandle::asBool()
     {
-        return (static_cast<bool*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<bool*>(mRenderContext->getData(mIndex)))[0];
     }
 
     Vector3 DataHandle::asVector3()
     {
-        return (static_cast<Vector3*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<Vector3*>(mRenderContext->getData(mIndex)))[0];
     }
 
     Vector4 DataHandle::asVector4()
     {
-        return (static_cast<Vector4*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<Vector4*>(mRenderContext->getData(mIndex)))[0];
     }
 
     Point3 DataHandle::asPoint3()
     {
-        return (static_cast<Point3*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<Point3*>(mRenderContext->getData(mIndex)))[0];
     }
 
     Matrix DataHandle::asMatrix()
     {
-        return (static_cast<Matrix*>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<Matrix*>(mRenderContext->getData(mIndex)))[0];
     }
 
-   /* void* DataHandle::asPointer()
+    void* DataHandle::asPointer()
     {
-        return mRenderContext->GetData(mIndex);
-    }*/
+        return (static_cast<void**>(mRenderContext->getData(mIndex)))[0];
+    }
     
     Shader* DataHandle::asShader()
     {
-        return (static_cast<Shader**>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<Shader**>(mRenderContext->getData(mIndex)))[0];
     }
 
     Shape* DataHandle::asShape()
     {
-        return (static_cast<Shape**>(mRenderContext->GetData(mIndex)))[0];
+        return (static_cast<Shape**>(mRenderContext->getData(mIndex)))[0];
     }
 
 }

@@ -41,22 +41,22 @@ namespace LumiereRenderer
 	{
 	}
 
-	void ImageSensor::SetResolutionWidth(int resolutionWidth)
+	void ImageSensor::setResolutionWidth(int resolutionWidth)
 	{
 		mResolutionWidth = resolutionWidth;
 	}
 
-	int ImageSensor::GetResolutionWidth()
+	int ImageSensor::getResolutionWidth()
 	{
 		return mResolutionWidth;
 	}
 
-	void ImageSensor::SetResolutionHeight(int resolutionHeight)
+	void ImageSensor::setResolutionHeight(int resolutionHeight)
 	{
 		mResolutionHeight = resolutionHeight;
 	}
 
-	int ImageSensor::GetResolutionHeight()
+	int ImageSensor::getResolutionHeight()
 	{
 		return mResolutionHeight;
 	}

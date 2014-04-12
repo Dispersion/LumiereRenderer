@@ -51,6 +51,6 @@ namespace LumiereRenderer
             SceneTracer();
             virtual ~SceneTracer(void);
             virtual bool intersect(const Point3 from, const Point3 to) = 0;
-            virtual bool intersect(Ray& Ray, RenderContext* rc) = 0;
+            virtual bool intersect(Ray& Ray, RenderContext& rc) = 0;
     };
 }

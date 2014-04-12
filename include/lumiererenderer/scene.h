@@ -59,11 +59,8 @@ namespace LumiereRenderer
 		    Scene(void);
 		    virtual ~Scene(void);
 		    virtual void addShape(Shape* shape);
-            virtual bool sampleEmitters(RenderContext* rc) const;
+            virtual bool sampleEmitters(RenderContext& rc) const;
             virtual SceneTracer* getSceneTracer() = 0;		
-
-		    //virtual bool Trace(const Point3 from, const Point3 to) = 0;
-            //virtual bool Trace(Ray& Ray, RenderContext* rc) = 0;
 
     protected:
             std::vector<Shape*>         mShapes; 

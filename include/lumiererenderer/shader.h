@@ -58,14 +58,14 @@ namespace LumiereRenderer
             /// Evaluate the light comming from wi.
             /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
             /// @return Radiance.
-            virtual float evaluateDir( RenderContext* rc ) = 0;
+            virtual float evaluateDir( RenderContext& rc ) = 0;
         
             /// Sample a direction wi towards the light source and evaluate the radiance comming from 
             /// wi going in the direction of wo. 
             /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
-            virtual float evaluateSample( RenderContext* rc ) = 0;
+            virtual float evaluateSample( RenderContext& rc ) = 0;
 
-            virtual void evaluate( Attribute* attribute, RenderContext* rc ) {}
+            virtual void evaluate( Attribute* /*attribute*/, RenderContext& /*rc*/ ) {}
            
             /// If a material is used as a light source, this function should return true.
             virtual bool isEmitter();

@@ -38,12 +38,12 @@ namespace LumiereRenderer
         Diffuse();
         ~Diffuse(void);
 
-        float evaluateDir( RenderContext* rc );
+        float evaluateDir( RenderContext& rc );
         
         /// Sample a direction wi towards the light source and evaluate the radiance comming from 
         /// wi going in the direction of wo. 
         /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
-        float evaluateSample( RenderContext* rc );
+        float evaluateSample( RenderContext& rc );
 
     private:
         Attribute* mPosition;

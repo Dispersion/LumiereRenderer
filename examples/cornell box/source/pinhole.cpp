@@ -43,19 +43,13 @@ namespace LumiereRenderer
         mFocalLength = focalLength;
         mAperture = aperture*0.5f;
         mShutterSpeed = shutterSpeed;
-
-
-//		AddAttribute( mAperture );
-
- //       mExposure = new AttributeValue<float>("Exposure", 0);
-//        AddAttribute( mExposure );
     }
 
     Pinhole::~Pinhole()
     {
     }
 
-    void Pinhole::trace( unsigned int i, unsigned int j, RenderContext* rc )
+    void Pinhole::trace( unsigned int i, unsigned int j, RenderContext& rc )
     {
 		ImageSensor::Sample imageSensorSample = mImageSensor->sample( i,j );
 
@@ -74,84 +68,20 @@ namespace LumiereRenderer
         
         ray.t = INFINITY;
 
-        rc->GetOutput( RenderContext::TRACE_DEPTH ).set( -1 );
-        rc->GetOutput( RenderContext::WO_WAVELENGTH ).set( imageSensorSample.wavelength );
+        rc.setOutput(RenderContext::TRACE_DEPTH, -1);
+        rc.setOutput(RenderContext::WO_WAVELENGTH, imageSensorSample.wavelength);
     
         float pdf = 1.0f / ( PI*mAperture*mAperture );
         float g = G( imageSensorSample.position, pointOnAperture, Vector3( 0, 0, -1 ), Vector3( 0, 0, 1) );
         float time = mShutterSpeed;
-        float exposure = ( ( time * g ) / pdf ) * rc->Trace( ray );
+        float exposure = ( ( time * g ) / pdf ) * rc.trace( ray );
 
-        mImageSensor->SetExposure( i, j, exposure, ray.alpha, rc );
+        mImageSensor->setExposure( i, j, exposure, ray.alpha, rc );
     }
 
-    void Pinhole::evaluate( Attribute* attr, RenderContext* rc )
+    void Pinhole::evaluate( Attribute* attr, RenderContext& rc )
     {
-		/*if( attr == aAperture )
-        {
-			DataHandle outColor = rc->GetOutput(aAperture);
-            outColor.Set( mAperture );
-		}
-
-		if( attr == aFocalLength )
-        {
-			DataHandle outColor = rc->GetOutput(aFocalLength);
-            outColor.Set( mFocalLength );
-		}
-
-		if( attr == aShutterSpeed )
-        {
-			DataHandle outColor = rc->GetOutput(aShutterSpeed);
-            outColor.Set( mShutterSpeed );
-		}*/
-
-        			
-/*		Point3 pointOnSensor = rc->GetInput( mPointOnSensor ).AsPoint3();
-        
-		Point3 pointOnAperture;
-        if ( mAperture > 0 )
-        {
-            pointOnAperture = SampleDisc(Random(), Random()) * mAperture;
-        }
-		
-	*/	
-		//float shutterSpeed = rc->GetInput( mShutterSpeed ).AsFloat();
-        //float aperture = rc->GetInput( mAperture ).AsFloat();
-        //float focalLength = rc->GetInput( mFocalLength ).AsFloat();
-        //float wavelength = rc->GetInput( mWavelength ).AsFloat();
-
-        //Point3 pointOnAperture;
-        //if ( mAperture > 0 )
-        //{
-        //    pointOnAperture = SampleDisc() * mAperture;
-        //}
-
-        //pointOnSensor.z = focalLength;
-
-        //Ray ray = Ray( pointOnSensor, pointOnAperture );
-        //ray.origin = pointOnAperture;
-        //ray.wavelength = wavelength;
-        //ray.t = INFINITY;
-        //ray.depth = 0;    
-
-        //// Transform ray with camera transformation.
-        //ray = mTransform * ray;
-
-     
-
-
-
-        //float pdf = 1.0f / ( PI*mAperture*mAperture );
-        //
-        //
-        //
-        //float g = G( pointOnSensor, pointOnAperture, Vector3( 0, 0, -1 ), Vector3( 0, 0, 1) );
-
-
-        //
-
-        //float exposure = ( ( shutterSpeed * g ) / pdf ) * rc->Trace( ray );
-        //rc->GetOutput( mExposure ).Set( exposure );
+        // Todo	
 	}
 
     void Pinhole::setFocalLength(float length)

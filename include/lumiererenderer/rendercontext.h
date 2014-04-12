@@ -57,17 +57,31 @@ namespace LumiereRenderer
             ~RenderContext();
 
             void clear();
-            DataHandle GetInput(Attribute* attribute);
-            DataHandle GetOutput(Attribute* attribute);
-  
-            float Trace( Ray& ray );            
+            DataHandle getInput(Attribute* attribute);
+
+            void setOutput(Attribute* attribute, int value);
+            void setOutput(Attribute* attribute, float value);
+            void setOutput(Attribute* attribute, double value);
+            void setOutput(Attribute* attribute, char value);
+            void setOutput(Attribute* attribute, bool value);
+            void setOutput(Attribute* attribute, Vector3 value);
+            void setOutput(Attribute* attribute, Vector4 value);
+            void setOutput(Attribute* attribute, Point3 value);
+            void setOutput(Attribute* attribute, Matrix value);
+            void setOutput(Attribute* attribute, void* value);
+            void setOutput(Attribute* attribute, Shader* value);
+            void setOutput(Attribute* attribute, Shape* value);
+
+            DataHandle operator[](Attribute* attribute);
+
+            float trace( Ray& ray );            
             Shader* getCurrenShader();
 
-            Camera* GetCamera();
-            Scene* GetScene();
-            SceneTracer* GetSceneTracer();
-            Integrator* GetIntegrator();
-           
+            Camera* getCamera();
+            Scene* getScene();
+            SceneTracer* getSceneTracer();
+            Integrator* getIntegrator();
+
             /// The direction of the current ray.
             static Attribute*           WI_DIRECTION;
             
@@ -117,12 +131,12 @@ namespace LumiereRenderer
                         void push();
             void pop();
     private:
-		    void* GetData(int index);
-		    void SetData(int index, void* data, size_t size);
-            void ResizeBuffer(size_t size);
-            void ResizeHandles(size_t size);
-            int  Find( Attribute* attribute );
-            int  Allocate( Attribute* attribute );
+		    void* getData(int index);
+		    void setData(int index, void* data, size_t size);
+            void resizeBuffer(size_t size);
+            void resizeHandles(size_t size);
+            int  find( Attribute* attribute );
+            int  allocate( Attribute* attribute );
 
 
 

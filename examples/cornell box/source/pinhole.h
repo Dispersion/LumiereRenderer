@@ -52,10 +52,10 @@ namespace LumiereRenderer
             
         /// Trace the scene from the camera.
         /// 
-        void trace( unsigned int i, unsigned int j, RenderContext* rc );
+        void trace( unsigned int i, unsigned int j, RenderContext& rc );
 
         ///
-		void evaluate( Attribute* attr, RenderContext* rc );
+		void evaluate( Attribute* attr, RenderContext& rc );
 
         /// Set the focal length to a new value.
         /// @param length The distance from the image sensor to the pinhole, given in meters.

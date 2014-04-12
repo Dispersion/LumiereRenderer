@@ -24,13 +24,13 @@ void Render(RenderContext* rc, Camera* camera)
         for (int i = 0; i < canvasWidth; i++)
         {                                
             rc->clear();
-            /*image[j*canvasWidth+i] = */camera->trace(i, j, rc);
+            /*image[j*canvasWidth+i] = */camera->trace(i, j, *rc);
             
             //rc->pop();
             //rc->push();
         }		
 
-		UpdatePixels(camera->getImageSensor()->Data());
+		UpdatePixels(camera->getImageSensor()->getData());
         RefreshCanvas();
 
     }

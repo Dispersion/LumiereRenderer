@@ -48,26 +48,26 @@ namespace LumiereRenderer
     {
     }
 
-    float Diffuse::evaluateDir( RenderContext* rc )
+    float Diffuse::evaluateDir( RenderContext& rc )
     {
-        return rc->GetInput( mReflectance ).asFloat() / PI;
+        return rc.getInput( mReflectance ).asFloat() / PI;
     }
 
-    float Diffuse::evaluateSample( RenderContext* rc )
+    float Diffuse::evaluateSample( RenderContext& rc )
     {
         float pdf;
 
-        Point3 P  = rc->GetInput( mPosition ).asPoint3();
-        Vector3 N = rc->GetInput( mNormal ).asVector3();
-        float wavelength = rc->GetInput( mWoWavelength ).asFloat();
-        float reflectance = rc->GetInput( mReflectance ).asFloat() / PI;
-        Matrix ShaderToWorld = rc->GetInput( mShaderToWorld ).asMatrix();
+        Point3 P  = rc.getInput( mPosition ).asPoint3();
+        Vector3 N = rc.getInput( mNormal ).asVector3();
+        float wavelength = rc.getInput( mWoWavelength ).asFloat();
+        float reflectance = rc.getInput( mReflectance ).asFloat() / PI;
+        Matrix ShaderToWorld = rc.getInput( mShaderToWorld ).asMatrix();
 
         Vector3 dir = ShaderToWorld * SampleCosineHemisphere( pdf );
 
         Ray wi = Ray(P, dir, wavelength);        
         wi.origin = wi.origin + wi.direction * EPSILON*10;
 
-        return (reflectance * rc->Trace(wi) * Dot(wi.direction, N)) / pdf;
+        return (reflectance * rc.trace(wi) * Dot(wi.direction, N)) / pdf;
     }
 }
