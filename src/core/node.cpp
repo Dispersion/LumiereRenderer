@@ -48,23 +48,23 @@ namespace LumiereRenderer
 
         if (name.compare("Position") == 0 )
         {
-            attribute->connect( Shape::POSITION );
+            attribute->connect( RenderContext::POSITION );
         } 
         else if (name.compare("Normal") == 0 )
         {
-            attribute->connect( Shape::NORMAL );
+            attribute->connect( RenderContext::NORMAL );
         }
         else if (name.compare("Binormal") == 0 )
         {
-            attribute->connect( Shape::BINORMAL );
+            attribute->connect( RenderContext::BINORMAL );
         }
         else if (name.compare("Tangent") == 0 )
         {
-            attribute->connect( Shape::TANGENT );
+            attribute->connect( RenderContext::TANGENT );
         }
         else if (name.compare("Texcoord") == 0 )
         {
-            attribute->connect( Shape::TEXCOORD );
+            attribute->connect( RenderContext::TEXCOORD );
         }
         else if (name.compare("WiDirection") == 0 )
         {
@@ -116,11 +116,11 @@ namespace LumiereRenderer
         }*/
         else if ( name.compare("WorldToShader") == 0 )
         {
-            attribute->connect( Shape::WORLD_TO_SHADER );
+            attribute->connect( RenderContext::WORLD_TO_SHADER );
         }
         else if ( name.compare("ShaderToWorld") == 0 )
         {
-            attribute->connect( Shape::SHADER_TO_WORLD );
+            attribute->connect( RenderContext::SHADER_TO_WORLD );
         }
 
         mAttributes[attribute->getName()] = attribute;

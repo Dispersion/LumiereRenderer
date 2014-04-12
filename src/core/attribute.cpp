@@ -32,13 +32,7 @@
 
 namespace LumiereRenderer
 {
-    Attribute::Attribute()
-    {
-        mConnection = NULL;
-        mOwner = NULL;
-        mReadable = true;
-        mWriteable = true;
-    }
+    
 
     Attribute::~Attribute(void)
     {
@@ -63,9 +57,20 @@ namespace LumiereRenderer
         return mName;
     }
 
-    void* Attribute::getDefaultValue() const
+    /** Attribute::getDefaultValue() const
     {
         return mDefaultValue;
+    }*/
+
+
+    void* Attribute::getDefaultValue() const
+    {
+        return mAttribute->getValue();
+    }
+
+    size_t Attribute::getSize() const    
+    {
+        return mAttribute->getSize();
     }
 
     void Attribute::connect(Attribute* attribute)

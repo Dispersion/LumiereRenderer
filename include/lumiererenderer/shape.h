@@ -93,13 +93,7 @@ namespace LumiereRenderer
 		    virtual void                Sample( RenderContext& rc ) = 0;
 	
             /// 
-            static Attribute*           POSITION;
-            static Attribute*           NORMAL;
-            static Attribute*           BINORMAL;
-            static Attribute*           TANGENT;
-            static Attribute*           TEXCOORD;
-		    static Attribute*           WORLD_TO_SHADER;
-            static Attribute*           SHADER_TO_WORLD;
+
 
 	protected:
             Shader*                     mShader;

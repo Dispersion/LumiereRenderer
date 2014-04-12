@@ -29,7 +29,6 @@
 
 #include "ccd.h"
 #include <lumiererenderer\random.h>
-#include <lumiererenderer\attributevalue.h>
 
 #include <iostream>
 

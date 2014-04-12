@@ -31,7 +31,6 @@
 #include <lumiererenderer\sampler.h>
 #include <lumiererenderer\linearalgebra.h>
 #include <lumiererenderer\constants.h>
-#include <lumiererenderer\attributevalue.h>
 
 namespace LumiereRenderer
 {

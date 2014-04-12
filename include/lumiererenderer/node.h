@@ -29,7 +29,7 @@
 
 #pragma once
 
-#include <lumiererenderer\AttributeValue.h>
+#include <lumiererenderer\Attribute.h>
 #include <lumiererenderer\RenderContext.h>
 #include <map>
 #include <string>
@@ -87,7 +87,7 @@ namespace LumiereRenderer
 		    template<class T>
 		    Attribute* createAttribute(const char* name, T value)
 		    {
-			    Attribute* attribute = new AttributeValue<T>(name, value);
+			    Attribute* attribute = new Attribute(name, value);
 			    addAttribute(attribute);
 			    return attribute;
 		    }

@@ -59,6 +59,7 @@ namespace LumiereRenderer
             void clear();
             DataHandle getInput(Attribute* attribute);
 
+
             void setOutput(Attribute* attribute, int value);
             void setOutput(Attribute* attribute, float value);
             void setOutput(Attribute* attribute, double value);
@@ -81,6 +82,14 @@ namespace LumiereRenderer
             Scene* getScene();
             SceneTracer* getSceneTracer();
             Integrator* getIntegrator();
+
+                                    static Attribute*           POSITION;
+            static Attribute*           NORMAL;
+            static Attribute*           BINORMAL;
+            static Attribute*           TANGENT;
+            static Attribute*           TEXCOORD;
+		    static Attribute*           WORLD_TO_SHADER;
+            static Attribute*           SHADER_TO_WORLD;
 
             /// The direction of the current ray.
             static Attribute*           WI_DIRECTION;

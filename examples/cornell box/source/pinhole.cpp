@@ -32,7 +32,6 @@
 #include <lumiererenderer\constants.h>
 #include <lumiererenderer\integrator.h>
 #include <lumiererenderer\radiometry.h>
-#include <lumiererenderer\attributevalue.h>
 #include <lumiererenderer\random.h>
 #include <iostream>
 

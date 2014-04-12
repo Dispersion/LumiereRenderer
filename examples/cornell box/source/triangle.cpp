@@ -125,27 +125,27 @@ namespace LumiereRenderer
 
     void Triangle::evaluate( Attribute* attr, RenderContext& rc )
     { 
-        if( attr == Shape::POSITION )
+        if( attr == RenderContext::POSITION )
         {
             Point3 rayOrigin = rc.getInput(RenderContext::RAY_ORIGIN).asPoint3();
             Vector3 rayDirection = rc.getInput(RenderContext::RAY_DIRECTION).asVector3();
             float rayLength = rc.getInput(RenderContext::RAY_LENGTH).asFloat();
             Point3 position = rayDirection * rayLength + rayOrigin;
-            rc.setOutput(Shape::POSITION, position);
+            rc.setOutput(RenderContext::POSITION, position);
         }
-        else if( attr == Shape::NORMAL )
+        else if( attr == RenderContext::NORMAL )
         {
             Vector3 rayBarycentric = rc.getInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).asVector3();
             Vector3 normal = Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal);
-            rc.setOutput(Shape::NORMAL, normal); 
+            rc.setOutput(RenderContext::NORMAL, normal); 
         }
-        else if( attr == Shape::TEXCOORD )
+        else if( attr == RenderContext::TEXCOORD )
         {
             Vector3 rayBarycentric = rc.getInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).asVector3();
             Vector3 texcoord = rayBarycentric.z * v0.texcoord + rayBarycentric.x * v1.texcoord + rayBarycentric.y * v2.texcoord;
-            rc.setOutput(Shape::TEXCOORD, texcoord);
+            rc.setOutput(RenderContext::TEXCOORD, texcoord);
         }
-        else if ( attr == Shape::SHADER_TO_WORLD )
+        else if ( attr == RenderContext::SHADER_TO_WORLD )
         {
             Vector3 rayBarycentric = rc.getInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).asVector3();
             Vector3 n = Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal);
@@ -154,9 +154,9 @@ namespace LumiereRenderer
             t = Cross(b,n);
             
             Matrix m( t.x, b.x, n.x, 0, t.y, b.y, n.y, 0, t.z, b.z, n.z, 0, 0, 0, 0, 1 );
-            rc.setOutput(Shape::SHADER_TO_WORLD, m);
+            rc.setOutput(RenderContext::SHADER_TO_WORLD, m);
         }
-        else if ( attr == Shape::WORLD_TO_SHADER )
+        else if ( attr == RenderContext::WORLD_TO_SHADER )
         {
             Vector3 rayBarycentric = rc.getInput(RenderContext::RAY_BARYCENTRIC_COORDINATES).asVector3();
             Vector3 n = Normalize(rayBarycentric.z * v0.normal + rayBarycentric.x * v1.normal + rayBarycentric.y * v2.normal);
@@ -165,7 +165,7 @@ namespace LumiereRenderer
             t = Cross(b,n);
 
             Matrix m( t.x, t.y, t.z, 0, b.x, b.y, b.z, 0, n.x, n.y, n.z, 0, 0, 0, 0, 1 );
-            rc.setOutput(Shape::WORLD_TO_SHADER, m);
+            rc.setOutput(RenderContext::WORLD_TO_SHADER, m);
         }
     }
 
@@ -185,9 +185,9 @@ namespace LumiereRenderer
 
         float area = Length(Cross(p0,p1) + Cross(p1,p2) + Cross(p2,p0)) * 0.5f;
         
-        rc.setOutput(Shape::POSITION, a * p0 + b * p1 + c * p2);
-        rc.setOutput(Shape::NORMAL, a * v0.normal + b * v1.normal + c * v2.normal);
-        rc.setOutput(Shape::TEXCOORD, a * v0.texcoord + b * v1.texcoord + c * v2.texcoord);
+        rc.setOutput(RenderContext::POSITION, a * p0 + b * p1 + c * p2);
+        rc.setOutput(RenderContext::NORMAL, a * v0.normal + b * v1.normal + c * v2.normal);
+        rc.setOutput(RenderContext::TEXCOORD, a * v0.texcoord + b * v1.texcoord + c * v2.texcoord);
         rc.setOutput(RenderContext::SHADER, mShader);
         rc.setOutput(RenderContext::SHAPE, this);		
         rc.setOutput(RenderContext::PDF, 1.0f/area);

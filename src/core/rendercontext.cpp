@@ -30,31 +30,39 @@
 #include <lumiererenderer\RenderContext.h>
 #include <lumiererenderer\Integrator.h>
 #include <lumiererenderer\Scene.h>
-#include <lumiererenderer\AttributeValue.h>
+#include <lumiererenderer\Attribute.h>
 
 namespace LumiereRenderer
 {
-    Attribute* RenderContext::RAY_ORIGIN = new AttributeValue<Point3>("RayOrigin", 0);
-    Attribute* RenderContext::RAY_DIRECTION = new AttributeValue<Vector3>("RayDirection", 0);
+    	Attribute* RenderContext::POSITION = new Attribute("Position", Point3());
+    Attribute* RenderContext::NORMAL = new Attribute("Normal", Vector3());
+    Attribute* RenderContext::BINORMAL = new Attribute("Binormal", Vector3());
+    Attribute* RenderContext::TANGENT = new Attribute("Tangent", Vector3());
+    Attribute* RenderContext::TEXCOORD = new Attribute("Texcoord", Vector3());
+	Attribute* RenderContext::WORLD_TO_SHADER = new Attribute("WorldToShader", Matrix());
+    Attribute* RenderContext::SHADER_TO_WORLD = new Attribute("ShaderToWorld", Matrix());
+
+    Attribute* RenderContext::RAY_ORIGIN = new Attribute("RayOrigin", Point3());
+    Attribute* RenderContext::RAY_DIRECTION = new Attribute("RayDirection", Vector3());
 //    Attribute* RenderContext::RAY_WAVELENGTH = new AttributeValue<float>("RayWavelength", 0);
-    Attribute* RenderContext::TRACE_DEPTH = new AttributeValue<int>("RayDepth", 0);
+    Attribute* RenderContext::TRACE_DEPTH = new Attribute("RayDepth", 0);
 //    Attribute* RenderContext::RAY_IOR = new AttributeValue<float>("RayIOR", 0);
-    Attribute* RenderContext::RAY_BARYCENTRIC_COORDINATES = new AttributeValue<Point3>("RayBarycentricCoordinates", 0);
-    Attribute* RenderContext::RAY_LENGTH = new AttributeValue<float>("RayLength", 0);
+    Attribute* RenderContext::RAY_BARYCENTRIC_COORDINATES = new Attribute("RayBarycentricCoordinates", Point3());
+    Attribute* RenderContext::RAY_LENGTH = new Attribute("RayLength", 0.0f);
     
-    Attribute* RenderContext::WO_DIRECTION = new AttributeValue<Vector3>("WoDirection", 0);
-    Attribute* RenderContext::WO_WAVELENGTH = new AttributeValue<float>("WoWavelength", 0);    
-    Attribute* RenderContext::WO_IOR = new AttributeValue<float>("WoIor", 0);
-    Attribute* RenderContext::WO_PDF = new AttributeValue<float>("WoPdf", 0);
+    Attribute* RenderContext::WO_DIRECTION = new Attribute("WoDirection", Vector3());
+    Attribute* RenderContext::WO_WAVELENGTH = new Attribute("WoWavelength", 0.0f);    
+    Attribute* RenderContext::WO_IOR = new Attribute("WoIor", 0.0f);
+    Attribute* RenderContext::WO_PDF = new Attribute("WoPdf", 0.0f);
 
-    Attribute* RenderContext::WI_DIRECTION = new AttributeValue<Vector3>("WiDirection", 0);
-    Attribute* RenderContext::WI_WAVELENGTH = new AttributeValue<float>("WiWavelength", 0);    
-    Attribute* RenderContext::WI_IOR = new AttributeValue<float>("WiIor", 0);
-    Attribute* RenderContext::WI_PDF = new AttributeValue<float>("WiPdf", 0);
+    Attribute* RenderContext::WI_DIRECTION = new Attribute("WiDirection", Vector3());
+    Attribute* RenderContext::WI_WAVELENGTH = new Attribute("WiWavelength", 0.0f);    
+    Attribute* RenderContext::WI_IOR = new Attribute("WiIor", 0.0f);
+    Attribute* RenderContext::WI_PDF = new Attribute("WiPdf", 0.0f);
 
-    Attribute* RenderContext::SHADER = new AttributeValue<Shader*>("Shader", 0);
-    Attribute* RenderContext::SHAPE = new AttributeValue<Shape*>("Shape", 0);
-    Attribute* RenderContext::PDF = new AttributeValue<float>("Pdf", 0);
+    Attribute* RenderContext::SHADER = new Attribute("Shader", (Shader*)0);
+    Attribute* RenderContext::SHAPE = new Attribute("Shape", (Shape*)0);
+    Attribute* RenderContext::PDF = new Attribute("Pdf", 0.0f);
 
     RenderContext::RenderContext(Scene* scene, Camera* camera, Integrator* integrator) : mScene(scene), mCamera(camera), mIntegrator(integrator)
     {

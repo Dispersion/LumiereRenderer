@@ -61,9 +61,6 @@
     <ClInclude Include="..\..\include\lumiererenderer\Attribute.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\AttributeValue.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\lumiererenderer\Camera.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>

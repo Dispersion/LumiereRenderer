@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\lumiererenderer\Attribute.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\AttributeValue.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Camera.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Constants.h" />
     <ClInclude Include="..\..\include\lumiererenderer\DataHandle.h" />

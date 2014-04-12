@@ -28,12 +28,9 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #include <lumiererenderer\Shader.h>
-#include <lumiererenderer\AttributeValue.h>
 
 namespace LumiereRenderer
 {
-//    Attribute* Shader::RADIANCE = new AttributeValue<float>("Radiance", 0);
-
     Shader::Shader(void)
     {
     }

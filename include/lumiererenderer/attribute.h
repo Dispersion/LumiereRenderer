@@ -50,10 +50,30 @@ namespace LumiereRenderer
         friend Node;
         friend RenderContext;
 
-    public:
-        /// Default constructor
-        Attribute();    
+        struct AbstracAttribute
+        {
+            virtual ~AbstracAttribute() {}
+            virtual void* getValue() const = 0;
+            virtual size_t getSize() const = 0;
+        };
 
+        template <class T>
+        struct ConcreteAttribute : public AbstracAttribute
+        {
+        public:
+            ConcreteAttribute(T value) : mValue(value) {}
+            virtual ~ConcreteAttribute() {}
+
+        private:
+            virtual void* getValue() const { return (void*)&mValue; }
+            size_t getSize() const {return sizeof(T);}
+
+            T mValue;
+        };
+
+        
+
+    public:
         /// Default destructor
         virtual ~Attribute(void);
 
@@ -67,11 +87,6 @@ namespace LumiereRenderer
         /// Get the name of the attribute.
         /// @return The name of the attribute.
         std::string getName() const;
-        
-        /// If the attribute is not connected to any other attribute it will use the 
-        /// default value.
-        /// @return The default value.
-        void* getDefaultValue() const;
         
         ///
         /// @param readable
@@ -87,14 +102,32 @@ namespace LumiereRenderer
         bool isWriteable();
 
     protected:
-        virtual size_t getSize() const = 0;
+
+         /// Default constructor
+        template<class T>
+        Attribute(std::string name, T value)  
+        {
+            mConnection = NULL;
+            mOwner = NULL;
+            mReadable = true;
+            mWriteable = true;
+            mName = name;
+            mAttribute = new ConcreteAttribute<T>(value);
+        }
+
+        /// If the attribute is not connected to any other attribute it will use the 
+        /// default value.
+        /// @return The default value.
+        void* getDefaultValue() const;
+
+        size_t getSize() const;
 
         Node*                       mOwner; 
         Attribute*                  mConnection;
         std::string                 mName;
-        void*                       mDefaultValue;
         bool                        mReadable;
         bool                        mWriteable;
+        AbstracAttribute* mAttribute;
 
     private:
         void connect(Attribute* attribute); //deprecated?

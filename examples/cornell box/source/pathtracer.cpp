@@ -62,8 +62,8 @@ namespace LumiereRenderer
 
         float radiance = 0;
 
-        Point3 surfacePosition = rc.getInput( Shape::POSITION ).asPoint3();
-        Vector3 surfaceNormal = rc.getInput( Shape::NORMAL ).asVector3();
+        Point3 surfacePosition = rc.getInput( RenderContext::POSITION ).asPoint3();
+        Vector3 surfaceNormal = rc.getInput( RenderContext::NORMAL ).asVector3();
         Shader* surfaceShader = static_cast<Shader*>(rc.getInput( RenderContext::SHADER ).asPointer());
         //Shader* surfaceShader = rc->GetInput( RenderContext::SHADER ).asShader();
         rc.setOutput(RenderContext::WO_WAVELENGTH, ray.wavelength);
@@ -83,13 +83,13 @@ namespace LumiereRenderer
             rc.push();
             if ( rc.getScene()->sampleEmitters( rc ) )
             {
-                emitterPosition = rc.getInput( Shape::POSITION ).asPoint3();
+                emitterPosition = rc.getInput( RenderContext::POSITION ).asPoint3();
 
                 // Test if there are anything blocking the path between the emitter and the point on the surface we are shading
                 if( !rc.getSceneTracer()->intersect( surfacePosition, emitterPosition ) )
                 {
                     directLight = true;
-                    Vector3 emitterNormal = rc.getInput( Shape::NORMAL ).asVector3();
+                    Vector3 emitterNormal = rc.getInput( RenderContext::NORMAL ).asVector3();
                     Shader* emitterShader = rc.getInput( RenderContext::SHADER ).asShader();
                     float emitterPdf = rc.getInput( RenderContext::PDF ).asFloat();          
 
