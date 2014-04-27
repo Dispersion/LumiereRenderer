@@ -19,41 +19,57 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\lumiererenderer\AABB.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Attribute.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\blackbody.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Camera.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\ccd.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Constants.h" />
     <ClInclude Include="..\..\include\lumiererenderer\DataHandle.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\dielectric.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\diffuse.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Geometry.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\glass.h" />
     <ClInclude Include="..\..\include\lumiererenderer\ImageSensor.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Integrator.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Intersector.h" />
     <ClInclude Include="..\..\include\lumiererenderer\LinearAlgebra.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\list.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Matrix.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\mirror.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Node.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\pathtracer.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\pinhole.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Point3.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\QBvh.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Radiometry.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Random.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Ray.h" />
     <ClInclude Include="..\..\include\lumiererenderer\RenderContext.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Sampler.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Scene.h" />
-    <ClInclude Include="..\..\include\lumiererenderer\SceneTracer.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Shader.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Shape.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Spectrum.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Triangle.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Vector3.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\cameras\pinhole.cpp" />
     <ClCompile Include="..\..\src\core\Attribute.cpp" />
     <ClCompile Include="..\..\src\core\Camera.cpp" />
     <ClCompile Include="..\..\src\core\DataHandle.cpp" />
     <ClCompile Include="..\..\src\core\ImageSensor.cpp" />
     <ClCompile Include="..\..\src\core\Integrator.cpp" />
+    <ClCompile Include="..\..\src\core\Intersector.cpp" />
     <ClCompile Include="..\..\src\core\Node.cpp" />
     <ClCompile Include="..\..\src\core\RenderContext.cpp" />
     <ClCompile Include="..\..\src\core\Scene.cpp" />
-    <ClCompile Include="..\..\src\core\SceneTracer.cpp" />
     <ClCompile Include="..\..\src\core\Shader.cpp" />
     <ClCompile Include="..\..\src\core\Shape.cpp" />
+    <ClCompile Include="..\..\src\imagesensors\ccd.cpp" />
+    <ClCompile Include="..\..\src\integrators\pathtracer.cpp" />
     <ClCompile Include="..\..\src\math\Geometry.cpp" />
     <ClCompile Include="..\..\src\math\LinearAlgebra.cpp" />
     <ClCompile Include="..\..\src\math\Matrix.cpp" />
@@ -64,6 +80,16 @@
     <ClCompile Include="..\..\src\math\Sampler.cpp" />
     <ClCompile Include="..\..\src\math\Vector3.cpp" />
     <ClCompile Include="..\..\src\math\Vector4.cpp" />
+    <ClCompile Include="..\..\src\nodes\glass.cpp" />
+    <ClCompile Include="..\..\src\nodes\spectrum.cpp" />
+    <ClCompile Include="..\..\src\scenes\list.cpp" />
+    <ClCompile Include="..\..\src\scenes\QBvh.cpp" />
+    <ClCompile Include="..\..\src\shaders\blackbody.cpp" />
+    <ClCompile Include="..\..\src\shaders\dielectric.cpp" />
+    <ClCompile Include="..\..\src\shaders\diffuse.cpp" />
+    <ClCompile Include="..\..\src\shaders\mirror.cpp" />
+    <ClCompile Include="..\..\src\shapes\AABB.cpp" />
+    <ClCompile Include="..\..\src\shapes\Triangle.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D82CB4C4-B25B-401B-9D53-47F5B9820A7D}</ProjectGuid>

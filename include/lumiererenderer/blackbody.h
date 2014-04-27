@@ -27,29 +27,24 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\Shape.h>
-#include <lumiererenderer\Shader.h>
+#pragma once
+#include <lumiererenderer/shader.h>
 
 namespace LumiereRenderer
 {
-
-
-	Shape::Shape(void)
+	class BlackBody : public Shader
 	{
-		mShader = 0;
-	}
+	public:
+		BlackBody(float temperature = 6500.0f);
+		~BlackBody(void);
 
-	Shape::~Shape(void)
-	{
-	}
+        float evaluateDir( RenderContext& rc );
+        float evaluateSample( RenderContext& rc );
 
-	Shader* Shape::getShader()
-	{
-		return mShader;
-	}
-
-	void Shape::setShader(Shader* shader)
-	{
-		mShader = shader;
-	}
+		bool isEmitter();
+	private:
+        float getRadiance( float kelvin, float wavelength );
+		Attribute* mTemperature;
+		Attribute* mWoWavelength;		
+	};
 }

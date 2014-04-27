@@ -27,66 +27,29 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "blackbody.h"
-#include <lumiererenderer\constants.h>
+#include <lumiererenderer\glass.h>
 
 namespace LumiereRenderer
 {
-    BlackBody::BlackBody()
+    Glass::Glass(float c1, float c2, float c3, float c4, float c5, float c6) : mC1(c1), mC2(c2), mC3(c3), mC4(c4), mC5(c5), mC6(c6)
     {
-        mTemperature = createAttribute<float>( "Temperature", 6500 ); ;
-        mWoWavelength = createAttribute<float>( "WoWavelength", 0 );     
+        mRayWavelength = createAttribute<float>("WoWavelength", 0);
+        mIOR = createAttribute<float>("outIOR", 0);
     }
 
-    BlackBody::~BlackBody(void)
+    Glass::~Glass(void)
     {
-        delete mTemperature;
-        delete mWoWavelength;
     }
 
-    float BlackBody::evaluateDir( RenderContext& rc )
+    void Glass::evaluate(Attribute* attr, RenderContext& rc)
     {
-        float wavelength = rc.getInput( mWoWavelength ).asFloat();
-        float temperature = rc.getInput( mTemperature ).asFloat();       
-        return getRadiance(temperature, wavelength);
-    }
-
-    float BlackBody::evaluateSample(RenderContext& rc)
-    {	
-        float wavelength = rc.getInput( mWoWavelength ).asFloat();
-        float temperature = rc.getInput( mTemperature ).asFloat();
-        return getRadiance(temperature, wavelength);
-    }
-
-    bool BlackBody::isEmitter()
-    {
-        return true;
-    }
-
-    float BlackBody::getRadiance(float kelvin, float wavelength)
-    {
-        //Planck's constant in J*s
-        float h = 6.6260696e-34f;
-        //Speed of light in M/s
-        float c = 299792458.f;
-        //Wavelength in M
-        float w = wavelength * 1e-9f;
-        //Boltzmann's constant in J/K
-        float k = 1.3806488e-23f;
-
-//		float e = 2.71828182846f;
-
-        float n0 = 8*PI*h*c;
-        float n1 =  pow(w,5);
-        float n2 = n0/n1;
-
-        float m0 = exp((h*c) / (w*k*kelvin));
-        float m1 = m0-1.0f;
-        float m2 = 1.0f / m1;
-
-        //Planck's law
-        //float p = ((2*h*c*c) / pow(w,5)) * (1.0f / ( pow(e, (h*c) / (w*k*mT)) - 1.0f));
-
-        return n2*m2;
+        if (attr == mIOR)
+        {
+            float wavelength = rc.getInput( mRayWavelength ).asFloat();
+            float wl = wavelength/1000.0f;
+            float wl2 = wl*wl;	
+            float ior = sqrt( (mC1*wl2)/(wl2-mC4) + (mC2*wl2)/(wl2-mC5) + (mC3*wl2)/(wl2-mC6) + 1);
+            rc.setOutput(mIOR, ior);
+        }
     }
 }

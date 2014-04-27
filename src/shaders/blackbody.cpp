@@ -27,81 +27,66 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "list.h"
+#include <lumiererenderer\blackbody.h>
 #include <lumiererenderer\constants.h>
-#include <lumiererenderer\geometry.h>
 
 namespace LumiereRenderer
 {
-    List::List(void)
+    BlackBody::BlackBody(float temperature)
     {
+        mTemperature = createAttribute<float>( "Temperature", temperature ); ;
+        mWoWavelength = createAttribute<float>( "WoWavelength", 0 );     
     }
 
-    List::~List(void)
+    BlackBody::~BlackBody(void)
     {
+        delete mTemperature;
+        delete mWoWavelength;
     }
 
-    SceneTracer* List::getSceneTracer()
+    float BlackBody::evaluateDir( RenderContext& rc )
     {
-        return new ListTracer(this);
+        float wavelength = rc.getInput( mWoWavelength ).asFloat();
+        float temperature = rc.getInput( mTemperature ).asFloat();       
+        return getRadiance(temperature, wavelength);
     }
 
-    std::vector<Shape*>& List::getShapes()
-    {
-        return mShapes;
+    float BlackBody::evaluateSample(RenderContext& rc)
+    {	
+        float wavelength = rc.getInput( mWoWavelength ).asFloat();
+        float temperature = rc.getInput( mTemperature ).asFloat();
+        return getRadiance(temperature, wavelength);
     }
 
-    List::ListTracer::ListTracer(List* list) : mList(list)
+    bool BlackBody::isEmitter()
     {
+        return true;
     }
 
-    List::ListTracer::~ListTracer(void)
+    float BlackBody::getRadiance(float kelvin, float wavelength)
     {
-    }
+        //Planck's constant in J*s
+        float h = 6.6260696e-34f;
+        //Speed of light in M/s
+        float c = 299792458.f;
+        //Wavelength in M
+        float w = wavelength * 1e-9f;
+        //Boltzmann's constant in J/K
+        float k = 1.3806488e-23f;
 
-    bool List::ListTracer::intersect(const Point3 from, const Point3 to)
-    {
-        Ray ray;		
-        ray.t = Length(to - from)-(EPSILON*20);
-        ray.direction = Normalize(to - from);
-        ray.origin = from + ray.direction * EPSILON*10;
+//		float e = 2.71828182846f;
 
-        std::vector<Shape*>::const_iterator shape;
-        for (shape = mList->getShapes().begin(); shape != mList->getShapes().end(); shape++)
-        {
-            if ((*shape)->Intersect(ray) /*&& shape != to->shape*/)
-            {
-                return true;
-            }
-        }
+        float n0 = 8*PI*h*c;
+        float n1 =  pow(w,5);
+        float n2 = n0/n1;
 
-        return false;
-    }
+        float m0 = exp((h*c) / (w*k*kelvin));
+        float m1 = m0-1.0f;
+        float m2 = 1.0f / m1;
 
-    bool List::ListTracer::intersect(Ray& ray, RenderContext& rc)// const 
-    {
-        Shape* hitShape = NULL;
+        //Planck's law
+        //float p = ((2*h*c*c) / pow(w,5)) * (1.0f / ( pow(e, (h*c) / (w*k*mT)) - 1.0f));
 
-        std::vector<Shape*>::const_iterator shape;
-        for (shape = mList->getShapes().begin(); shape != mList->getShapes().end(); shape++)
-        {
-            if ((*shape)->Intersect(ray))
-            {
-                hitShape = *shape;
-            }
-        }		
-
-        if (hitShape)
-        {
-            rc.setOutput(RenderContext::SHAPE, hitShape);
-            rc.setOutput(RenderContext::SHADER, hitShape->GetShader());
-            rc.setOutput(RenderContext::RAY_BARYCENTRIC_COORDINATES, Vector3(ray.u, ray.v, (1-ray.u-ray.v)));
-            rc.setOutput(RenderContext::RAY_LENGTH, ray.t);
-            rc.setOutput(RenderContext::RAY_ORIGIN, ray.origin);
-            rc.setOutput(RenderContext::RAY_DIRECTION, ray.direction);
-            return true;
-        }
-
-        return false;
+        return n2*m2;
     }
 }

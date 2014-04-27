@@ -27,43 +27,69 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\Scene.h>
-#include <lumiererenderer\Shader.h>
-#include <lumiererenderer\Random.h>
+#include <lumiererenderer\pinhole.h>
+#include <lumiererenderer\sampler.h>
+#include <lumiererenderer\constants.h>
+#include <lumiererenderer\integrator.h>
+#include <lumiererenderer\radiometry.h>
+#include <lumiererenderer\random.h>
+#include <iostream>
 
 namespace LumiereRenderer
 {
-    Scene::Scene(void)
+    Pinhole::Pinhole(float focalLength, float aperture, float shutterSpeed)
+    {		
+        mFocalLength = focalLength;
+        mAperture = aperture*0.5f;
+        mShutterSpeed = shutterSpeed;
+    }
+
+    Pinhole::~Pinhole()
     {
     }
 
-    Scene::~Scene(void)
+    void Pinhole::trace( unsigned int i, unsigned int j, RenderContext& rc )
     {
-    }
+		ImageSensor::Sample imageSensorSample = mImageSensor->sample( i,j );
 
-    void Scene::addShape(Shape* shape)
-    {
-        if (shape->getShader()->isEmitter())
+        Point3 pointOnAperture;
+        if ( mAperture > 0 )
         {
-            mEmitters.push_back(shape);
+            pointOnAperture = SampleDisc(Random(), Random()) * mAperture;
         }
 
-        mShapes.push_back(shape);
+        imageSensorSample.position.z = mFocalLength;
+        Ray ray = Ray( imageSensorSample.position, pointOnAperture, imageSensorSample.wavelength );
+        ray.origin = pointOnAperture;
+
+        // Transform ray with camera transformation.
+        ray = mTransform * ray;
+        
+        ray.t = INFINITY;
+
+        rc.setOutput(RenderContext::TRACE_DEPTH, -1);
+        rc.setOutput(RenderContext::WO_WAVELENGTH, imageSensorSample.wavelength);
+    
+        float pdf = 1.0f / ( PI*mAperture*mAperture );
+        float g = G( imageSensorSample.position, pointOnAperture, Vector3( 0, 0, -1 ), Vector3( 0, 0, 1) );
+        float time = mShutterSpeed;
+        float exposure = ( ( time * g ) / pdf ) * rc.trace( ray );
+
+        mImageSensor->setExposure( i, j, exposure, ray.alpha, rc );
     }
 
-    bool Scene::sampleEmitters(RenderContext& rc) const
+    void Pinhole::evaluate( Attribute* /*attr*/, RenderContext& /*rc*/ )
     {
-        if (mEmitters.empty())
-            return false;
+        // Todo	
+	}
 
-        int i = static_cast<int>(floor(Random() * (mEmitters.size()-1)+0.5));
-        
-        mEmitters[i]->sample( rc );       
-        DataHandle pdf = rc.getInput( RenderContext::PDF );
-        //pdf.set( pdf.asFloat() / mEmitters.size() );
+    void Pinhole::setFocalLength(float length)
+    {
+        mFocalLength = length;
+    }
 
-        rc.setOutput(RenderContext::PDF, pdf.asFloat() / mEmitters.size());
-
-        return true;
+    float Pinhole::getFocalLength()
+    {
+        return mFocalLength;
     }
 }

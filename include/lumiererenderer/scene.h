@@ -34,7 +34,7 @@
 namespace LumiereRenderer
 {
     // Forward declarations
-    class SceneTracer;
+    class Intersector;
 
     /*!
         @class Scene
@@ -60,7 +60,7 @@ namespace LumiereRenderer
 		    virtual ~Scene(void);
 		    virtual void addShape(Shape* shape);
             virtual bool sampleEmitters(RenderContext& rc) const;
-            virtual SceneTracer* getSceneTracer() = 0;		
+            virtual Intersector* getIntersector() = 0;		
 
     protected:
             std::vector<Shape*>         mShapes; 

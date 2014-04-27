@@ -73,7 +73,7 @@ namespace LumiereRenderer
         mNextDataAvailable = 0;
         mData = new char[mBufferSize];
         mHandles = new int[mHandlesSize];
-        mSceneTracer = scene->getSceneTracer();
+        mIntersector = scene->getIntersector();
         push();
     }
 
@@ -483,9 +483,9 @@ namespace LumiereRenderer
         return mScene;
     }
 
-    SceneTracer* RenderContext::getSceneTracer()
+    Intersector* RenderContext::getIntersector()
     {
-        return mSceneTracer;
+        return mIntersector;
     }
 
     Integrator* RenderContext::getIntegrator()

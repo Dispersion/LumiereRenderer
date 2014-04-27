@@ -11,29 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\blackbody.cpp" />
     <ClCompile Include="..\..\source\canvas.cpp" />
-    <ClCompile Include="..\..\source\ccd.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\include;</AdditionalIncludeDirectories>
-    </ClCompile>
-    <ClCompile Include="..\..\source\diffuse.cpp" />
-    <ClCompile Include="..\..\source\list.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
-    <ClCompile Include="..\..\source\pathtracer.cpp" />
-    <ClCompile Include="..\..\source\pinhole.cpp" />
-    <ClCompile Include="..\..\source\spectrum.cpp" />
-    <ClCompile Include="..\..\source\triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\source\blackbody.h" />
     <ClInclude Include="..\..\source\canvas.h" />
-    <ClInclude Include="..\..\source\ccd.h" />
-    <ClInclude Include="..\..\source\diffuse.h" />
-    <ClInclude Include="..\..\source\list.h" />
-    <ClInclude Include="..\..\source\pathtracer.h" />
-    <ClInclude Include="..\..\source\pinhole.h" />
-    <ClInclude Include="..\..\source\Spectrum.h" />
-    <ClInclude Include="..\..\source\triangle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4B7E9DCF-3DE5-4904-B460-DC89AD834DDB}</ProjectGuid>

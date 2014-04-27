@@ -28,29 +28,25 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\Ray.h>
-#include <lumiererenderer\RenderContext.h>
+#include <lumiererenderer\Node.h>
 
 namespace LumiereRenderer
 {
-
     /*!
-        @class SceneTracer
-        @brief Trace a ray into the scene.
-
-               The SceneTracer is used to find the closest intersection 
-               point on the ray with an object in the scene. 
-               
-               Each implementation of a Scene must have an implementation
-               of a corresponding SceneTracer.
+        @class Glass
+        @brief This node can generate attributes of real Glass
     */
 
-    class SceneTracer
+    class Glass : public Node
     {
-    public:
-            SceneTracer();
-            virtual ~SceneTracer(void);
-            virtual bool intersect(const Point3 from, const Point3 to) = 0;
-            virtual bool intersect(Ray& Ray, RenderContext& rc) = 0;
+    public:	
+        Glass(float c1, float c2, float c3, float c4, float c5, float c6);
+        virtual ~Glass();
+        
+        void evaluate(Attribute* attr, RenderContext& rc);       
+    private:
+        Attribute* mRayWavelength;
+        Attribute* mIOR;
+        float mC1, mC2, mC3, mC4, mC5, mC6;
     };
 }

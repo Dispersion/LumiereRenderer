@@ -28,53 +28,29 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer\shape.h>
+#include <lumiererenderer\scene.h>
+#include <lumiererenderer\Intersector.h>
 
 namespace LumiereRenderer
 {
-    struct Vertex
-    {
-        Point3 position;
-        Vector3 normal;
-        Vector3 texcoord;
-    };
-
-    struct TriWald
-    {
-        // first 16 byte half cache line
-        // plane
-        float nu;
-        float nv;
-        float nd;
-        int k;
-
-        //second 16 byte half cache line
-        //line equation for line ac
-        float bnu;
-        float bnv;
-        float bd;
-        int pad; // pad to next cache line
-
-        //third 16 byte cache line
-        //line equation for line ab
-        float cnu;
-        float cnv;
-        float cd;
-        int pad2; // pad to 48 bytes for cache alignment purposes
-    };
-
-    class Triangle : public Shape
+    class List : public Scene
     {
     public:
-        Triangle(Vertex v0, Vertex v1, Vertex v2);
-        ~Triangle(void);
-        bool Intersect(Ray& Ray);
-        void evaluate( Attribute* attr, RenderContext& rc );
-        void Sample(RenderContext& rc);
+        class ListTracer : public Intersector
+        {
+        public:
+            ListTracer(List* list);
+            virtual ~ListTracer(void);
+            bool intersect(const Point3 from, const Point3 to);
+            bool intersect(Ray& ray, RenderContext& rc);
 
-        Vertex v0, v1, v2;
+        private:
+            List* mList;
+        };
 
-    private:		
-        TriWald mWaldTriangle;
+        List(void);
+        virtual ~List(void);
+        Intersector* getIntersector();
+        std::vector<Shape*>& getShapes();
     };
 }

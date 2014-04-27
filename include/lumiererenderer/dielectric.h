@@ -28,23 +28,31 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <lumiererenderer/shader.h>
+#include <lumiererenderer\Shader.h>
+#include <lumiererenderer\Spectrum.h>
 
-namespace LumiereRenderer
+namespace LumiereRenderer 
 {
-	class BlackBody : public Shader
+	class Dielectric : public Shader
 	{
 	public:
-		BlackBody();
-		~BlackBody(void);
+        Dielectric();
+		~Dielectric(void);
 
         float evaluateDir( RenderContext& rc );
         float evaluateSample( RenderContext& rc );
-
-		bool isEmitter();
+	
 	private:
-        float getRadiance( float kelvin, float wavelength );
-		Attribute* mTemperature;
-		Attribute* mWoWavelength;		
-	};
+        Attribute* mPosition;
+        Attribute* mNormal;
+        Attribute* mWoIor;
+        Attribute* mWiIor;
+        Attribute* mRayDirection;
+        Attribute* mShaderToWorld;
+        Attribute* mWorldToShader;
+        Attribute* mWavelength;
+        Attribute* mReflectance;
+        Attribute* mInteriorIor;
+        Attribute* mExteriorIor;
+    };
 }

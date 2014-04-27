@@ -1,15 +1,15 @@
 #include <iostream>
 #include "canvas.h"
 #include <lumiererenderer\rendercontext.h>
-#include "list.h"
-#include "pinhole.h"
-#include "pathtracer.h"
+#include <lumiererenderer\list.h>
+#include <lumiererenderer\pinhole.h>
+#include <lumiererenderer\pathtracer.h>
 #include <lumiererenderer\imagesensor.h>
-#include "ccd.h"
-#include "spectrum.h"
-#include "triangle.h"
-#include "diffuse.h"
-#include "blackbody.h"
+#include <lumiererenderer\ccd.h>
+#include <lumiererenderer\spectrum.h>
+#include <lumiererenderer\triangle.h>
+#include <lumiererenderer\diffuse.h>
+#include <lumiererenderer\blackbody.h>
 
 using namespace LumiereRenderer;
 

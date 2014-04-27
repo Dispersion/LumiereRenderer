@@ -23,6 +23,77 @@
       <UniqueIdentifier>{0cb0b1e8-bb5d-4f1b-87f5-c434aece453b}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Cameras">
+      <UniqueIdentifier>{3353bf0c-e819-40f1-98c3-7e141ce0bf8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageSensors">
+      <UniqueIdentifier>{5c731e47-77b9-4526-a7e9-ebfa03645bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Integrators">
+      <UniqueIdentifier>{575845d6-a0e4-410a-a272-ed293ae1ecbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{99843f1c-a438-453a-8101-bcb6cd2334af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Nodes">
+      <UniqueIdentifier>{1b0d4636-264e-4d08-8e4f-9108a15bd70a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{8249666a-43d9-40d3-9be6-51d2b8397219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shapes">
+      <UniqueIdentifier>{6bdca609-043f-4eaf-b842-8b01e4d5817d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\Header Files">
+      <UniqueIdentifier>{c518aba7-2bce-48e8-8629-11ebba87bf27}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Cameras\Source Files">
+      <UniqueIdentifier>{2c7660c3-b697-4348-87eb-c8f20419b3b9}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ImageSensors\Header Files">
+      <UniqueIdentifier>{e4d0d793-81e9-4cf1-aa61-58af8455ce58}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="ImageSensors\Source Files">
+      <UniqueIdentifier>{8c0993e2-4b8e-4c79-b132-1b52a24c13f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Integrators\Header Files">
+      <UniqueIdentifier>{b3bf4aab-43f2-4ced-ad1d-7eab67de7757}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Integrators\Source Files">
+      <UniqueIdentifier>{feef1937-dd02-435a-986c-54e2f4bff316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shapes\Header Files">
+      <UniqueIdentifier>{b46b9047-ab27-40da-bf92-b8e4d937fc68}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Shapes\Source Files">
+      <UniqueIdentifier>{b97dd945-b10e-42d5-ae70-4e5bd3997daf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Header Files">
+      <UniqueIdentifier>{35defe91-8f5e-4ea5-abf9-db5d1092d5a1}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Shaders\Source Files">
+      <UniqueIdentifier>{695d4ad3-4643-4fae-90f9-3460f2957b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Nodes\Header Files">
+      <UniqueIdentifier>{cc33121d-809e-44dc-afdb-9ef9dd58720c}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Nodes\Source Files">
+      <UniqueIdentifier>{396cc444-9ba5-4f52-b8a5-791b5a77868c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Header Files">
+      <UniqueIdentifier>{43e8fdf7-3111-42ac-8882-771da17454f2}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Scenes\Source Files">
+      <UniqueIdentifier>{1a5b4ae2-3243-4b4f-b629-a3ba086ffa5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\lumiererenderer\Vector4.h">
@@ -82,14 +153,53 @@
     <ClInclude Include="..\..\include\lumiererenderer\Scene.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\lumiererenderer\SceneTracer.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\lumiererenderer\Shader.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\lumiererenderer\Shape.h">
       <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Intersector.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\list.h">
+      <Filter>Scenes\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Spectrum.h">
+      <Filter>Nodes\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\diffuse.h">
+      <Filter>Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\blackbody.h">
+      <Filter>Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\pathtracer.h">
+      <Filter>Integrators\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\ccd.h">
+      <Filter>ImageSensors\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\pinhole.h">
+      <Filter>Cameras\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\QBvh.h">
+      <Filter>Scenes\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Triangle.h">
+      <Filter>Shapes\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\AABB.h">
+      <Filter>Shapes\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\mirror.h">
+      <Filter>Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\dielectric.h">
+      <Filter>Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\glass.h">
+      <Filter>Nodes\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -147,14 +257,53 @@
     <ClCompile Include="..\..\src\core\Scene.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\SceneTracer.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\core\Shader.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\Shape.cpp">
       <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\Intersector.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cameras\pinhole.cpp">
+      <Filter>Cameras\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\imagesensors\ccd.cpp">
+      <Filter>ImageSensors\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\integrators\pathtracer.cpp">
+      <Filter>Integrators\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\shaders\blackbody.cpp">
+      <Filter>Shaders\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\shaders\diffuse.cpp">
+      <Filter>Shaders\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\nodes\spectrum.cpp">
+      <Filter>Nodes\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\scenes\list.cpp">
+      <Filter>Scenes\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\scenes\QBvh.cpp">
+      <Filter>Scenes\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\shapes\AABB.cpp">
+      <Filter>Shapes\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\shapes\Triangle.cpp">
+      <Filter>Shapes\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\shaders\mirror.cpp">
+      <Filter>Shaders\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\nodes\glass.cpp">
+      <Filter>Nodes\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\shaders\dielectric.cpp">
+      <Filter>Shaders\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

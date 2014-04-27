@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014, LumiereRenderer
+// Copyright (c) 2012, LumiereRenderer
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -27,46 +27,29 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "diffuse.h"
-#include <lumiererenderer\sampler.h>
-#include <lumiererenderer\linearalgebra.h>
-#include <lumiererenderer\constants.h>
+#pragma once
+//#include "lumiererenderer\boundingvolume.h"
+#include <vector>
+#include <lumiererenderer\Point3.h>
+#include <lumiererenderer\shape.h>
 
 namespace LumiereRenderer
 {
-    Diffuse::Diffuse()
-    {		
-        mPosition = createAttribute<Point3>("Position", 0);
-        mNormal = createAttribute<Vector3>("Normal", 0);
-        mReflectance = createAttribute<float>("Reflectance", 0);
-        mWoWavelength = createAttribute<float>("WoWavelength", 0);
-        mShaderToWorld = createAttribute<Matrix>("ShaderToWorld", Matrix());
-    }
+	class AABB : public Shape
+	{
+	public:
+		AABB(Point3 min, Point3 max);
+		AABB(const std::vector<Shape*>& primitives);
+		~AABB(void);
+		virtual bool intersect( Ray& ray );
+        virtual Shape* getBounding();
+        virtual Point3 getMin();
+        virtual Point3 getMax();
+        virtual void evaluate( Attribute* attr, RenderContext& rc );
+        virtual void sample( RenderContext& rc );
 
-    Diffuse::~Diffuse(void)
-    {
-    }
-
-    float Diffuse::evaluateDir( RenderContext& rc )
-    {
-        return rc.getInput( mReflectance ).asFloat() / PI;
-    }
-
-    float Diffuse::evaluateSample( RenderContext& rc )
-    {
-        float pdf;
-
-        Point3 P  = rc.getInput( mPosition ).asPoint3();
-        Vector3 N = rc.getInput( mNormal ).asVector3();
-        float wavelength = rc.getInput( mWoWavelength ).asFloat();
-        float reflectance = rc.getInput( mReflectance ).asFloat() / PI;
-        Matrix ShaderToWorld = rc.getInput( mShaderToWorld ).asMatrix();
-
-        Vector3 dir = ShaderToWorld * SampleCosineHemisphere( pdf );
-
-        Ray wi = Ray(P, dir, wavelength);        
-        wi.origin = wi.origin + wi.direction * EPSILON*10;
-
-        return (reflectance * rc.trace(wi) * Dot(wi.direction, N)) / pdf;
-    }
+    private:
+        Point3 mMin;
+        Point3 mMax;
+	};	
 }

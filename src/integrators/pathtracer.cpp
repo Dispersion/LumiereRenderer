@@ -27,11 +27,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "pathtracer.h"
+#include <lumiererenderer\pathtracer.h>
 #include <lumiererenderer\shader.h>
 #include <lumiererenderer\radiometry.h>
 #include <lumiererenderer\scene.h>
-#include <lumiererenderer\scenetracer.h>
+#include <lumiererenderer\Intersector.h>
 
 namespace LumiereRenderer
 {
@@ -50,7 +50,7 @@ namespace LumiereRenderer
         if (rayDepth == mMaxPathLength)
             return 0;
 
-        if ( !rc.getSceneTracer()->intersect( ray, rc ) )
+        if ( !rc.getIntersector()->intersect( ray, rc ) )
         {			
             if ( rayDepth == 0 )
                 ray.alpha = 0;
@@ -68,6 +68,7 @@ namespace LumiereRenderer
         //Shader* surfaceShader = rc->GetInput( RenderContext::SHADER ).asShader();
         rc.setOutput(RenderContext::WO_WAVELENGTH, ray.wavelength);
         rc.setOutput(RenderContext::WI_WAVELENGTH, ray.wavelength);
+        rc.setOutput(RenderContext::WO_DIRECTION, ray.direction);
 
 
             float directLight = false;
@@ -86,7 +87,7 @@ namespace LumiereRenderer
                 emitterPosition = rc.getInput( RenderContext::POSITION ).asPoint3();
 
                 // Test if there are anything blocking the path between the emitter and the point on the surface we are shading
-                if( !rc.getSceneTracer()->intersect( surfacePosition, emitterPosition ) )
+                if( !rc.getIntersector()->intersect( surfacePosition, emitterPosition ) )
                 {
                     directLight = true;
                     Vector3 emitterNormal = rc.getInput( RenderContext::NORMAL ).asVector3();

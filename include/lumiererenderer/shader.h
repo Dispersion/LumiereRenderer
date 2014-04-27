@@ -49,12 +49,7 @@ namespace LumiereRenderer
     public:
             Shader(void);
             virtual ~Shader(void);
-
-            /// Evaluate the light going through the material between two points.
-            /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
-            /// @return Radiance.	        
-            //virtual float evaulateTransmission( RenderContext* rc ) = 0;
-        
+       
             /// Evaluate the light comming from wi.
             /// @param[in] rc   The RenderContext is used to get values from incomming attributes.
             /// @return Radiance.

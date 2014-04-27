@@ -27,29 +27,46 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\Shape.h>
-#include <lumiererenderer\Shader.h>
+#include <lumiererenderer\diffuse.h>
+#include <lumiererenderer\sampler.h>
+#include <lumiererenderer\linearalgebra.h>
+#include <lumiererenderer\constants.h>
 
 namespace LumiereRenderer
 {
+    Diffuse::Diffuse()
+    {		
+        mPosition = createAttribute<Point3>("Position", 0);
+        mNormal = createAttribute<Vector3>("Normal", 0);
+        mReflectance = createAttribute<float>("Reflectance", 0);
+        mWoWavelength = createAttribute<float>("WoWavelength", 0);
+        mShaderToWorld = createAttribute<Matrix>("ShaderToWorld", Matrix());
+    }
 
+    Diffuse::~Diffuse(void)
+    {
+    }
 
-	Shape::Shape(void)
-	{
-		mShader = 0;
-	}
+    float Diffuse::evaluateDir( RenderContext& rc )
+    {
+        return rc.getInput( mReflectance ).asFloat() / PI;
+    }
 
-	Shape::~Shape(void)
-	{
-	}
+    float Diffuse::evaluateSample( RenderContext& rc )
+    {
+        float pdf;
 
-	Shader* Shape::getShader()
-	{
-		return mShader;
-	}
+        Point3 P  = rc.getInput( mPosition ).asPoint3();
+        Vector3 N = rc.getInput( mNormal ).asVector3();
+        float wavelength = rc.getInput( mWoWavelength ).asFloat();
+        float reflectance = rc.getInput( mReflectance ).asFloat() / PI;
+        Matrix ShaderToWorld = rc.getInput( mShaderToWorld ).asMatrix();
 
-	void Shape::setShader(Shader* shader)
-	{
-		mShader = shader;
-	}
+        Vector3 dir = ShaderToWorld * SampleCosineHemisphere( pdf );
+
+        Ray wi = Ray(P, dir, wavelength);        
+        wi.origin = wi.origin + wi.direction * EPSILON*10;
+
+        return (reflectance * rc.trace(wi) * Dot(wi.direction, N)) / pdf;
+    }
 }

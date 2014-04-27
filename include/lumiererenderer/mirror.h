@@ -27,29 +27,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\Shape.h>
+#pragma once
 #include <lumiererenderer\Shader.h>
+#include <lumiererenderer\Spectrum.h>
 
-namespace LumiereRenderer
+namespace LumiereRenderer 
 {
-
-
-	Shape::Shape(void)
+	class Mirror : public Shader
 	{
-		mShader = 0;
-	}
+	public:
+		Mirror();
+		~Mirror(void);
 
-	Shape::~Shape(void)
-	{
-	}
-
-	Shader* Shape::getShader()
-	{
-		return mShader;
-	}
-
-	void Shape::setShader(Shader* shader)
-	{
-		mShader = shader;
-	}
+        float evaluateDir( RenderContext& rc );
+        float evaluateSample( RenderContext& rc );
+	
+	private:
+		Attribute* mPosition;
+		Attribute* mNormal;
+		Attribute* mRayDirection;
+		Attribute* mWoWavelength;
+        Attribute* mReflectance;
+		//Attribute* mRayDepth;
+		//Attribute* mOutColor;
+        Attribute* mShaderToWorld;
+        Attribute* mWorldToShader;
+	};
 }

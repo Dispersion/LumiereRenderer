@@ -27,69 +27,81 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "pinhole.h"
-#include <lumiererenderer\sampler.h>
+#include <lumiererenderer\list.h>
 #include <lumiererenderer\constants.h>
-#include <lumiererenderer\integrator.h>
-#include <lumiererenderer\radiometry.h>
-#include <lumiererenderer\random.h>
-#include <iostream>
+#include <lumiererenderer\geometry.h>
 
 namespace LumiereRenderer
 {
-    Pinhole::Pinhole(float focalLength, float aperture, float shutterSpeed)
-    {		
-        mFocalLength = focalLength;
-        mAperture = aperture*0.5f;
-        mShutterSpeed = shutterSpeed;
-    }
-
-    Pinhole::~Pinhole()
+    List::List(void)
     {
     }
 
-    void Pinhole::trace( unsigned int i, unsigned int j, RenderContext& rc )
+    List::~List(void)
     {
-		ImageSensor::Sample imageSensorSample = mImageSensor->sample( i,j );
+    }
 
-        Point3 pointOnAperture;
-        if ( mAperture > 0 )
+    Intersector* List::getIntersector()
+    {
+        return new ListTracer(this);
+    }
+
+    std::vector<Shape*>& List::getShapes()
+    {
+        return mShapes;
+    }
+
+    List::ListTracer::ListTracer(List* list) : mList(list)
+    {
+    }
+
+    List::ListTracer::~ListTracer(void)
+    {
+    }
+
+    bool List::ListTracer::intersect(const Point3 from, const Point3 to)
+    {
+        Ray ray;		
+        ray.t = Length(to - from)-(EPSILON*20);
+        ray.direction = Normalize(to - from);
+        ray.origin = from + ray.direction * EPSILON*10;
+
+        std::vector<Shape*>::const_iterator shape;
+        for (shape = mList->getShapes().begin(); shape != mList->getShapes().end(); shape++)
         {
-            pointOnAperture = SampleDisc(Random(), Random()) * mAperture;
+            if ((*shape)->intersect(ray) /*&& shape != to->shape*/)
+            {
+                return true;
+            }
         }
 
-        imageSensorSample.position.z = mFocalLength;
-        Ray ray = Ray( imageSensorSample.position, pointOnAperture, imageSensorSample.wavelength );
-        ray.origin = pointOnAperture;
-
-        // Transform ray with camera transformation.
-        ray = mTransform * ray;
-        
-        ray.t = INFINITY;
-
-        rc.setOutput(RenderContext::TRACE_DEPTH, -1);
-        rc.setOutput(RenderContext::WO_WAVELENGTH, imageSensorSample.wavelength);
-    
-        float pdf = 1.0f / ( PI*mAperture*mAperture );
-        float g = G( imageSensorSample.position, pointOnAperture, Vector3( 0, 0, -1 ), Vector3( 0, 0, 1) );
-        float time = mShutterSpeed;
-        float exposure = ( ( time * g ) / pdf ) * rc.trace( ray );
-
-        mImageSensor->setExposure( i, j, exposure, ray.alpha, rc );
+        return false;
     }
 
-    void Pinhole::evaluate( Attribute* attr, RenderContext& rc )
+    bool List::ListTracer::intersect(Ray& ray, RenderContext& rc)// const 
     {
-        // Todo	
-	}
+        Shape* hitShape = NULL;
 
-    void Pinhole::setFocalLength(float length)
-    {
-        mFocalLength = length;
-    }
+        std::vector<Shape*>::const_iterator shape;
+        for (shape = mList->getShapes().begin(); shape != mList->getShapes().end(); shape++)
+        {
+            if ((*shape)->intersect(ray))
+            {
+                hitShape = *shape;
+            }
+        }		
 
-    float Pinhole::getFocalLength()
-    {
-        return mFocalLength;
+        if (hitShape)
+        {
+            rc.setOutput(RenderContext::SHAPE, hitShape);
+            rc.setOutput(RenderContext::SHADER, hitShape->getShader());
+            rc.setOutput(RenderContext::RAY_BARYCENTRIC_COORDINATES, Vector3(ray.u, ray.v, (1-ray.u-ray.v)));
+            rc.setOutput(RenderContext::RAY_LENGTH, ray.t);
+            rc.setOutput(RenderContext::RAY_ORIGIN, ray.origin);
+            rc.setOutput(RenderContext::RAY_DIRECTION, ray.direction);
+            return true;
+        }
+
+        return false;
     }
 }

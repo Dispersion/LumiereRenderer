@@ -27,29 +27,59 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\Shape.h>
-#include <lumiererenderer\Shader.h>
+#pragma once
+#include <lumiererenderer\shape.h>
+#include <lumiererenderer\AABB.h>
 
 namespace LumiereRenderer
 {
+    struct Vertex
+    {
+        Point3 position;
+        Vector3 normal;
+        Vector3 texcoord;
+    };
 
+    struct TriWald
+    {
+        // first 16 byte half cache line
+        // plane
+        float nu;
+        float nv;
+        float nd;
+        int k;
 
-	Shape::Shape(void)
-	{
-		mShader = 0;
-	}
+        //second 16 byte half cache line
+        //line equation for line ac
+        float bnu;
+        float bnv;
+        float bd;
+        int pad; // pad to next cache line
 
-	Shape::~Shape(void)
-	{
-	}
+        //third 16 byte cache line
+        //line equation for line ab
+        float cnu;
+        float cnv;
+        float cd;
+        int pad2; // pad to 48 bytes for cache alignment purposes
+    };
 
-	Shader* Shape::getShader()
-	{
-		return mShader;
-	}
+    class Triangle : public Shape
+    {
+    public:
+        Triangle(Vertex v0, Vertex v1, Vertex v2);
+        ~Triangle(void);
+        bool intersect(Ray& Ray);
+        virtual Shape* getBounding();
+        virtual Point3 getMin();
+        virtual Point3 getMax();
+        void evaluate( Attribute* attr, RenderContext& rc );
+        void sample(RenderContext& rc);
 
-	void Shape::setShader(Shader* shader)
-	{
-		mShader = shader;
-	}
+        Vertex v0, v1, v2;
+
+    private:		
+        TriWald mWaldTriangle;
+        AABB* mAABB;
+    };
 }

@@ -28,6 +28,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 #include <lumiererenderer\Geometry.h>
+#include <lumiererenderer\LinearAlgebra.h>
 
 namespace LumiereRenderer
 {
@@ -76,12 +77,12 @@ namespace LumiereRenderer
     Vector3 Reflect(const Vector3& wo, float& pdf)
     {
         pdf = 1.0;      
-        return Vector3(wo.x, wo.y, -wo.z);
+        return Vector3(-wo.x, -wo.y, wo.z);
     }
 
     bool Refract( float n1, float n2, const Vector3& wo, Vector3& wi, float& pdf)
     {
-        pdf = 1.0;
+       /* pdf = 1.0;
         float eta = n1/n2;
 
         float c1 = wo.z;
@@ -90,6 +91,24 @@ namespace LumiereRenderer
         if ( c2 < 0 ) return false;
 
         wi = Normalize(-eta*Vector3(wo.x, wo.y, wo.z-c1) - Vector3( 0, 0, sqrt(c2)));
+
+        return true;*/
+
+        pdf = 1.0;
+        Vector3 normal = Vector3(0,0,1);
+
+        float eta = n1/n2;
+        if (Dot( normal, wo ) < 0)
+        {
+            normal = -normal;
+        }
+
+        float c1 = Dot( normal, wo );
+        float c2 = 1 - eta*eta *( 1-c1*c1);
+
+        if ( c2 < 0 ) return false;
+
+        wi = Normalize(-eta*(wo - c1*normal) - sqrt(c2) * normal);
 
         return true;
     }

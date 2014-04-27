@@ -60,17 +60,21 @@ namespace LumiereRenderer
 		    /// with the shape and not where it intersects. 
             /// @param[in] ray  The ray used to test for intersection.
             /// @return It will return true if the ray intersects with the shape, otherwise it will return false.
-		    virtual bool Intersect( Ray& ray ) = 0;
+		    virtual bool intersect( Ray& ray ) = 0;
   	    
 		    /// Each shape have a pointer to the shader used to shade the shape. This means that, however, we store
 		    /// the shapes in the scene, we can find out which shader we should use to shade the shape.
             /// @return The shader used to shade this shape.
-		    Shader* GetShader();
+		    Shader* getShader();
         	
 		    /// Each shape have a pointer to the shader used to shade the shape. This means that, however, we store
 		    /// the shapes in the scene, we can find out which shader we should use to shade the shape.
             /// @param[in] shader  The shader used to shade this shape.          
-		    void SetShader( Shader* shader );
+		    void setShader( Shader* shader );
+
+            virtual Shape* getBounding() = 0;
+            virtual Point3 getMin() = 0;
+            virtual Point3 getMax() = 0;
 
 		    /// The node system will call the evaluate function, when a connected node wants to find the value
 		    /// of one of this shapes attributes. Any shape must implement this function to evaluate the 
@@ -87,14 +91,11 @@ namespace LumiereRenderer
             /// @param[in] attr  The attribute we want to find the value of.
 		    /// @param[in] rc    The RenderContext is used to get values from incomming attributes.
             virtual void evaluate( Attribute* attr, RenderContext& rc ) = 0;
-        
+
 		    ///
             /// @param[in] rc    The RenderContext is used to get values from incomming attributes.
-		    virtual void                Sample( RenderContext& rc ) = 0;
+		    virtual void                sample( RenderContext& rc ) = 0;
 	
-            /// 
-
-
 	protected:
             Shader*                     mShader;
     };

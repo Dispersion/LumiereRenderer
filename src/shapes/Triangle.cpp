@@ -27,11 +27,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "triangle.h"
+#include <lumiererenderer\triangle.h>
 #include <lumiererenderer\random.h>
 #include <lumiererenderer\constants.h>
 #include <lumiererenderer\linearalgebra.h>
 #include <lumiererenderer\geometry.h>
+#include <math.h>
 
 namespace LumiereRenderer
 {
@@ -78,13 +79,17 @@ namespace LumiereRenderer
         mWaldTriangle.cnu = c[v] / denom; 
         mWaldTriangle.cnv = -c[u] / denom;
         mWaldTriangle.cd = (c[u]*p0[v] - c[v]*p0[u]) / denom;		
+
+        Point3 minPoint = Point3( std::min(p0[0], std::min(p1[0], p2[0])), std::min(p0[1], std::min(p1[1], p2[1])), std::min(p0[2], std::min(p1[2], p2[2])));
+        Point3 maxPoint = Point3( std::max(p0[0], std::max(p1[0], p2[0])), std::max(p0[1], std::max(p1[1], p2[1])), std::max(p0[2], std::max(p1[2], p2[2])));
+        mAABB = new AABB(minPoint, maxPoint);
     }
 
     Triangle::~Triangle(void)
     {
     }
 
-    bool Triangle::Intersect(Ray& ray)
+    bool Triangle::intersect(Ray& ray)
     {
         ////Walds method
 #define ku modulo[mWaldTriangle.k+1]
@@ -121,6 +126,21 @@ namespace LumiereRenderer
         ray.v = mue;
 
         return true;
+    }
+
+    Shape* Triangle::getBounding()
+    {
+        return mAABB;
+    }
+
+    Point3 Triangle::getMin()
+    {
+        return mAABB->getMin();
+    }
+
+    Point3 Triangle::getMax()
+    {
+        return mAABB->getMax();
     }
 
     void Triangle::evaluate( Attribute* attr, RenderContext& rc )
@@ -169,7 +189,7 @@ namespace LumiereRenderer
         }
     }
 
-    void Triangle::Sample(RenderContext& rc)
+    void Triangle::sample(RenderContext& rc)
     {
         float r1 = Random();
         float r2 = Random();

@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "Spectrum.h"
+#include <lumiererenderer\Spectrum.h>
 #include <lumiererenderer\Geometry.h>
 
 namespace LumiereRenderer

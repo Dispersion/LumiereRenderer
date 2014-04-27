@@ -38,7 +38,7 @@ namespace LumiereRenderer
     class Camera;
     class Integrator;
     class Scene;
-    class SceneTracer;
+    class Intersector;
     class Attribute;
 
     /*!
@@ -80,10 +80,10 @@ namespace LumiereRenderer
 
             Camera* getCamera();
             Scene* getScene();
-            SceneTracer* getSceneTracer();
+            Intersector* getIntersector();
             Integrator* getIntegrator();
 
-                                    static Attribute*           POSITION;
+            static Attribute*           POSITION;
             static Attribute*           NORMAL;
             static Attribute*           BINORMAL;
             static Attribute*           TANGENT;
@@ -158,7 +158,7 @@ namespace LumiereRenderer
             int                         mCurrentBlock;
 
             Scene*                      mScene;
-            SceneTracer*                mSceneTracer;
+            Intersector*                mIntersector;
             Integrator*                 mIntegrator;
             Camera*                     mCamera;        
             std::stack<Shader*>         mShaderStack;    

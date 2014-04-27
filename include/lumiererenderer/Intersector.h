@@ -27,29 +27,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include <lumiererenderer\Shape.h>
-#include <lumiererenderer\Shader.h>
+#pragma once
+#include <lumiererenderer\Ray.h>
+#include <lumiererenderer\RenderContext.h>
 
 namespace LumiereRenderer
 {
 
+    /*!
+        @class Intersector
+        @brief Trace a ray into the scene.
 
-	Shape::Shape(void)
-	{
-		mShader = 0;
-	}
+               The SceneTracer is used to find the closest intersection 
+               point on the ray with an object in the scene. 
+               
+               Each implementation of a Scene must have an implementation
+               of a corresponding SceneTracer.
+    */
 
-	Shape::~Shape(void)
-	{
-	}
-
-	Shader* Shape::getShader()
-	{
-		return mShader;
-	}
-
-	void Shape::setShader(Shader* shader)
-	{
-		mShader = shader;
-	}
+    class Intersector
+    {
+    public:
+            Intersector();
+            virtual ~Intersector(void);
+            virtual bool intersect(const Point3 from, const Point3 to) = 0;
+            virtual bool intersect(Ray& Ray, RenderContext& rc) = 0;
+    };
 }

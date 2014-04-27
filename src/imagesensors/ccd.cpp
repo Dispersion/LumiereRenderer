@@ -27,7 +27,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-#include "ccd.h"
+#include <lumiererenderer\ccd.h>
 #include <lumiererenderer\random.h>
 
 #include <iostream>
@@ -113,7 +113,7 @@ namespace LumiereRenderer
         mSamples[j * mResolutionWidth + i]++;
     }
 
-	void CCD::evaluate( Attribute* attr, RenderContext& rc )
+	void CCD::evaluate( Attribute* /*attr*/, RenderContext& /*rc*/ )
 	{
 	}
 

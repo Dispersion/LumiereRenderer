@@ -30,6 +30,7 @@
 #pragma once
 
 #include <string>
+#include <lumiererenderer\Point3.h>
 
 namespace LumiereRenderer
 {
@@ -50,28 +51,27 @@ namespace LumiereRenderer
         friend Node;
         friend RenderContext;
 
-        struct AbstracAttribute
+        struct AbstractAttribute
         {
-            virtual ~AbstracAttribute() {}
+            virtual ~AbstractAttribute() {}
             virtual void* getValue() const = 0;
             virtual size_t getSize() const = 0;
         };
 
         template <class T>
-        struct ConcreteAttribute : public AbstracAttribute
+        struct ConcreteAttribute : public AbstractAttribute
         {
         public:
             ConcreteAttribute(T value) : mValue(value) {}
             virtual ~ConcreteAttribute() {}
+            virtual void setValue(T value) { mValue = value; }
 
-        private:
+        private:            
             virtual void* getValue() const { return (void*)&mValue; }
             size_t getSize() const {return sizeof(T);}
 
             T mValue;
         };
-
-        
 
     public:
         /// Default destructor
@@ -95,12 +95,18 @@ namespace LumiereRenderer
         ///
         /// @param writeable
         void setWriteable(bool writeable);
-        
+                
+        template <class T>
+        void setDefaultValue(T value)
+        {
+            static_cast<ConcreteAttribute<T>*>(mAttribute)->setValue(value);
+        }
+
         //
         /// @return Returns true if this attribute is allowed to connect to other attributes.
         bool isReadable();
         bool isWriteable();
-
+         void* getDefaultValue() const;
     protected:
 
          /// Default constructor
@@ -118,19 +124,19 @@ namespace LumiereRenderer
         /// If the attribute is not connected to any other attribute it will use the 
         /// default value.
         /// @return The default value.
-        void* getDefaultValue() const;
+       
 
         size_t getSize() const;
 
-        Node*                       mOwner; 
-        Attribute*                  mConnection;
-        std::string                 mName;
-        bool                        mReadable;
-        bool                        mWriteable;
-        AbstracAttribute* mAttribute;
+        Node*             mOwner; 
+        Attribute*        mConnection;
+        std::string       mName;
+        bool              mReadable;
+        bool              mWriteable;
+        AbstractAttribute* mAttribute;
 
     private:
-        void connect(Attribute* attribute); //deprecated?
+        void connect(Attribute* attribute);
         void setOwner(Node* node);
         Node* getOwner() const;
     };
