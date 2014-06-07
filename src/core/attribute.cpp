@@ -32,17 +32,16 @@
 
 namespace LumiereRenderer
 {
-    
-
     Attribute::~Attribute(void)
     {
+        delete mAttribute;
     }
 
-    Attribute& Attribute::operator=(Attribute& attribute)
+    Attribute& Attribute::operator=(Attribute* attribute)
     {
-        if( mWriteable && attribute.isReadable() )
+        if( mWriteable && attribute->isReadable() )
         {
-            mConnection = &attribute;
+            mConnection = attribute;
         }
         return *this;
     }

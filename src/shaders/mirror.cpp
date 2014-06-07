@@ -51,6 +51,13 @@ namespace LumiereRenderer
 
 	Mirror::~Mirror(void)
 	{
+        delete mPosition;
+		delete mNormal;
+		delete mRayDirection;
+		delete mWoWavelength;
+        delete mShaderToWorld;
+        delete mWorldToShader;
+        delete mReflectance;
 	}
 
     float Mirror::evaluateDir( RenderContext& /*rc*/ )

@@ -87,6 +87,7 @@ namespace LumiereRenderer
 
     Triangle::~Triangle(void)
     {
+        delete mAABB;
     }
 
     bool Triangle::intersect(Ray& ray)

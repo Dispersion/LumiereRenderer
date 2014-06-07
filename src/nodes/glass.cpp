@@ -39,6 +39,8 @@ namespace LumiereRenderer
 
     Glass::~Glass(void)
     {
+        delete mRayWavelength;
+        delete mIOR;
     }
 
     void Glass::evaluate(Attribute* attr, RenderContext& rc)

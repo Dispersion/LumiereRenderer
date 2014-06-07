@@ -34,7 +34,7 @@
 
 namespace LumiereRenderer
 {
-    	Attribute* RenderContext::POSITION = new Attribute("Position", Point3());
+    Attribute* RenderContext::POSITION = new Attribute("Position", Point3());
     Attribute* RenderContext::NORMAL = new Attribute("Normal", Vector3());
     Attribute* RenderContext::BINORMAL = new Attribute("Binormal", Vector3());
     Attribute* RenderContext::TANGENT = new Attribute("Tangent", Vector3());
@@ -79,6 +79,7 @@ namespace LumiereRenderer
 
     RenderContext::~RenderContext(void)
     {
+        delete mIntersector;
         pop();
         delete []mData;
     }

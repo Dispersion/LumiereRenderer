@@ -45,7 +45,7 @@ namespace LumiereRenderer
         /// Constructor for a pinhole camera.
         /// @param focalLength The distance from the image sensor to to the pinhole, given in meters.
         /// @param aperture The diameter of the aperture in meters. If you set it to 0 then it will give you an infinte small pinhole.
-        Pinhole( float focalLength, float aperture = 0, float shutterSpeed = 1 );
+        Pinhole( float focalLength = 0, float aperture = 0, float shutterSpeed = 1 );
         
         /// Destructor for a pinhole camera.
         ~Pinhole();
@@ -63,16 +63,16 @@ namespace LumiereRenderer
         
         /// Get the focal length.
         /// @return The distance from the image sensor to the pinhole, given in meters.
-        float getFocalLength();
+        //float getFocalLength();
 
     private:
-        float mFocalLength;
+        Attribute* mFocalLength;
         Point3 mPinhole;
-        float mAperture;
-        float mShutterSpeed;
+        Attribute* mAperture;
+        Attribute* mShutterSpeed;
 
         //Attribute* mExposure;
 		//Attribute* mAperture;
-
+        Attribute* mFOV;
     };
 }

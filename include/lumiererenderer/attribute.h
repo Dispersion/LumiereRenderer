@@ -64,7 +64,10 @@ namespace LumiereRenderer
         public:
             ConcreteAttribute(T value) : mValue(value) {}
             virtual ~ConcreteAttribute() {}
-            virtual void setValue(T value) { mValue = value; }
+            virtual void setValue(T value) 
+            { 
+                mValue = value; 
+            }
 
         private:            
             virtual void* getValue() const { return (void*)&mValue; }
@@ -78,7 +81,7 @@ namespace LumiereRenderer
         virtual ~Attribute(void);
 
         ///        
-        Attribute& operator=(Attribute& attribute);
+        Attribute& operator=(Attribute* attribute);
         
         /// Get the attribute that this attribute is connected to.
         /// @return The connected attribute.
@@ -99,7 +102,8 @@ namespace LumiereRenderer
         template <class T>
         void setDefaultValue(T value)
         {
-            static_cast<ConcreteAttribute<T>*>(mAttribute)->setValue(value);
+            ConcreteAttribute<T>* a = (ConcreteAttribute<T>*)(mAttribute);//->setValue(value);
+            a->setValue(value);
         }
 
         //

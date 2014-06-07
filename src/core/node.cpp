@@ -127,8 +127,8 @@ namespace LumiereRenderer
         attribute->setOwner(this);
     }
 
-    Attribute& Node::operator[](const char* name)
+    Attribute* Node::operator[](const char* name)
     {
-        return *mAttributes[name];
+        return mAttributes[name];
     }
 }

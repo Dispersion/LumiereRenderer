@@ -44,7 +44,20 @@ namespace LumiereRenderer
 
 
 	QBVH::~QBVH()
-	{
+    {
+        std::vector<Node4*>::iterator node;
+        for ( node = mNodes.begin(); node != mNodes.end();)
+        {
+            delete *node;  
+            node = mNodes.erase(node);
+        }
+
+        std::vector<Shape*>::iterator shape;
+        for ( shape = mBVH.begin(); shape != mBVH.end();)
+        {
+            delete *shape;  
+            shape = mBVH.erase(shape);
+        }
 	}
 
 	void QBVH::FrameBegin()

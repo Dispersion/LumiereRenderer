@@ -45,6 +45,11 @@ namespace LumiereRenderer
 
     Diffuse::~Diffuse(void)
     {
+        delete mPosition;
+        delete mNormal;
+        delete mReflectance;
+        delete mWoWavelength;
+        delete mShaderToWorld;
     }
 
     float Diffuse::evaluateDir( RenderContext& rc )

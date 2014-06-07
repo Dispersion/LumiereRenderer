@@ -39,9 +39,9 @@ namespace LumiereRenderer
 {
     Pinhole::Pinhole(float focalLength, float aperture, float shutterSpeed)
     {		
-        mFocalLength = focalLength;
-        mAperture = aperture*0.5f;
-        mShutterSpeed = shutterSpeed;
+        mFocalLength = createAttribute<float>("focalLength", 0.06f);
+        mShutterSpeed = createAttribute<float>("shutterSpeed", 0.3f);
+        mAperture = createAttribute<float>("aperture", 0.00005f);
     }
 
     Pinhole::~Pinhole()
@@ -50,15 +50,19 @@ namespace LumiereRenderer
 
     void Pinhole::trace( unsigned int i, unsigned int j, RenderContext& rc )
     {
-		ImageSensor::Sample imageSensorSample = mImageSensor->sample( i,j );
+		float focalLength = rc.getInput( mFocalLength ).asFloat();
+        float shutterSpeed = rc.getInput( mShutterSpeed ).asFloat();
+        float aperture = rc.getInput( mAperture ).asFloat();
+
+        ImageSensor::Sample imageSensorSample = mImageSensor->sample( i,j );
 
         Point3 pointOnAperture;
         if ( mAperture > 0 )
         {
-            pointOnAperture = SampleDisc(Random(), Random()) * mAperture;
+            pointOnAperture = SampleDisc(Random(), Random()) * aperture;
         }
 
-        imageSensorSample.position.z = mFocalLength;
+        imageSensorSample.position.z = focalLength;
         Ray ray = Ray( imageSensorSample.position, pointOnAperture, imageSensorSample.wavelength );
         ray.origin = pointOnAperture;
 
@@ -70,9 +74,10 @@ namespace LumiereRenderer
         rc.setOutput(RenderContext::TRACE_DEPTH, -1);
         rc.setOutput(RenderContext::WO_WAVELENGTH, imageSensorSample.wavelength);
     
-        float pdf = 1.0f / ( PI*mAperture*mAperture );
+       
+        float pdf = 1.0f / ( PI*aperture*aperture );
         float g = G( imageSensorSample.position, pointOnAperture, Vector3( 0, 0, -1 ), Vector3( 0, 0, 1) );
-        float time = mShutterSpeed;
+        float time = shutterSpeed;
         float exposure = ( ( time * g ) / pdf ) * rc.trace( ray );
 
         mImageSensor->setExposure( i, j, exposure, ray.alpha, rc );
@@ -85,11 +90,11 @@ namespace LumiereRenderer
 
     void Pinhole::setFocalLength(float length)
     {
-        mFocalLength = length;
+        mFocalLength->setDefaultValue(length);
     }
 
-    float Pinhole::getFocalLength()
+    /*float Pinhole::getFocalLength()
     {
-        return mFocalLength;
-    }
+        return static_cast<float>(mFocalLength->getDefaultValue());
+    }*/
 }

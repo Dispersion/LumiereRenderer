@@ -72,6 +72,17 @@ namespace LumiereRenderer
 
     CCD::~CCD(void)
     {
+        delete mRed;
+        delete mGreen;
+        delete mBlue;
+        delete mExposure;
+        delete mSampleX;
+        delete mSampleY;
+        delete mPosition;
+        delete mRGBA;
+
+        delete[] mSamples;
+        delete[] mImage;   
     }
 
     ImageSensor::Sample CCD::sample(unsigned int i, unsigned int j)

@@ -34,16 +34,11 @@ namespace LumiereRenderer
 {	
 	Camera::Camera()
 	{
-		mImageSensor = 0;
+		mImageSensor = NULL;
 	}
 
 	Camera::~Camera()
 	{
-		if (mImageSensor)
-		{
-			delete mImageSensor;
-		}
-
 	}
 	
 	void Camera::setImageSensor(ImageSensor* sensor)

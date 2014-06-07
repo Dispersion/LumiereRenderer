@@ -52,6 +52,17 @@ namespace LumiereRenderer
 
     Dielectric::~Dielectric(void)
     {
+        delete mPosition;
+        delete mNormal;
+        delete mWoIor;
+        delete mWiIor;
+        delete mRayDirection;
+        delete mShaderToWorld;
+        delete mWorldToShader;
+        delete mWavelength;
+        delete mReflectance;
+        delete mInteriorIor;
+        delete mExteriorIor;
     }
 
     float Dielectric::evaluateDir( RenderContext& /*rc*/ )

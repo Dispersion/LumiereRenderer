@@ -82,7 +82,7 @@ namespace LumiereRenderer
               * @param[in] name   The name of the attribute.
               * @return A reference to the attribute.
 	          */	
-		    Attribute& operator[](const char* name);        
+		    Attribute* operator[](const char* name);        
 
 		    template<class T>
 		    Attribute* createAttribute(const char* name, T value)

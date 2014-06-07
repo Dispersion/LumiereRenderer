@@ -103,6 +103,8 @@ namespace LumiereRenderer
 
     Spectrum::~Spectrum()
     {
+        delete mRayWavelength;
+        delete aOutColor;		
     }
 
     void Spectrum::evaluate( Attribute* attr, RenderContext& rc )
