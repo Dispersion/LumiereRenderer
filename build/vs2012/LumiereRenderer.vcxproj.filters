@@ -201,6 +201,15 @@
     <ClInclude Include="..\..\include\lumiererenderer\glass.h">
       <Filter>Nodes\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Curve.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Solver.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\lumiererenderer\Vector2.h">
+      <Filter>Math\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\math\Geometry.cpp">
@@ -304,6 +313,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\shaders\dielectric.cpp">
       <Filter>Shaders\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Curve.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Solver.cpp">
+      <Filter>Math\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\Vector2.cpp">
+      <Filter>Math\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

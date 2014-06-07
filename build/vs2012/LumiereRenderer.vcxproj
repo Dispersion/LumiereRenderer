@@ -25,6 +25,7 @@
     <ClInclude Include="..\..\include\lumiererenderer\Camera.h" />
     <ClInclude Include="..\..\include\lumiererenderer\ccd.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Constants.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Curve.h" />
     <ClInclude Include="..\..\include\lumiererenderer\DataHandle.h" />
     <ClInclude Include="..\..\include\lumiererenderer\dielectric.h" />
     <ClInclude Include="..\..\include\lumiererenderer\diffuse.h" />
@@ -50,8 +51,10 @@
     <ClInclude Include="..\..\include\lumiererenderer\Scene.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Shader.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Shape.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Solver.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Spectrum.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Triangle.h" />
+    <ClInclude Include="..\..\include\lumiererenderer\Vector2.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Vector3.h" />
     <ClInclude Include="..\..\include\lumiererenderer\Vector4.h" />
   </ItemGroup>
@@ -70,6 +73,7 @@
     <ClCompile Include="..\..\src\core\Shape.cpp" />
     <ClCompile Include="..\..\src\imagesensors\ccd.cpp" />
     <ClCompile Include="..\..\src\integrators\pathtracer.cpp" />
+    <ClCompile Include="..\..\src\math\Curve.cpp" />
     <ClCompile Include="..\..\src\math\Geometry.cpp" />
     <ClCompile Include="..\..\src\math\LinearAlgebra.cpp" />
     <ClCompile Include="..\..\src\math\Matrix.cpp" />
@@ -78,6 +82,8 @@
     <ClCompile Include="..\..\src\math\Random.cpp" />
     <ClCompile Include="..\..\src\math\Ray.cpp" />
     <ClCompile Include="..\..\src\math\Sampler.cpp" />
+    <ClCompile Include="..\..\src\math\Solver.cpp" />
+    <ClCompile Include="..\..\src\math\Vector2.cpp" />
     <ClCompile Include="..\..\src\math\Vector3.cpp" />
     <ClCompile Include="..\..\src\math\Vector4.cpp" />
     <ClCompile Include="..\..\src\nodes\glass.cpp" />
